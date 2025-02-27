@@ -24,7 +24,7 @@
     color: #2d07b6;
 }
 .background {
-    background: url("textura1.jpg") no-repeat center center/cover;
+    background: url("img/textura1.jpg") no-repeat center center/cover;
     min-height: 100px;
 }
 body{
