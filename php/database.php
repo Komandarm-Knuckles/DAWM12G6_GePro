@@ -1,0 +1,136 @@
+<?php
+$host = "localhost";
+$user = "root";
+$pass = "";
+$dbname = "GePro";
+
+function crearConexion(){
+    $con = mysqli_connect($GLOBALS["host"], $GLOBALS["user"],$GLOBALS["pass"]);
+    if (!$con) {
+        die("Error al conectar con la Base de Datos de GePro" . mysqli_connect_error());
+    }
+
+    crearDB($con);
+    mysqli_select_db($con,$GLOBALS["dbname"]);
+    crear_tabla_usuarios($con);
+    crear_tabla_jefeEquipo($con);
+    crear_tabla_administradores($con);
+    crear_tabla_grupos($con);
+    crear_tabla_proyectos($con);
+    crear_tabla_reuniones($con);
+    crear_tabla_tareas($con);
+    // drop_database_GePro($con);
+    return $con;
+
+}
+
+    function crearDB($con){
+        $query = "CREATE DATABASE IF NOT EXISTS GePro";
+        mysqli_query($con, $query) or die ("Error al crear la base de datos" . mysqli_error($con)); 
+    }
+
+
+    function crear_tabla_usuarios($con){
+        $query = "CREATE TABLE IF NOT EXISTS USUARIOS (
+            usuario VARCHAR(255) PRIMARY KEY,
+            pass VARCHAR(255) NOT NULL,
+            nombre VARCHAR(255) NOT NULL,
+            apellido VARCHAR(255) NOT NULL,
+            dni VARCHAR(9) NOT NULL,
+            email VARCHAR(255) NOT NULL,
+            telefono INT NOT NULL,
+            tipo INT NOT NULL
+        )
+    ";
+    mysqli_query($con, $query) or die ("Error al crear la tabla usuarios" . mysqli_error($con)); 
+    }
+
+    function crear_tabla_jefeEquipo($con){
+        $query = " CREATE TABLE IF NOT EXISTS jefeEquipo (
+            id VARCHAR(255) NOT NULL PRIMARY KEY,
+            nombre VARCHAR(255) NOT NULL,
+            apellido VARCHAR(255) NOT NULL,
+            dni VARCHAR(9) NOT NULL,
+            email VARCHAR(255) NOT NULL,
+            telefono INT NOT NULL
+        )
+    ";
+        mysqli_query($con, $query) or die ("Error al crear la tabla jefeEquipo" . mysqli_error($con)); 
+    }
+
+    function crear_tabla_administradores($con){
+        $query = "CREATE TABLE IF NOT EXISTS ADMINISTRADORES (
+            id_admin INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(255) NOT NULL,
+            apellido VARCHAR(255) NOT NULL,
+            mail VARCHAR(255) NOT NULL,
+            telefono INT NOT NULL
+        )
+    ";
+        mysqli_query($con, $query) or die ("Error al crear la tabla administradores" . mysqli_error($con)); 
+    }
+
+    function crear_tabla_grupos($con){
+        $query = "CREATE TABLE IF NOT EXISTS GRUPOS (
+            id_grupos INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(255) NOT NULL,
+            jefeEquipo VARCHAR(255) NOT NULL,
+            usuarios VARCHAR(255) NOT NULL
+            
+        )
+    ";
+        mysqli_query($con, $query) or die ("Error al crear la tabla grupos" . mysqli_error($con)); 
+    }
+
+    function crear_tabla_proyectos($con){
+        $query = "CREATE TABLE IF NOT EXISTS PROYECTOS (
+            id_proyectos INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(255) NOT NULL,
+            grupos VARCHAR(255) NOT NULL
+        )
+    ";
+        mysqli_query($con, $query) or die ("Error al crear la tabla proyectos" . mysqli_error($con)); 
+    }
+
+    function crear_tabla_reuniones($con){
+        $query = "CREATE TABLE IF NOT EXISTS REUNIONES (
+            id_proyectos INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(255) NOT NULL,
+            grupos VARCHAR(255) NOT NULL,
+            usuarios VARCHAR(255) NOT NULL
+        )
+    ";
+        mysqli_query($con, $query) or die ("Error al crear la tabla reuniones" . mysqli_error($con)); 
+    }
+
+    function crear_tabla_tareas($con){
+        $query = "CREATE TABLE IF NOT EXISTS TAREAS (
+            id_proyectos INT AUTO_INCREMENT PRIMARY KEY,
+            nombre VARCHAR(255) NOT NULL,
+            usuarios VARCHAR(255) NOT NULL
+        )
+    ";
+        mysqli_query($con, $query) or die ("Error al crear la tabla tareas" . mysqli_error($con)); 
+    }
+
+    function drop_database_GePro($con){
+        $query = "DROP DATABASE IF EXISTS GePro";
+        mysqli_query($con, $query) or die ("Error al borrar la base de datos" . mysqli_error($con)); 
+    }
+
+//------------------------------------------ FUNCIONES -----------------------------------------------------
+
+function crear_usuarios($con,$usuario,$nombre,$apellido,$dni,$email,$telefono,) {
+    $usuario = mysqli_real_escape_string($con, $usuario);
+    $pass = mysqli_real_escape_string($con, $pass);
+    $nombre = mysqli_real_escape_string($con, $nombre);
+    $apellido = mysqli_real_escape_string($con, $apellido);
+    $dni = mysqli_real_escape_string($con, $dni);
+    $email = mysqli_real_escape_string($con, $email);
+    $telefono = mysqli_real_escape_string($con, $telefono);
+    $tipo = mysqli_real_escape_string($con, $tipo);
+    $query = "INSERT INTO USUARIOS (usuario, pass, nombre, apellido,dni,email,telefono,tipo) VALUES ('$usuario', '$pass', '$nombre', $apellido', '$dni', '$email', '$telefono', '$tipo)";
+    mysqli_query($con, $query) or die("Error al crear el usuario: " . mysqli_error($con));
+}
+
+?>
