@@ -82,10 +82,10 @@ $_POST['nuevo_telefono'], $_POST['nuevo_tipo'])) {
     $nuevo_telefono = $_POST['nuevo_telefono'];
     $nuevo_tipo = $_POST['nuevo_tipo'];
 
-    if (empty($id_usuario) ||empty($nueva_pass) ||empty($nuevo_nombre) ||empty($nuevo_apellido) ||empty($nuevo_dni) ||empty($nuevo_email) ||empty($nuevo_telefono) || $nuevo_tipo === '') {
+    if (empty($usuario) ||empty($nueva_pass) ||empty($nuevo_nombre) ||empty($nuevo_apellido) ||empty($nuevo_dni) ||empty($nuevo_email) ||empty($nuevo_telefono) || $nuevo_tipo === '') {
         echo "<p style='color: red;'>Error: Rellena todos los campos.</p>";
     } else {
-        modificar_usuario($con, $usuario,$nueva_pass,$nuevo_nombre,$nuevo_apellido,$nuevo_dni,$nuevo_email,$nuevo_telefono, $nuevo_tipo);
+        modificar_usuarios($con, $usuario,$nueva_pass,$nuevo_nombre,$nuevo_apellido,$nuevo_dni,$nuevo_email,$nuevo_telefono, $nuevo_tipo);
         echo "<p style='color: green;'>Usuario modificado correctamente.</p>";
         header("Location: administradores.php");
         exit(); 
@@ -113,12 +113,12 @@ echo   "<form method='POST' action=''>
 echo "<h4>Borrar usuarios:</h4>";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_usuario'])) {
-    $id_usuario = $_POST['id_usuario'];
+    $usuario = $_POST['id_usuario'];
 
-    if (empty($id_usuario)) {
+    if (empty($usuario)) {
         echo "<p style='color: red;'>Error: El campo ID de usuario es obligatorio.</p>";
     } else {
-        borrar_usuario($con, $id_usuario);
+        borrar_usuario($con, $usuario);
         echo "<p style='color: green;'>Usuario Borrado Correctamente.</p>";
         header("Location: administradores.php");
     }

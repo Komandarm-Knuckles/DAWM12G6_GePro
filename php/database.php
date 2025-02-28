@@ -157,20 +157,21 @@ function obtener_todos_los_usuarios($con) {
     }
 }
 
-function modificar_usuarios($con, $usuario, $nombre, $apellido, $dni, $email, $telefono, $tipo) {
+function modificar_usuarios($con, $usuario,$nueva_pass,$nuevo_nombre,$nuevo_apellido,$nuevo_dni,$nuevo_email,$nuevo_telefono, $nuevo_tipo) {
     $usuario = mysqli_real_escape_string($con, $usuario);
-    $nombre = mysqli_real_escape_string($con, $nombre);
-    $apellido = mysqli_real_escape_string($con, $apellido);
-    $dni = mysqli_real_escape_string($con, $dni);
-    $email = mysqli_real_escape_string($con, $email);
-    $telefono = intval($telefono);
-    $tipo = intval($tipo);
+    $nueva_pass = password_hash(mysqli_real_escape_string($con, $pass), PASSWORD_DEFAULT);
+    $nuevo_nombre = mysqli_real_escape_string($con, $nombre);
+    $nuevo_apellido = mysqli_real_escape_string($con, $apellido);
+    $nuevo_dni = mysqli_real_escape_string($con, $dni);
+    $nuevo_email = mysqli_real_escape_string($con, $email);
+    $nuevo_telefono = intval($telefono);
+    $nuevo_tipo = intval($tipo);
 
-    $query = "UPDATE USUARIOS SET nombre = '$nombre', apellido = '$apellido', dni = '$dni', email = '$email', telefono = $telefono, tipo = $tipo WHERE usuario = '$usuario'";
+    $query = "UPDATE USUARIOS SET usuario = '$usuario',pass = '$nueva_pass', nombre = '$nuevo_nombre', apellido = '$nuevo_apellido', dni = '$nuevo_dni', email = '$nuevo_email', telefono = $nuevo_telefono, tipo = $nuevo_tipo WHERE usuario = '$usuario'";
     mysqli_query($con, $query) or die("Error al modificar el usuario: " . mysqli_error($con));
 }
 
-function borrar_usuarios($con, $usuario) {
+function borrar_usuario($con, $usuario) {
     $usuario = mysqli_real_escape_string($con, $usuario);
     $query = "DELETE FROM USUARIOS WHERE usuario = '$usuario'";
     mysqli_query($con, $query) or die("Error al borrar el usuario: " . mysqli_error($con));
@@ -181,7 +182,7 @@ function obtener_num_filas($resultado){
 }
 
 function obtener_resultados($resultado){
-    return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+    return mysqli_fetch_assoc($resultado);
 }
 
 function cerrar_conexion($con){
