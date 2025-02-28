@@ -134,8 +134,8 @@ function crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, 
     mysqli_query($con, $query) or die("Error al crear el usuario: " . mysqli_error($con));
 }
 
-function obtener_usuario($con, $usuario) {
-    $usuario = mysqli_real_escape_string($con, $usuario);
+function obtener_usuarios($con, $usuarios) {
+    $usuario = mysqli_real_escape_string($con, $usuarios);
     $query = "SELECT * FROM USUARIOS WHERE usuario = '$usuario'";
     $resultado = mysqli_query($con, $query);
 
@@ -146,7 +146,18 @@ function obtener_usuario($con, $usuario) {
     }
 }
 
-function modificar_usuario($con, $usuario, $nombre, $apellido, $dni, $email, $telefono, $tipo) {
+function obtener_todos_los_usuarios($con) {
+    $query = "SELECT * FROM USUARIOS";
+    $resultado = mysqli_query($con, $query);
+
+    if ($resultado) {
+        return $resultado;
+    } else {
+        return null;
+    }
+}
+
+function modificar_usuarios($con, $usuario, $nombre, $apellido, $dni, $email, $telefono, $tipo) {
     $usuario = mysqli_real_escape_string($con, $usuario);
     $nombre = mysqli_real_escape_string($con, $nombre);
     $apellido = mysqli_real_escape_string($con, $apellido);
@@ -159,7 +170,7 @@ function modificar_usuario($con, $usuario, $nombre, $apellido, $dni, $email, $te
     mysqli_query($con, $query) or die("Error al modificar el usuario: " . mysqli_error($con));
 }
 
-function borrar_usuario($con, $usuario) {
+function borrar_usuarios($con, $usuario) {
     $usuario = mysqli_real_escape_string($con, $usuario);
     $query = "DELETE FROM USUARIOS WHERE usuario = '$usuario'";
     mysqli_query($con, $query) or die("Error al borrar el usuario: " . mysqli_error($con));
