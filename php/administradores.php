@@ -94,7 +94,7 @@ $_POST['nuevo_telefono'], $_POST['nuevo_tipo'])) {
 
 echo   "<label>Introduce el ID del usuario que quieres modificar:</label>";
 echo   "<form method='POST' action=''>
-        ID Usuario:<input type='text' name='id_usuario'><br>
+        <input type='text' name='id_usuario' placeholder='ID Usuario'><br>
         <input type='text' name='nuevo_nombre' placeholder='Nuevo Nombre'><br>
         <input type='text' name='nuevo_apellido' placeholder='Nuevo Apellido'><br>
         <input type='text' name='dni' placeholder='Nuevo DNI'><br>
