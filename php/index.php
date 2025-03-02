@@ -6,44 +6,54 @@ $con = crearConexion();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']))
 {
-    $user = $_POST['user'];
-    $pass = hash('sha256', $_POST['pass']);
-    
-    #region Query
-    # PENDIENTE
-    #endregion
-
-    #region Verificacion
-    if($result !== null && $user === $result['usuario'] && $pass === $user['pass'])
+    if(empty($_POST['user']) ||empty($_POST['pass']))
     {
-        $_SESSION['usuario'] = $result['usuario'];
-        $_SESSION['tipo'] = $result['tipo'];
-
-        #region Redirección
-        switch ($user['tipo'])
-        {
-            case 'Admin':
-                header('Location: administradores.php');
-                exit();
-            
-            case 'Jefe':
-                header('Location: jefes.php');
-                exit();
-            
-            case 'Empleado':
-                header('Location: empleados.php');
-                exit();
-
-            default:
-            echo "<script type='text/javascript'>alert('Bienvenido');</script>";
-        }
-        #endregion
-    }
+        echo'<script type="text/javascript">alert("Debes rellenar ambos campos");window.location.href="index.php";</script>';
+    } 
     else
     {
-        echo "<script type='text/javascript'>alert('Usuario o contraseña incorrectos');</script>";
-    } 
-    #endregion
+        $user = $_POST['user'];
+        $pass = hash('sha256', $_POST['pass']);
+        
+        #region Query
+        $query = "SELECT usuario, pass, tipo FROM USUARIOS WHERE usuario = ?";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "s", $user);
+        mysqli_stmt_execute($stmt);
+        $return = mysqli_stmt_get_result($stmt);
+        $result = mysqli_fetch_assoc($return);
+        #endregion
+
+        #region Verificacion
+        if($result !== null && $user === $result['usuario'] && $pass === $result['pass'])
+        {
+            $_SESSION['usuario'] = $result['usuario'];
+            $_SESSION['tipo'] = $result['tipo'];
+
+            #region Redirección
+            switch ($result['tipo'])
+            {
+                case 'Admin':
+                    header('Location: administradores.php');
+                    exit();
+                
+                case 'Jefe':
+                    header('Location: jefes.php');
+                    exit();
+                
+                case 'Empleado':
+                    header('Location: empleados.php');
+                    exit();
+            }
+            #endregion
+        }
+        else
+        {
+            echo'<script type="text/javascript">alert("Usuario o contraseña incorrectos");window.location.href="index.php";</script>';
+        } 
+        #endregion
+    }
+    
 } 
 
 ?>
@@ -69,10 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     <main>
         <div class="login-container">
             <div class="login-box">
-                <form>
+                <form method="POST">
                     <p>Inicio de sesión</p>
-                    <input type="text" name="user" placeholder="Nombre"><br>
-                    <input type="password" name="pass" placeholder="Contraseña"><br>
+                    <input type="text" name="user" placeholder="Nombre" required><br>
+                    <input type="password" name="pass" placeholder="Contraseña" required><br>
                     <input type="submit" value="INICIAR SESION">
                 </form>
             </div>
