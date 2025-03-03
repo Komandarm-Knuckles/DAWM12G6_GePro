@@ -30,15 +30,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
             #region Redirección
             switch ($result['tipo'])
             {
-                case 'Admin':
+                case '0':
                     header('Location: administradores.php');
                     exit();
                 
-                case 'Jefe':
+                case '1':
                     header('Location: jefes.php');
                     exit();
                 
-                case 'Empleado':
+                case '2':
                     header('Location: empleados.php');
                     exit();
             }
