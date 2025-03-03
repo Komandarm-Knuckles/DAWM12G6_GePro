@@ -12,6 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     } 
     else
     {
+        #Introducimos los datos del login en variables. 
+        #Guardamos el hash SHA256 de la contraseña directamente para poder compararlo con el que tenemos almacenado en la db
         $user = $_POST['user'];
         $pass = hash('sha256', $_POST['pass']);
         
