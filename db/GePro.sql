@@ -59,9 +59,9 @@ CREATE TABLE reuniones (
 );
 
 INSERT INTO usuarios (usuario, pass, nombre, apellido, dni, email, telefono, tipo) VALUES
-('admin', 'admin123', 'Admin', 'Principal', '12345678A', 'admin@gepro.com', '600000001', 0),
-('jefe', 'jefe123', 'Jefe', 'Equipo', '87654321B', 'jefe@gepro.com', '600000002', 1),
-('empleado', 'empleado123', 'Empleado', 'Basico', '11223344C', 'empleado@gepro.com', '600000003', 2);
+('admin', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'Admin', 'Principal', '12345678A', 'admin@gepro.com', '600000001', 0),
+('jefe', 'e577c004a29a6a084d8e9bc25242bfe08eee016313058aea0cb987f91bf7b1f8', 'Jefe', 'Equipo', '87654321B', 'jefe@gepro.com', '600000002', 1),
+('empleado', 'ccc13e8ab0819e3ab61719de4071ecae6c1d3cd35dc48b91cad3481f20922f9f', 'Empleado', 'Basico', '11223344C', 'empleado@gepro.com', '600000003', 2);
 
 INSERT INTO proyectos (nombre, descripcion, fecha_inicio, estado) VALUES
 ('Proyecto Alpha', 'Desarrollo de una nueva plataforma web', '2024-03-01', 'en progreso'),
