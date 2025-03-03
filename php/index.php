@@ -12,22 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     } 
     else
     {
-        #Introducimos los datos del login en variables. 
-        #Guardamos el hash SHA256 de la contraseña directamente para poder compararlo con el que tenemos almacenado en la db
-        $user = $_POST['user'];
-        $pass = hash('sha256', $_POST['pass']);
-        
         #region Query
         $query = "SELECT usuario, pass, tipo FROM USUARIOS WHERE usuario = ?";
         $stmt = mysqli_prepare($con, $query);
-        mysqli_stmt_bind_param($stmt, "s", $user);
+        mysqli_stmt_bind_param($stmt, "s", $_POST['user']);
         mysqli_stmt_execute($stmt);
         $return = mysqli_stmt_get_result($stmt);
         $result = mysqli_fetch_assoc($return);
         #endregion
 
         #region Verificacion
-        if($result !== null && $user === $result['usuario'] && $pass === $result['pass'])
+        if($result !== null && password_verify($_POST['pass'], $result['pass']))
         {
             $_SESSION['usuario'] = $result['usuario'];
             $_SESSION['tipo'] = $result['tipo'];
@@ -55,10 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
         } 
         #endregion
     }
-    
-} 
-
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
