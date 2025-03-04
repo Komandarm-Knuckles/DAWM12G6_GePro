@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
 {
     if(empty($_POST['user']) ||empty($_POST['pass']))
     {
-        echo'<script type="text/javascript">alert("Debes rellenar ambos campos");window.location.href="index.php";</script>';
+        echo'<script type="text/javascript">alert("Debes rellenar ambos campos");</script>';
     } 
     else
     {
@@ -22,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
         #endregion
 
         #region Verificacion
-        if($result !== null && password_verify($_POST['pass'], $result['pass']))
+        if ($result && isset($result['pass']) && password_verify($_POST['pass'], $result['pass'])) 
+
         {
             $_SESSION['usuario'] = $result['usuario'];
             $_SESSION['tipo'] = $result['tipo'];
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     <header>
         <nav class="navbar">
             <ul class="nav-list">
-                <li><a href="iniciar-sesion.html">Iniciar Sesión</a></li>
+                <h1>Iniciar Sesión</h1>
             </ul>
             <div class="rightNav">
             </div>

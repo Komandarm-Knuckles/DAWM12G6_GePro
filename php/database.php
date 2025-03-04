@@ -18,10 +18,6 @@ function obtener_todos_los_usuarios($con) {
     return $con->query($sql);
 }
 
-function obtener_num_filas($resultado) {
-    return $resultado->num_rows;
-}
-
 function obtener_resultados($resultado) {
     return $resultado->fetch_assoc();
 }
@@ -33,16 +29,18 @@ function crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, 
     return $stmt->execute();
 }
 
-function modificar_usuarios($con, $id_usuario, $nueva_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo) {
+function modificar_usuarios($con, $usuario, $nueva_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo) {
     $hashed_pass = password_hash($nueva_pass, PASSWORD_DEFAULT);
-    $stmt = $con->prepare("UPDATE usuarios SET pass=?, nombre=?, apellido=?, dni=?, email=?, telefono=?, tipo=? WHERE id=?");
-    $stmt->bind_param("ssssssii", $hashed_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo, $id_usuario);
+    $stmt = $con->prepare("UPDATE usuarios SET pass=?, nombre=?, apellido=?, dni=?, email=?, telefono=?, tipo=? WHERE usuario=?");
+    $stmt->bind_param("ssssssis", $hashed_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo, $usuario);
     return $stmt->execute();
 }
 
-function borrar_usuario($con, $id_usuario) {
-    $stmt = $con->prepare("DELETE FROM usuarios WHERE id=?");
-    $stmt->bind_param("i", $id_usuario);
+function borrar_usuario($con, $usuario) {
+    $stmt = $con->prepare("DELETE FROM usuarios WHERE usuario=?");
+    $stmt->bind_param("s", $usuario);
     return $stmt->execute();
 }
 ?>
+
+
