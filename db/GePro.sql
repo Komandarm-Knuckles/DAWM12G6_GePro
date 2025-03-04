@@ -4,7 +4,7 @@ USE gepro;
 -- TABLA DE USUARIOS
 CREATE TABLE usuarios (
     usuario VARCHAR(50) PRIMARY KEY NOT NULL UNIQUE,
-    pass VARCHAR(255) NOT NULL CHECK (LENGTH(pass) >= 60), -- Evita contraseñas vacías
+    pass VARCHAR(255) NOT NULL CHECK (LENGTH(pass) >= 60),
     nombre VARCHAR(50) NOT NULL,
     apellido VARCHAR(50) NOT NULL,
     dni VARCHAR(20) NOT NULL UNIQUE,
@@ -34,7 +34,7 @@ CREATE TABLE proyectos (
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     fecha_inicio DATE NOT NULL,
-    fecha_fin DATE CHECK (fecha_fin IS NULL OR fecha_fin > fecha_inicio), -- Evita fechas inválidas
+    fecha_fin DATE CHECK (fecha_fin IS NULL OR fecha_fin > fecha_inicio), 
     estado ENUM('pendiente', 'en progreso', 'completado') NOT NULL
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE tareas (
     id_proyecto INT NOT NULL,
     usuario VARCHAR(50) NOT NULL,
     fecha_asignacion DATE NOT NULL,
-    fecha_vencimiento DATE CHECK (fecha_vencimiento IS NULL OR fecha_vencimiento > fecha_asignacion), -- Evita fechas inválidas
+    fecha_vencimiento DATE CHECK (fecha_vencimiento IS NULL OR fecha_vencimiento > fecha_asignacion),
     estado ENUM('pendiente', 'en progreso', 'completada') NOT NULL,
     FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto) ON DELETE CASCADE,
     FOREIGN KEY (usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE

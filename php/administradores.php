@@ -2,7 +2,15 @@
 require_once("database.php");
 session_start();
 $con = crearConexion();
+?>
+
+<head>
+    <title>Página de Administrador</title>
+    <link rel="stylesheet" href="../css/admin-styles.css">
+</head>
+<?php
 echo "<h1>Bienvenido a la Página de Administrador</h1>";
+
 
 // ---------------------------GESTIÓN DE USUARIOS-----------------------------
 

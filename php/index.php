@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
                     exit();
                 
                 case '1':
-                    header('Location: jefes.php');
+                    header('Location: jefes-equipo.php');
                     exit();
                 
                 case '2':
@@ -67,7 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     <header>
         <nav class="navbar">
             <ul class="nav-list">
-                <h1>Iniciar Sesión</h1>
+                <h1>GePro</h1>
+                
             </ul>
             <div class="rightNav">
             </div>
