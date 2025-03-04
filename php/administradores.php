@@ -2,29 +2,51 @@
 require_once("database.php");
 session_start();
 $con = crearConexion();
-echo "<h1>Bienvenido a la Página de Administrador</h1>";
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador - Gestión de Usuarios</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+<body>
+    <h1>Bienvenido a la Página de Administrador</h1>
 
-// ---------------------------GESTIÓN DE USUARIOS-----------------------------
+    <h2 style='color:blue;'>Gestión de Usuarios:</h2>
+    <?php
+    $usuarios = obtener_todos_los_usuarios($con);
 
-echo "<h2 style='color:blue;'>Gestión de Usuarios:</h2>";
-$usuarios = obtener_todos_los_usuarios($con);
-
-// MOSTRAR TABLA USUARIOS
-echo "<h4>Usuarios registrados:</h4>";
-if ($usuarios->num_rows === 0) {
-    echo "<p>No se encuentran usuarios</p>";
-} else {
-    echo "<table border='1'>
-        <tr>
-        <td>USUARIO</td><td>CONTRASEÑA</td><td>NOMBRE</td><td>APELLIDO</td><td>DNI</td><td>EMAIL</td><td>TELEFONO</td><td>TIPO</td>
-        </tr>";
-    while ($fila = obtener_resultados($usuarios)) {
-        extract($fila);
-        echo "<tr><td>$usuario</td><td>$pass</td><td>$nombre</td><td>$apellido</td><td>$dni</td><td>$email</td><td>$telefono</td><td>$tipo</td></tr>";
+    // MOSTRAR TABLA USUARIOS
+    echo "<h4>Usuarios registrados:</h4>";
+    if ($usuarios->num_rows === 0) {
+        echo "<p>No se encuentran usuarios</p>";
+    } else {
+        echo "<table class='styled-table'>
+            <thead>
+                <tr>
+                    <th>USUARIO</th><th>CONTRASEÑA</th><th>NOMBRE</th><th>APELLIDO</th><th>DNI</th><th>EMAIL</th><th>TELEFONO</th><th>TIPO</th>
+                </tr>
+            </thead>
+            <tbody>";
+        
+        while ($fila = obtener_resultados($usuarios)) {
+            extract($fila);
+            echo "<tr>
+                    <td>$usuario</td>
+                    <td>$pass</td>
+                    <td>$nombre</td>
+                    <td>$apellido</td>
+                    <td>$dni</td>
+                    <td>$email</td>
+                    <td>$telefono</td>
+                    <td>$tipo</td>
+                  </tr>";
+        }
+        
+        echo "</tbody></table>";
     }
-    echo "</table>";
-}
-
+    
 // CREAR USUARIOS
 echo "<h4>Dar de alta nuevos usuarios:</h4>";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pass'], $_POST['nombre'], $_POST['apellido'], $_POST['dni'], $_POST['email'], $_POST['telefono'], $_POST['tipo'])) {
