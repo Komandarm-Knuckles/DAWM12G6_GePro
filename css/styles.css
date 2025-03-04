@@ -99,3 +99,32 @@ p {
 .styled-table tbody tr:hover {
     background-color: #ddd;
 }
+
+#admin-editUserForm label
+{
+    display: inline-block;
+    padding: 5px;
+    width: 70px;
+}
+
+#admin-editUserForm input
+{
+    display: inline-block;
+}
+
+#admin-createUserForm label
+{
+    display: inline-block;
+    padding: 5px;
+    width: 70px;
+}
+
+#admin-createUserForm input
+{
+    display: inline-block;
+}
+
+#admin-createUserForm select
+{
+    display: inline-block;
+}
