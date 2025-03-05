@@ -126,6 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
         }
         
         echo "</tbody></table>";
+        echo "
+            <br/>
+            <form method='POST' action='adminCrearUsuario.php'>
+                <button type='submit' style='background:#007bff;color:white;border:none;cursor:pointer;font-size:14px;float:left;margin-left:2px;'>Añadir usuario</button>
+            </form>";
     }
 
 ?>
