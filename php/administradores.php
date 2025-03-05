@@ -156,9 +156,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
     <input type='submit' value='Crear'>
 </form>
 
-<hr>
+<!-- 
+MODIFICAR USUARIOS
 
-<!-- MODIFICAR USUARIOS -->
+<hr>
 <h4>Modificar Usuarios:</h4>
 <form method='POST' action='' id="admin-editUserForm">
     <label for="usuario">Usuario:</label>
@@ -183,3 +184,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
     </select><br>
     <input type='submit' value='Modificar'>
 </form>
+-->
