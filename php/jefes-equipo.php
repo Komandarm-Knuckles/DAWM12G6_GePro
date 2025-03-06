@@ -83,12 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
 <html>
 <head>
     <title>Panel de Jefe de Equipo</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body>
     <h2>Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
     
     <h3>Crear Proyecto</h3>
-    <form method="post">
+    <form method="post" >
         <input type="text" name="nombre" placeholder="Nombre" required>
         <textarea name="descripcion" placeholder="Descripción" required></textarea>
         <input type="date" name="fecha_inicio" required>

@@ -61,30 +61,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GePro</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <!-- <link rel="stylesheet" href="../css/styles.css"/> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <ul class="nav-list">
-                <h1>GePro</h1>
-                
-            </ul>
-            <div class="rightNav">
-            </div>
-        </nav>    
-    </header>
-    <main>
-        <div class="login-container">
-            <div class="login-box">
-                <form method="POST">
-                    <p>Inicio de sesión</p>
-                    <input type="text" name="user" placeholder="Nombre" required><br>
-                    <input type="password" name="pass" placeholder="Contraseña" required><br>
-                    <input type="submit" value="INICIAR SESION">
+    <img class="w-full h-screen relative" src="../img/textura1.jpg" alt="">
+    <!-- contenedor Principal -->
+    <div class="w-[100em] flex z-10 absolute left-50 bottom-50 shadow-2xl">
+        <!-- Div izquierdo -->
+            <section class="flex flex-col  w-200 justify-center items-center gap-15 bg-orange-100">
+                <div class="flex font-bold text-3xl">
+                    <!-- imagen logo en pequeño al lado del nombre -->
+                    <img src="" alt="">
+                    <p> Logo + GePro </p>
+                </div>
+                <div class="font-bold text-4xl">
+                    <p>Bienvenido/a</p>
+                </div>
+                <div class="flex flex-col w-100 items-center gap-10 p-10 ">
+                <p class="font-bold text-3xl">Inicia de sesión</p>
+                <form method="POST" class="flex flex-col w-full  ">
+                    <!-- INPUT USUARIO -->
+                    <p class="font-bold">USUARIO</p>
+                    <input type="text" name="user" placeholder="Nombre" required
+                        class="bg-green-500 shadow-xl rounded-md p-1 outline-none "/><br>
+
+                    <!-- INPUT CONTRASEÑA -->
+                    <p class="font-bold">CONTRASEÑA</p>
+                    <input type="password" name="pass" placeholder="Contraseña" required
+                        class="bg-green-500 shadow-xl rounded-md p-1 outline-none"/><br>
+                    <input type="submit" value="INICIAR SESION"
+                        class="bg-blue-500 p-2 hover:scale-115 duration-500 rounded-md"/>
                 </form>
-            </div>
+                </div>
+            </section>
+        <!-- Div derecho Logo empresa GePro -->
+        <div class="flex">
+            <img src="../img/textura1.jpg" alt="Iamgen Empresa">
         </div>
-    </main>
+    </div>
+
 </body>
 </html>
