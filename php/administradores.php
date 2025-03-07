@@ -10,59 +10,6 @@ require_once("database.php");
 
 $con = crearConexion();
 
-/* 
-CREAR USUARIOS
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pass'], $_POST['nombre'], $_POST['apellido'], $_POST['dni'], $_POST['email'], $_POST['telefono'], $_POST['tipo'])) {
-    $usuario = $_POST['usuario'];
-    $pass = $_POST['pass'];
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $dni = $_POST['dni'];
-    $email = $_POST['email'];
-    $telefono = $_POST['telefono'];
-    $tipo = $_POST['tipo'];
-
-    if (empty($usuario) || empty($pass) || empty($nombre) || empty($apellido) || empty($dni) || empty($email) || empty($telefono) || $tipo === '') {
-        echo "<p style='color: red;'>Error: Todos los campos son obligatorios.</p>";
-    } else {
-        if (crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, $telefono, $tipo)) {
-            header("Location: administradores.php");
-            exit();
-        } else {
-            echo "<p style='color: red;'>Error al crear usuario.</p>";
-        }
-    }
-}
-*/
-
-/* 
-
-MODIFICAR USUARIOS
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['nueva_pass'], $_POST['nuevo_nombre'], $_POST['nuevo_apellido'], $_POST['nuevo_dni'], $_POST['nuevo_email'], $_POST['nuevo_telefono'], $_POST['nuevo_tipo'])) {
-
-    $usuario = $_POST['usuario'];
-    $nueva_pass = $_POST['nueva_pass'];
-    $nuevo_nombre = $_POST['nuevo_nombre'];
-    $nuevo_apellido = $_POST['nuevo_apellido'];
-    $nuevo_dni = $_POST['nuevo_dni'];
-    $nuevo_email = $_POST['nuevo_email'];
-    $nuevo_telefono = $_POST['nuevo_telefono'];
-    $nuevo_tipo = $_POST['nuevo_tipo'];
-
-    if (empty($usuario) || empty($nueva_pass) || empty($nuevo_nombre) || empty($nuevo_apellido) || empty($nuevo_dni) || empty($nuevo_email) || empty($nuevo_telefono) || $nuevo_tipo === '') {
-        echo "<p style='color: red;'>Error: Rellena todos los campos.</p>";
-    } else {
-        if (modificar_usuarios($con, $usuario, $nueva_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo)) {
-            header("Location: administradores.php");
-            exit();
-        } else {
-            echo "<p style='color: red;'>Error al modificar usuario.</p>";
-        }
-    }
-}
-*/
-
 // ELIMINAR USUARIOS
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario'])) 
     {
