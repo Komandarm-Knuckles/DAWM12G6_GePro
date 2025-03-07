@@ -64,42 +64,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     <!-- <link rel="stylesheet" href="../css/styles.css"/> -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body >
-    <img class="w-full h-screen relative" src="../img/engranajesFondo.jpeg" alt="">
-    <!-- contenedor Principal -->
-    <div class="w-[100em] flex z-10 justify-center absolute left-50 bottom-50 gap-10">
-        <!-- Div izquierdo -->
-            <section class="flex flex-col w-100 justify-center items-center gap-3 bg-gray-500 shadow-2xl">
-                <div class="flex font-bold text-3xl">
-                    <!-- imagen logo en pequeño al lado del nombre -->
-                    <img class="w-10" src="../img/LogoEmpresa.png" alt="logo Empresa">
-                    
-                </div>
-                <div class="font-bold text-4xl ">
-                    <p>Bienvenido/a</p>
-                </div>
-                <div class="flex flex-col w-100 items-center gap-10 p-10 ">
+<body class="h-screen w-full justify-center bg-cover bg-center bg-fixed" style="background-image: url('../img/engranajesFondo.jpeg');">
+    <!-- Contenedor Principal -->
+    <div class="flex  justify-center items-center gap-5 h-screen w-full">
+        <!-- div Contenedor login -->
+        <section class="flex flex-col w-[30em] justify-center items-center gap-10 bg-gray-300 rounded-xl shadow-2xl p-10 ">
+            <div class="flex flex-col items-center font-bold text-3xl gap-2">
+                <img class="w-10" src="../img/LogoEmpresa.png" alt="logo Empresa">
+                <p class="font-bold text-4xl">Bienvenido/a</p>
+            </div>
+            <span class="block h-0.5 w-80 bg-black opacity-40"></span>
+            <!-- Div Formulario -->
+            <div class="flex flex-col w-100 items-center gap-5 px-10">
                 <p class="font-bold text-3xl">Inicia Sesión</p>
-                <form method="POST" class="flex flex-col w-full  ">
-                    <!-- INPUT USUARIO -->
+                <form method="POST" class="flex flex-col w-full">
                     <p class="font-bold">USUARIO</p>
                     <input type="text" name="user" placeholder="Nombre" required
-                        class="bg-gray-700 shadow-xl text-white caret-white rounded-md p-1 outline-none "/><br>
-
-                    <!-- INPUT CONTRASEÑA -->
+                        class="bg-gray-700 shadow-xl text-white caret-white rounded-md p-2 outline-none"/><br>
                     <p class="font-bold">CONTRASEÑA</p>
                     <input type="password" name="pass" placeholder="Contraseña" required
-                        class="bg-gray-700 shadow-xl text-white caret-white rounded-md p-1 outline-none"/><br>
-                    <input type="submit" value="INICIAR SESION"
-                        class="bg-orange-400 p-2 hover:scale-115 duration-500 rounded-md"/>
+                        class="bg-gray-700 shadow-xl text-white caret-white rounded-md p-2 outline-none"/><br>
+                    <input type="submit" value="INICIAR SESIÓN"
+                        class="bg-orange-400 p-2 hover:scale-110 transition-transform duration-300 rounded-md cursor-pointer"/>
                 </form>
-                </div>
-            </section>
-        <!-- Div derecho Logo empresa GePro -->
-        <div class="flex">
+            </div>
+            
+        </section>
+            <!-- div derecho -->
+            <div class="flex hidden md:block">
             <img src="../img/LogoEmpresa.png" alt="Iamgen Empresa">
-        </div>
+            </div>
     </div>
-
 </body>
+ 
 </html>
