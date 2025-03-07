@@ -1,5 +1,24 @@
 <?php
 session_start();
+
+#region Comprobación de sesión existente
+if (isset($_SESSION['usuario'])) 
+{
+    switch ($_SESSION['tipo']) 
+    {
+        case 0:
+            header("Location: administradores.php");
+            exit();
+        case 1:
+            header("Location: jefes-equipo.php");
+            exit();
+        case 2:
+            header("Location: empleados.php");
+            exit();
+    }
+}
+#endregion
+
 require_once 'database.php';
 
 // mensaje de error sesión
