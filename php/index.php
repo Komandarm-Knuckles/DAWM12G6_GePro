@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     <!-- <link rel="stylesheet" href="../css/styles.css"/> -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body class="h-screen w-full justify-center bg-cover bg-center bg-fixed" style="background-image: url('../img/engranajesFondo.jpeg');">
+<body class="h-screen w-full justify-center bg-cover bg-center bg-fixed" style="background-image: url('../img/pixels14.jpg');">
     <!-- Contenedor Principal -->
     <div class="flex justify-center items-center gap-5 h-screen w-full">
         <!-- div Contenedor login -->
