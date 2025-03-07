@@ -10,7 +10,8 @@ require_once("database.php");
 
 $con = crearConexion();
 
-// CREAR USUARIOS
+/* 
+CREAR USUARIOS
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pass'], $_POST['nombre'], $_POST['apellido'], $_POST['dni'], $_POST['email'], $_POST['telefono'], $_POST['tipo'])) {
     $usuario = $_POST['usuario'];
     $pass = $_POST['pass'];
@@ -32,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
         }
     }
 }
+*/
 
 /* 
 
@@ -152,6 +154,10 @@ echo "<h4>Dar de alta nuevos usuarios:</h4>";
 <form method='POST' action='adminCrearUsuario.php'>
     <input type='submit' value="Añadir Usuario">
 </form>
+
+<!-- 
+ CREAR USUARIOS 
+
 <form method='POST' action='' id="admin-createUserForm">
     <input type='text' name='usuario' placeholder='Nombre de usuario' required><br>
     <label for="nombre">Nombre:</label>
@@ -175,6 +181,7 @@ echo "<h4>Dar de alta nuevos usuarios:</h4>";
     </select><br>
     <input type='submit' value='Crear'>
 </form>
+-->
 
 <!-- 
 MODIFICAR USUARIOS

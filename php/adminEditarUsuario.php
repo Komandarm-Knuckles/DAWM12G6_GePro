@@ -3,6 +3,14 @@ require_once("database.php");
 session_start();
 $con = crearConexion();
 
+#region Control de sesión
+if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] !== 0) 
+{
+    header("Location: index.php");
+    exit();
+}
+#endregion
+
 #region Comprobación por si acaso no se ha seleccionado el usuario de alguna manera
 if (!isset($_POST['editar_usuario'])) 
 {
