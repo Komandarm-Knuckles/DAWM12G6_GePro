@@ -26,7 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
     }
 }
 
-// MODIFICAR USUARIOS
+/* 
+
+MODIFICAR USUARIOS
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['nueva_pass'], $_POST['nuevo_nombre'], $_POST['nuevo_apellido'], $_POST['nuevo_dni'], $_POST['nuevo_email'], $_POST['nuevo_telefono'], $_POST['nuevo_tipo'])) {
 
     $usuario = $_POST['usuario'];
@@ -49,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['nu
         }
     }
 }
+*/
 
 // ELIMINAR USUARIOS
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario'])) 
@@ -62,8 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
 ?>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Administrador</title>
-    <link rel="stylesheet" href="../css/admin-styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/admin-styles.css">
 </head>
 <?php
 echo "<h1>Bienvenido a la Página de Administrador</h1>";
@@ -82,7 +88,7 @@ $usuarios = obtener_todos_los_usuarios($con);
         echo "<table class='styled-table'>
             <thead>
                 <tr>
-                    <th>USUARIO</th><th>CONTRASEÑA</th><th>NOMBRE</th><th>APELLIDO</th><th>DNI</th><th>EMAIL</th><th>TELEFONO</th><th>TIPO</th>
+                    <th>USUARIO</th><th>CONTRASEÑA</th><th>NOMBRE</th><th>APELLIDO</th><th>DNI</th><th>EMAIL</th><th>TELEFONO</th><th>TIPO</th><th>ACCIONES</th>
                 </tr>
             </thead>
             <tbody>";
@@ -97,38 +103,45 @@ $usuarios = obtener_todos_los_usuarios($con);
                     <td>$dni</td>
                     <td>$email</td>
                     <td>$telefono</td>
-                    <td>$tipo</td>
-                  </tr>";
+                    <td>$tipo</td>";
+                    if ($_SESSION['usuario'] !== $usuario) 
+                    {
+                        echo "
+                            <td>
+                                <form method='POST' action='adminEditarUsuario.php'>
+                                    <input type='hidden' name='editar_usuario' value='$usuario'>
+                                    <input type='submit' style='background:#007bff;color:white;border:none;cursor:pointer;font-size:14px;float:left;margin-left:2px;' value='Editar'>
+                                </form>
+                                <form method='POST' action=''>
+                                    <input type='hidden' name='eliminar_usuario' value='$usuario'>
+                                    <input type='submit' onclick=\"return confirm('¿Estás seguro de que quieres eliminar este usuario?');\" style='background:#007bff;color:white;border:none;cursor:pointer;font-size:14px;float:left;margin-left:2px;' value='Eliminar'>
+                                </form>
+                            </td>";
+                    }
+                    else
+                    {
+                        echo "
+                            <td>
+                                <form method='POST' action='adminEditarUsuario.php'>
+                                    <input type='hidden' name='editar_usuario' value='$usuario'>
+                                    <input type='submit' style='background:#007bff;color:white;border:none;cursor:pointer;font-size:14px;float:left;margin-left:2px;' value='Editar'>
+                                </form>
+                            </td>";
+                    }
+                  echo "</tr>";
         }
         
         echo "</tbody></table>";
     }
     
-// CREAR USUARIOS
-echo "<h4>Dar de alta nuevos usuarios:</h4>";
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pass'], $_POST['nombre'], $_POST['apellido'], $_POST['dni'], $_POST['email'], $_POST['telefono'], $_POST['tipo'])) {
-    $usuario = $_POST['usuario'];
-    $pass = $_POST['pass'];
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $dni = $_POST['dni'];
-    $email = $_POST['email'];
-    $telefono = $_POST['telefono'];
-    $tipo = $_POST['tipo'];
 
-    if (empty($usuario) || empty($pass) || empty($nombre) || empty($apellido) || empty($dni) || empty($email) || empty($telefono) || $tipo === '') {
-        echo "<p style='color: red;'>Error: Todos los campos son obligatorios.</p>";
-    } else {
-        if (crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, $telefono, $tipo)) {
-            header("Location: administradores.php");
-            exit();
-        } else {
-            echo "<p style='color: red;'>Error al crear usuario.</p>";
-        }
-    }
-}
+echo "<h4>Dar de alta nuevos usuarios:</h4>";
 ?>
-<form method='POST' action=''>
+<!-- CREAR USUARIOS -->
+<form method='POST' action='adminCrearUsuario.php'>
+    <input type='submit' value="Añadir Usuario">
+</form>
+<form method='POST' action='' id="admin-createUserForm">
     <input type='text' name='usuario' placeholder='Nombre de usuario' required><br>
     <label for="nombre">Nombre:</label>
     <input type='text' name='nombre' placeholder='Nombre' required><br>
