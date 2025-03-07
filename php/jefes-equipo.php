@@ -1,11 +1,13 @@
 <?php
-require_once("database.php");
+// control de inicio de sesión
 session_start();
-
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 1) {
+    $_SESSION['error'] = "Debes iniciar sesión antes de acceder.";
+    header("Location: index.php");
     exit();
 }
+require_once("database.php");
+
 
 $usuario = $_SESSION['usuario'];
 $con = crearConexion();
@@ -148,4 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
     </ul>
 </body>
 </html>
-
+<!--LogOut-->
+<form action="logout.php" method="POST">
+    <button type="submit" class="logout-button">Cerrar Sesión</button>
+</form>

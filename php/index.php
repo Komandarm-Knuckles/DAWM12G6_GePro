@@ -2,6 +2,12 @@
 session_start();
 require_once 'database.php';
 
+// mensaje de error sesión
+if (isset($_SESSION['error'])) {
+    echo "<p style='color: red; font-weight: bold; text-align:center;'>" . $_SESSION['error'] . "</p>";
+    unset($_SESSION['error']); // Borra el mensaje después de mostrarlo
+}
+
 $con = crearConexion();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']))

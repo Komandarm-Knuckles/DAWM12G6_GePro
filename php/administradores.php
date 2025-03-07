@@ -1,6 +1,13 @@
 <?php
-require_once("database.php");
+// Control de inicio de sesión
 session_start();
+if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
+    $_SESSION['error'] = "Debes iniciar sesión antes de acceder.";
+    header("Location: index.php");
+    exit();
+}
+require_once("database.php");
+
 $con = crearConexion();
 
 // CREAR USUARIOS
@@ -194,3 +201,8 @@ MODIFICAR USUARIOS
     <input type='submit' value='Modificar'>
 </form>
 -->
+
+<!--LogOut-->
+<form action="logout.php" method="POST">
+    <button type="submit" class="logout-button">Cerrar Sesión</button>
+</form>
