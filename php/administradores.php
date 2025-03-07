@@ -76,15 +76,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Administrador</title>
-    <link rel="stylesheet" type="text/css" href="../css/admin-styles.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <?php
-echo "<h1>Bienvenido a la Página de Administrador</h1>";
+echo "
+<div class='flex flex-col justify-center items-center gap-5'>
+<h1 class='text-2xl font-bold'>Bienvenido a la Página de Administrador</h1>";
 
 
 // ---------------------------GESTIÓN DE USUARIOS-----------------------------
 
-echo "<h2 style='color:blue;'>Gestión de Usuarios:</h2>";
+echo "<h2 style='color:blue;'>Gestión de Usuarios:</h2>
+</div>";
 $usuarios = obtener_todos_los_usuarios($con);
 
     // MOSTRAR TABLA USUARIOS
