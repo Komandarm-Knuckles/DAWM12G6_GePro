@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
 </head>
 <body class="h-screen w-full justify-center bg-cover bg-center bg-fixed" style="background-image: url('../img/engranajesFondo.jpeg');">
     <!-- Contenedor Principal -->
-    <div class="flex  justify-center items-center gap-5 h-screen w-full">
+    <div class="flex justify-center items-center gap-5 h-screen w-full">
         <!-- div Contenedor login -->
         <section class="flex flex-col w-[30em] justify-center items-center gap-10 bg-gray-300 rounded-xl shadow-2xl p-10 ">
             <div class="flex flex-col items-center font-bold text-3xl gap-2">
@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
                     <input type="password" name="pass" placeholder="Contraseña" required
                         class="bg-gray-700 shadow-xl text-white caret-white rounded-md p-2 outline-none"/><br>
                     <input type="submit" value="INICIAR SESIÓN"
-                        class="bg-orange-400 p-2 hover:scale-110 transition-transform duration-300 rounded-md cursor-pointer"/>
+                        class="bg-orange-400 p-2 focus:bg-orange-700 transition-transform duration-300 rounded-md cursor-pointer"/>
                 </form>
             </div>
             
