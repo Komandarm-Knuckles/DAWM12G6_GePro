@@ -56,19 +56,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
     <h1>Crear Nuevo Usuario</h1>
     <form method="POST" action="">
         <label>Usuario:</label>
-        <input type="text" name="usuario" required><br>
+        <input type="text" name="usuario" placeholder="Nombre de usuario" required><br>
         <label>Nombre:</label>
-        <input type="text" name="nombre" required><br>
+        <input type="text" name="nombre" placeholder="Nombre" required><br>
         <label>Apellido:</label>
-        <input type="text" name="apellido" required><br>
+        <input type="text" name="apellido" placeholder="Apellido" required><br>
         <label>DNI:</label>
-        <input type="text" name="dni" required><br>
+        <input type="text" name="dni" placeholder="DNI" required><br>
         <label>Email:</label>
-        <input type="email" name="email" required><br>
+        <input type="email" name="email" placeholder="Correo electrónico" required><br>
         <label>Teléfono:</label>
-        <input type="text" name="telefono" required><br>
+        <input type="number" name="telefono" placeholder="Teléfono" required><br>
         <label>Contraseña:</label>
-        <input type="password" name="pass" required><br>
+        <input type="password" name="pass" placeholder="Contraseña" required><br>
         <label>Tipo:</label>
         <select name="tipo" required>
             <option value="">Selecciona...</option>
