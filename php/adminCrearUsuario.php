@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 #endregion
 ?>
 
-<?php #region HTML ?>
+<?php #region HTML y Javascript para expresiones regulares ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -54,30 +54,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 </head>
 <body>
     <h1>Crear Nuevo Usuario</h1>
-    <form method="POST" action="">
-        <label>Usuario:</label>
-        <input type="text" name="usuario" placeholder="Nombre de usuario" required><br>
-        <label>Nombre:</label>
-        <input type="text" name="nombre" placeholder="Nombre" required><br>
-        <label>Apellido:</label>
-        <input type="text" name="apellido" placeholder="Apellido" required><br>
-        <label>DNI:</label>
-        <input type="text" name="dni" placeholder="DNI" required><br>
-        <label>Email:</label>
-        <input type="email" name="email" placeholder="Correo electrónico" required><br>
-        <label>Teléfono:</label>
-        <input type="number" name="telefono" placeholder="Teléfono" required><br>
-        <label>Contraseña:</label>
-        <input type="password" name="pass" placeholder="Contraseña" required><br>
-        <label>Tipo:</label>
-        <select name="tipo" required>
-            <option value="">Selecciona...</option>
-            <option value="0">Administrador</option>
-            <option value="1">Jefe de Equipo</option>
-            <option value="2">Empleado</option>
-        </select><br>
-        <input type="submit" value="Crear Usuario">
-    </form>
+    <form id="userForm" method="POST" action="">
+    <label>Usuario:</label>
+    <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required><br>
+
+    <label>Nombre:</label>
+    <input type="text" name="nombre" id="nombre" placeholder="Nombre" minlength="3" required><br>
+
+    <label>Apellido:</label>
+    <input type="text" name="apellido" id="apellido" placeholder="Apellido" minlength="3" required><br>
+
+    <label>DNI:</label>
+    <input type="text" name="dni" id="dni" placeholder="DNI" required><br>
+
+    <label>Email:</label>
+    <input type="email" name="email" id="email" placeholder="Correo electrónico" required><br>
+
+    <label>Teléfono:</label>
+    <input type="number" name="telefono" id="telefono" placeholder="Teléfono" minlength="9" required><br>
+
+    <label>Contraseña:</label>
+    <input type="password" name="pass" id="pass" placeholder="Contraseña" required><br>
+
+    <label>Tipo:</label>
+    <select name="tipo" required>
+        <option value="">Selecciona...</option>
+        <option value="0">Administrador</option>
+        <option value="1">Jefe de Equipo</option>
+        <option value="2">Empleado</option>
+    </select><br>
+
+    <input type="submit" value="Crear Usuario">
+</form>
+
+<!-- Expresiones Regulares formulario Javascript -->
+<script>
+document.getElementById("userForm").addEventListener("submit", function(event) {
+    let dni = document.getElementById("dni").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("pass").value;
+
+    let dniRegex = /^\d{8}[A-Z]$/;
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+
+    if (!dniRegex.test(dni)) {
+        alert("El DNI debe tener 8 números seguidos de una letra mayúscula.");
+        event.preventDefault();
+        return;
+    }
+
+    if (!emailRegex.test(email)) {
+        alert("Por favor, introduce un correo electrónico válido.");
+        event.preventDefault();
+        return;
+    }
+
+    if (!passwordRegex.test(password)) {
+        alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
+        event.preventDefault();
+        return;
+    }
+
+    alert("Formulario enviado correctamente.");
+});
+</script>
+
 </body>
 </html>
 <?php #endregion ?>
