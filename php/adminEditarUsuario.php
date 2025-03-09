@@ -62,18 +62,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user']))
 </head>
 <body>
     <h1>Editar Usuario</h1>
-    <form method="POST" action="" id="admin-createUserForm">
+    <form method="POST" action="" id="formEditarUsuarios">
         <input type="hidden" name="editar_usuario" value="<?php echo $usuario; ?>">
         <label>Contraseña:</label>
-        <input type="password" name="pass" placeholder="Nueva contraseña - opcional"><br>
+        <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional"><br>
         <label>Nombre:</label>
         <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required><br>
         <label>Apellido:</label>
         <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required><br>
         <label>DNI:</label>
-        <input type="text" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required><br>
+        <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required><br>
         <label>Email:</label>
-        <input type="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required><br>
+        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required><br>
         <label>Teléfono:</label>
         <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required><br>
         <label>Tipo:</label>
@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user']))
         </select><br>
         <input type="submit" name="update_user" value="Actualizar Usuario">
     </form>
+    <script src="../js/regExp.js"></script>
 </body>
 </html>
 <?php #endregion ?>
