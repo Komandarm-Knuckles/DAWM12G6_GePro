@@ -53,6 +53,7 @@ echo"<h1 class='text-2xl font-bold'>Bienvenido a la Página de Administrador</h1
 
 echo "<h2 style='color:blue;'>Gestión de Usuarios:</h2>";
 $usuarios = obtener_todos_los_usuarios($con);
+$arrayTipos = [0 => "Administrador", 1 => "Jefe de Grupo", 2 => "Empleado"];
 
     // MOSTRAR TABLA USUARIOS
     echo "<h4>Usuarios registrados:</h4>";
@@ -76,6 +77,7 @@ $usuarios = obtener_todos_los_usuarios($con);
         
         while ($fila = obtener_resultados($usuarios)) {
             extract($fila);
+            $tipoString = $arrayTipos[$tipo] ?? "Error";
             echo "<tr>
                     <td class='text-center p-4'>$usuario</td>
                     <td class='text-center p-4'>$nombre</td>
@@ -83,7 +85,7 @@ $usuarios = obtener_todos_los_usuarios($con);
                     <td class='text-center p-4'>$dni</td>
                     <td class='text-center p-4'>$email</td>
                     <td class='text-center p-4'>$telefono</td>
-                    <td class='text-center p-4'>$tipo</td>";
+                    <td class='text-center p-4'>$tipoString</td>";
                     if ($_SESSION['usuario'] !== $usuario) 
                     {
                         echo "
