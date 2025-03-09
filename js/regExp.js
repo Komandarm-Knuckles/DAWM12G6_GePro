@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", function ()
 {
-    let form = document.getElementById('formUsuarios');
+    let form = document.getElementById('formUsuarios') || document.getElementById('formEditarUsuarios');
     if(!form) return;
 
     form.addEventListener("submit", function(event) {
-        let dni = document.getElementById("dni").value;
-        let email = document.getElementById("email").value;
-        let password = document.getElementById("pass").value;
+        let dni = document.getElementById("dni").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("pass").value.trim();
     
         let dniRegex = /^\d{8}[A-Z]$/;
         let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -25,11 +25,12 @@ document.addEventListener("DOMContentLoaded", function ()
             return;
         }
     
-        if (!passwordRegex.test(password)) {
-            alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
-            event.preventDefault();
-            return;
+        if (form.id === "formUsuarios" || (form.id === "formEditarUsuarios" && password.length > 0)) {
+            if (!passwordRegex.test(password)) {
+                alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.");
+                event.preventDefault();
+                return;
+            }
         }
     });
 });
-
