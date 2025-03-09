@@ -29,15 +29,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
     } 
     else 
     {
-        if (crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, $telefono, $tipo)) 
+        #region Expresiones regulares - Comprobación en servidor
+        $dniRegex = "/^\d{8}[A-Z]$/";
+        $emailRegex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+        $passwordRegex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+
+        if (!preg_match($dniRegex, $dni)) 
         {
-            header("Location: administradores.php");
-            exit();
+            echo "<p style='color: red;'>Error: El DNI debe tener 8 números seguidos de una letra mayúscula.</p>";
         } 
-        else 
+        elseif (!preg_match($emailRegex, $email)) 
         {
-            echo "<p style='color: red;'>Error al crear usuario.</p>";
+            echo "<p style='color: red;'>Error: Introduce un correo electrónico válido.</p>";
+        } 
+        elseif (!preg_match($passwordRegex, $pass)) 
+        {
+            echo "<p style='color: red;'>Error: La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.</p>";
         }
+        else
+        {
+            if (crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, $telefono, $tipo)) 
+            {
+                header("Location: administradores.php");
+                exit();
+            } 
+            else 
+            {
+                echo "<p style='color: red;'>Error al crear usuario.</p>";
+            }
+        }
+        #endregion 
     }
 }
 #endregion
@@ -54,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 </head>
 <body>
     <h1>Crear Nuevo Usuario</h1>
-    <form id="userForm" method="POST" action="">
+    <form id="formUsuarios" method="POST" action="">
     <label>Usuario:</label>
     <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required><br>
 
@@ -86,41 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 
     <input type="submit" value="Crear Usuario">
 </form>
-
-<!-- Expresiones Regulares formulario Javascript -->
-<script>
-document.getElementById("userForm").addEventListener("submit", function(event) {
-    let dni = document.getElementById("dni").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("pass").value;
-
-    let dniRegex = /^\d{8}[A-Z]$/;
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    let passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-
-    if (!dniRegex.test(dni)) {
-        alert("El DNI debe tener 8 números seguidos de una letra mayúscula.");
-        event.preventDefault();
-        return;
-    }
-
-    if (!emailRegex.test(email)) {
-        alert("Por favor, introduce un correo electrónico válido.");
-        event.preventDefault();
-        return;
-    }
-
-    if (!passwordRegex.test(password)) {
-        alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
-        event.preventDefault();
-        return;
-    }
-
-    alert("Formulario enviado correctamente.");
-});
-</script>
-
+ <script src="../js/regExp.js"></script>
 </body>
 </html>
 <?php #endregion ?>
