@@ -38,15 +38,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user']))
     $nuevo_telefono = $_POST['telefono'];
     $nuevo_tipo = $_POST['tipo'];
 
-    if (modificar_usuarios($con, $usuario, $nuevo_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo)) 
+    #region Expresiones regulares - Comprobación en servidor
+    $dniRegex = "/^\d{8}[A-Z]$/";
+    $emailRegex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+    $passwordRegex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+
+    if (!preg_match($dniRegex, $nuevo_dni)) 
     {
-        header("Location: administradores.php");
-        exit();
+        echo "<p style='color: red;'>Error: El DNI debe tener 8 números seguidos de una letra mayúscula.</p>";
     } 
-    else 
+    elseif (!preg_match($emailRegex, $nuevo_email)) 
     {
-        echo'<script type="text/javascript">alert("No se ha podido realizar la modificación");window.location.href="index.php";</script>';
+        echo "<p style='color: red;'>Error: Introduce un correo electrónico válido.</p>";
+    } 
+    elseif (!empty($nuevo_pass) && !preg_match($passwordRegex, $nuevo_pass)) 
+    {
+        echo "<p style='color: red;'>Error: La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</p>";
     }
+    else
+    {
+        if (modificar_usuarios($con, $usuario, $nuevo_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo)) 
+        {
+            header("Location: administradores.php");
+            exit();
+        } 
+        else 
+        {
+            echo'<script type="text/javascript">alert("No se ha podido realizar la modificación");window.location.href="index.php";</script>';
+        }
+    }
+    #endregion
 }
 #endregion
 ?>
