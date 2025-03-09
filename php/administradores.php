@@ -28,13 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <?php
-echo "<body class='h-screen w-full bg-cover bg-center bg-fixed z-10 bg-[url(\"../img/pixels11.jpg\")]'>";
+echo "<body class='h-screen w-full bg-cover bg-center bg-fixed z-10 bg-[url(\"../img/pixels4.jpg\")]'>";
 // div principal
 echo"<div class='flex w-full h-screen justify-center items-center max-w-screen'>";
 // div Contenedor
 echo"<div class='flex w-full md:flex-row flex-col  justify-center items-center'>";
 // Div Izquierdo
-echo"<div class='flex w-80 md:flex-col md:h-169 pl-10 pt-5 bg-orange-500 gap-10'>
+echo"<div class='flex w-80 md:flex-col md:h-197 pl-10 pt-5 bg-orange-500 gap-10'>
         <img class='w-10' src='../img/LogoEmpresa.png' alt='logo Empresa'/>
         <p>GePro</p>
         <p>Reuniones</p>
@@ -51,18 +51,18 @@ echo"<h1 class='text-2xl font-bold'>Bienvenido a la Página de Administrador</h1
 
 // ---------------------------GESTIÓN DE USUARIOS-----------------------------
 
-echo "<h2 style='color:blue;'>Gestión de Usuarios:</h2>";
+echo "<h2 class='font-bold text-2xl underline'>Gestión de Usuarios:</h2>";
 $usuarios = obtener_todos_los_usuarios($con);
-$arrayTipos = [0 => "Administrador", 1 => "Jefe de Grupo", 2 => "Empleado"];
 
     // MOSTRAR TABLA USUARIOS
     echo "<h4>Usuarios registrados:</h4>";
-    if ($usuarios->num_rows === 0) {
-        echo "<p>No se encuentran usuarios</p>";
-    } else {
-        echo "<table class='styled-table'>
+if ($usuarios->num_rows === 0) {
+    echo "<p>No se encuentran usuarios</p>";
+} else {
+    echo "<div class='max-h-[300px] overflow-y-auto shadow-2xl'>"; // Envuelve la tabla en un div con altura máxima y scroll
+    echo "<table class='styled-table w-[100em]'>
             <thead>
-                <tr>
+                <tr class='sticky top-0 bg-gray-300'>
                     <th class='p-3'>USUARIO</th>
                     <th class='p-3'>NOMBRE</th>
                     <th class='p-3'>APELLIDO</th>
@@ -73,56 +73,51 @@ $arrayTipos = [0 => "Administrador", 1 => "Jefe de Grupo", 2 => "Empleado"];
                     <th class='p-3'>ACCIONES</th>
                 </tr>
             </thead>
-            <tbody class='shadow-2xl'>";
-        
-        while ($fila = obtener_resultados($usuarios)) {
-            extract($fila);
-            $tipoString = $arrayTipos[$tipo] ?? "Error";
-            echo "<tr>
-                    <td class='text-center p-4'>$usuario</td>
-                    <td class='text-center p-4'>$nombre</td>
-                    <td class='text-center p-4'>$apellido</td>
-                    <td class='text-center p-4'>$dni</td>
-                    <td class='text-center p-4'>$email</td>
-                    <td class='text-center p-4'>$telefono</td>
-                    <td class='text-center p-4'>$tipoString</td>";
-                    if ($_SESSION['usuario'] !== $usuario) 
-                    {
-                        echo "
-                            <td>
-                                <div class='flex justify-center items-center'>
-                                <form method='POST' action='adminEditarUsuario.php'>
-                                    <input type='hidden' name='editar_usuario' value='$usuario'>
-                                    <button type='submit' style='background:#007bff;color:white;border:none;cursor:pointer;font-size:14px;float:left;margin-left:2px;' value='Editar'>
-                                    <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'/> 
-                                    </button>
-                                    </form>
-                                <form method='POST' action=''>
-                                    <input type='hidden' name='eliminar_usuario' value='$usuario'>
-                                    <button type='submit' onclick=\"return confirm('¿Estás seguro de que quieres eliminar este usuario?');\" style='border: none; background: none; padding: 0; cursor: pointer;'>
-                                        <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;'> 
-                                    </button>
-                                </form>
-                                </div>
-                            </td>";
-                    }
-                    else
-                    {
-                        echo "
-                            <td>
-                                <form class='flex justify-center items-center' method='POST' action='adminEditarUsuario.php'>
-                                    <input type='hidden' name='editar_usuario' value='$usuario'>
-                                    <button type='submit' style='background:#007bff;color:white;border:none;cursor:pointer;font-size:14px;float:left;margin-left:2px;' value='Editar'>
-                                    <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'/> 
-                                    </button>
-                                </form>
-                            </td>";
-                    }
-                  echo "</tr>";
+            <tbody>";
+
+    while ($fila = obtener_resultados($usuarios)) {
+        extract($fila);
+        echo "<tr>
+                <td class='text-center p-4'>$usuario</td>
+                <td class='text-center p-4'>$nombre</td>
+                <td class='text-center p-4'>$apellido</td>
+                <td class='text-center p-4'>$dni</td>
+                <td class='text-center p-4'>$email</td>
+                <td class='text-center p-4'>$telefono</td>
+                <td class='text-center p-4'>$tipo</td>";
+        if ($_SESSION['usuario'] !== $usuario) {
+            echo "
+                <td>
+                    <div class='flex justify-center items-center'>
+                        <form method='POST' action='adminEditarUsuario.php'>
+                            <input type='hidden' name='editar_usuario' value='$usuario'>
+                            <button type='submit' value='Editar' class='cursor-pointer'>
+                                <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'/> 
+                            </button>
+                        </form>
+                        <form method='POST' action=''>
+                            <input type='hidden' name='eliminar_usuario' value='$usuario'>
+                            <button type='submit' onclick=\"return confirm('¿Estás seguro de que quieres eliminar este usuario?');\" class='cursor-pointer'>
+                                <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;'> 
+                            </button>
+                        </form>
+                    </div>
+                </td>";
+        } else {
+            echo "
+                <td>
+                    <form class='flex justify-center items-center' method='POST' action='adminEditarUsuario.php'>
+                        <input type='hidden' name='editar_usuario' value='$usuario'>
+                        <button type='submit' value='Editar' class='cursor-pointer'>
+                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'/> 
+                        </button>
+                    </form>
+                </td>";
         }
-        
-        echo "</tbody></table>";
+        echo "</tr>";
     }
+    echo "</tbody></table></div>"; // Cierra el div que envuelve la tabla
+}
     
 
 
@@ -130,13 +125,14 @@ $arrayTipos = [0 => "Administrador", 1 => "Jefe de Grupo", 2 => "Empleado"];
 <!-- CREAR USUARIOS -->
  <div class="flex p-5 gap-2 justify-center items-center shadow-2xl">
 <h4>Dar de alta nuevos usuarios:</h4>
-<form method='POST' action='adminCrearUsuario.php' class="p-1 border-2">
-    <input type='submit' value="Añadir Usuario">
+<form method='POST' action='adminCrearUsuario.php' class="p-2 bg-orange-400 rounded-xl shadow-lg cursor-pointer">
+    <button class="cursor-pointer" type='submit'> Añadir Usuario</button>
+
 </form>
 </div>
 <!--LogOut-->
 <form action="logout.php" method="POST">
-    <button type="submit" class="logout-button p-1 border-2">Cerrar Sesión</button>
+    <button type="submit" class="p-2 bg-orange-400 rounded-xl shadow-lg cursor-pointer">Cerrar Sesión</button>
 </form>
 <?php
 

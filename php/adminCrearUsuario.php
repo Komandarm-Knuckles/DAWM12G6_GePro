@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
         #region Expresiones regulares - Comprobación en servidor
         $dniRegex = "/^\d{8}[A-Z]$/";
         $emailRegex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-        $passwordRegex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+        $passwordRegex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&.\-_])[A-Za-z\d@$!%*?&.\-_]{8,}$/";
 
         if (!preg_match($dniRegex, $dni)) 
         {
@@ -71,7 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Usuario</title>
-    <link rel="stylesheet" type="text/css" href="../css/admin-styles.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body>
     <h1>Crear Nuevo Usuario</h1>
@@ -95,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
     <input type="number" name="telefono" id="telefono" placeholder="Teléfono" minlength="9" required><br>
 
     <label>Contraseña:</label>
-    <input type="password" name="pass" id="pass" placeholder="Contraseña" required><br>
+    <input type="text" name="pass" id="pass" placeholder="Contraseña" required><br>
 
     <label>Tipo:</label>
     <select name="tipo" required>

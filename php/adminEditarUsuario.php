@@ -79,33 +79,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/styles.css"> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    
 </head>
-<body>
-    <h1>Editar Usuario</h1>
-    <form method="POST" action="" id="formEditarUsuarios">
-        <input type="hidden" name="editar_usuario" value="<?php echo $usuario; ?>">
-        <label>Contraseña:</label>
-        <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional"><br>
-        <label>Nombre:</label>
-        <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required><br>
-        <label>Apellido:</label>
-        <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required><br>
-        <label>DNI:</label>
-        <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required><br>
-        <label>Email:</label>
-        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required><br>
-        <label>Teléfono:</label>
-        <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required><br>
-        <label>Tipo:</label>
-        <select name="tipo" required>
-            <option value="0" <?php echo ($datos_usuario['tipo'] == 0) ? 'selected' : ''; ?>>Administrador</option>
-            <option value="1" <?php echo ($datos_usuario['tipo'] == 1) ? 'selected' : ''; ?>>Jefe de Equipo</option>
-            <option value="2" <?php echo ($datos_usuario['tipo'] == 2) ? 'selected' : ''; ?>>Empleado</option>
-        </select><br>
-        <input type="submit" name="update_user" value="Actualizar Usuario">
-    </form>
-    <script src="../js/regExp.js"></script>
+<body class="h-screen">
+    <div class="flex h-screen w-full items-center justify-center bg-cover bg-center bg-fixed bg-[url('../img/pixels4.jpg')] z-10">
+        <div class="flex flex-col justify-center items-center bg-gray-300 p-10 gap-10">
+            <h1 class="font-bold text-4xl">Editar Usuario</h1>
+            <span class="block h-0.5 w-100 bg-black opacity-40"></span>
+            <form method="POST" action="" id="formEditarUsuarios" class="flex flex-col gap-1 text-center w-[30em]">
+                <input type="hidden" name="editar_usuario" value="<?php echo $usuario; ?>">
+                <p class="text-lg font-bold">CONTRASEÑA</p>
+                <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <p class="text-lg font-bold">NOMBRE</p>
+                <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <p class="text-lg font-bold">APELLIDO</p>
+                <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <p class="text-lg font-bold">DNI</p>
+                <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <p class="text-lg font-bold">EMAIL</p>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <p class="text-lg font-bold">TELEFONO</p>
+                <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <p class="text-lg font-bold">TIPO</p>
+                <select name="tipo" class="border-3 rounded-md border-orange-500 text-center focus:outline-none" required>
+                    <option value="0" <?php echo ($datos_usuario['tipo'] == 0) ? 'selected' : ''; ?>>Administrador</option>
+                    <option value="1" <?php echo ($datos_usuario['tipo'] == 1) ? 'selected' : ''; ?>>Jefe de Equipo</option>
+                    <option value="2" <?php echo ($datos_usuario['tipo'] == 2) ? 'selected' : ''; ?>>Empleado</option>
+                </select><br>
+                <div>
+                    <button type="submit" name="update_user" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Actualizar</button>
+                    <button type="button" onclick="history.back()" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Volver</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 <?php #endregion ?>
