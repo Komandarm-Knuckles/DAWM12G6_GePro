@@ -91,26 +91,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user']))
             <form method="POST" action="" id="formEditarUsuarios" class="flex flex-col gap-1 text-center w-[30em]">
                 <input type="hidden" name="editar_usuario" value="<?php echo $usuario; ?>">
                 <p class="text-lg font-bold">CONTRASEÑA</p>
-                <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-3 rounded-md border-orange-400 text-center focus:outline-none">
                 <p class="text-lg font-bold">NOMBRE</p>
-                <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-3 rounded-md border-orange-400 text-center focus:outline-none">
                 <p class="text-lg font-bold">APELLIDO</p>
-                <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-3 rounded-md border-orange-400 text-center focus:outline-none">
                 <p class="text-lg font-bold">DNI</p>
-                <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-3 rounded-md border-orange-400 text-center focus:outline-none">
                 <p class="text-lg font-bold">EMAIL</p>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-3 rounded-md border-orange-400 text-center focus:outline-none">
                 <p class="text-lg font-bold">TELEFONO</p>
-                <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-3 rounded-md border-orange-500 text-center focus:outline-none">
+                <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-3 rounded-md border-orange-400 text-center focus:outline-none">
                 <p class="text-lg font-bold">TIPO</p>
-                <select name="tipo" class="border-3 rounded-md border-orange-500 text-center focus:outline-none" required>
+                <select name="tipo" class="border-3 rounded-md border-orange-400 text-center focus:outline-none" required>
                     <option value="0" <?php echo ($datos_usuario['tipo'] == 0) ? 'selected' : ''; ?>>Administrador</option>
                     <option value="1" <?php echo ($datos_usuario['tipo'] == 1) ? 'selected' : ''; ?>>Jefe de Equipo</option>
                     <option value="2" <?php echo ($datos_usuario['tipo'] == 2) ? 'selected' : ''; ?>>Empleado</option>
                 </select><br>
                 <div>
-                    <button type="submit" name="update_user" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Actualizar</button>
-                    <button type="button" onclick="history.back()" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Volver</button>
+                    <button type="submit" name="update_user" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Actualizar</button>
+                    <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Volver</button>
                 </div>
             </form>
         </div>

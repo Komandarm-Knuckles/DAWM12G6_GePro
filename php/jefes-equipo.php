@@ -87,70 +87,101 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
     <title>Panel de Jefe de Equipo</title>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <h2>Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
-    
-    <h3>Crear Proyecto</h3>
-    <form method="post" >
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <textarea name="descripcion" placeholder="Descripción" required></textarea>
-        <input type="date" name="fecha_inicio" required>
-        <input type="date" name="fecha_fin">
-        <button type="submit" name="crear_proyecto">Crear Proyecto</button>
-    </form>
-    
-    <h3>Crear Reunión</h3>
-    <form method="post">
-        <input type="text" name="titulo" placeholder="Título" required>
-        <textarea name="descripcion" placeholder="Descripción" required></textarea>
-        <input type="date" name="fecha" required>
-        <input type="time" name="hora" required>
-        <input type="number" name="id_proyecto" placeholder="ID Proyecto" required>
-        <button type="submit" name="crear_reunion">Crear Reunión</button>
-    </form>
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
+<div class="flex flex-col gap-10 p-10 w-full max-w-[40%] bg-gray-300 justify-center items-center">
+            <h2 class="font-bold text-orange-400 text-4xl underline">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
 
-    <h3>Crear Tarea</h3>
-    <form method="post">
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <textarea name="descripcion" placeholder="Descripción" required></textarea>
-        <input type="number" name="id_proyecto" placeholder="ID Proyecto" required>
-        <input type="text" name="usuario_asignado" placeholder="Usuario asignado" required>
-        <input type="date" name="fecha_vencimiento" required>
-        <button type="submit" name="crear_tarea">Crear Tarea</button>
-    </form>
-    
-    <h3>Proyectos</h3>
-    <ul>
-        <?php while ($proyecto = $proyectos->fetch_assoc()) { ?>
-            <li><?php echo htmlspecialchars($proyecto['nombre']) . " - Estado: " . $proyecto['estado']; ?>
-                <a href='editar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>'>Editar</a>
-                <a href='borrar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>'>Borrar</a>
-            </li>
-        <?php } ?>
-    </ul>
-    
-    <h3>Reuniones</h3>
-    <ul>
-        <?php while ($reunion = $reuniones->fetch_assoc()) { ?>
-            <li><?php echo htmlspecialchars($reunion['titulo']) . " - " . $reunion['fecha']; ?>
-                <a href='editar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>'>Editar</a>
-                <a href='borrar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>'>Borrar</a>
-            </li>
-        <?php } ?>
-    </ul>
+            <h3 class="font-bold text-orange-400 text-3xl underline">Crear Proyecto</h3>
+            <form method="post" class="flex flex-col w-full gap-2">
+                <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded" />
+                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
+                <input type="date" name="fecha_inicio" required class="p-2 border rounded" />
+                <input type="date" name="fecha_fin" class="p-2 border rounded" />
+                <button type="submit" name="crear_proyecto" class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Proyecto</button>
+            </form>
 
-    <h3>Tareas</h3>
-    <ul>
-        <?php while ($tarea = $tareas->fetch_assoc()) { ?>
-            <li><?php echo htmlspecialchars($tarea['nombre']) . " - Estado: " . $tarea['estado']; ?>
-                <a href='editar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>'>Editar</a>
-                <a href='borrar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>'>Borrar</a>
-            </li>
-        <?php } ?>
-    </ul>
+            <h3 class="font-bold text-orange-400 text-3xl underline">Crear Reunión</h3>
+            <form method="post" class="flex flex-col w-full gap-2">
+                <input type="text" name="titulo" placeholder="Título" required class="p-2 border rounded" />
+                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
+                <input type="date" name="fecha" required class="p-2 border rounded" />
+                <input type="time" name="hora" required class="p-2 border rounded" />
+                <input type="number" name="id_proyecto" placeholder="ID Proyecto" required class="p-2 border rounded" />
+                <button type="submit" name="crear_reunion" class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Reunión</button>
+            </form>
+
+            <h3 class="font-bold text-orange-400 text-3xl underline">Crear Tarea</h3>
+            <form method="post" class="flex flex-col w-full gap-2">
+                <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded" />
+                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
+                <input type="number" name="id_proyecto" placeholder="ID Proyecto" required class="p-2 border rounded" />
+                <input type="text" name="usuario_asignado" placeholder="Usuario asignado" required class="p-2 border rounded" />
+                <input type="date" name="fecha_vencimiento" required class="p-2 border rounded" />
+                <button type="submit" name="crear_tarea" class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Tarea</button>
+            </form>
+
+            <h3 class="font-bold text-orange-400 text-3xl underline">Proyectos</h3>
+            <ul>
+                <?php while ($proyecto = $proyectos->fetch_assoc()) { ?>
+                <li class="flex gap-5">
+                <?php
+                echo " <p class='font-bold text-orange-400'>-Nombre del Proyecto:</p> " . htmlspecialchars($proyecto['nombre']) . 
+                     " <p class='font-bold text-orange-400'>Estado:</p> " . htmlspecialchars($proyecto['estado']);
+                ?>
+                    <div class="flex gap-1">
+                    <a href="editar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>">
+                        <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/> 
+                    </a>
+                    <a href="borrar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>">
+                        <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-400'/> 
+                    </a>
+                    </div>
+                </li>
+                <?php } ?>
+            </ul>
+
+            <h3 class="font-bold text-orange-400 text-3xl underline">Reuniones</h3>
+            <ul>
+                <?php while ($reunion = $reuniones->fetch_assoc()) { ?>
+                <li class="flex gap-5">
+                    <?php 
+                    echo " <p class='font-bold text-orange-400'>-Nombre de la Reunión:</p> " .  htmlspecialchars($reunion['titulo']) . 
+                    " <p class='font-bold text-orange-400'>Fecha:</p>" . $reunion['fecha']; ?>
+                    <div class="flex gap-1">
+                        <a href="editar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>">
+                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/>
+                        </a>
+                        <a href="borrar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>">
+                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/>
+                        </a>
+                    </div>
+                </li>
+                <?php } ?>
+            </ul>
+
+            <h3 class="font-bold text-orange-400 text-3xl underline">Tareas</h3>
+            <ul>
+                <?php while ($tarea = $tareas->fetch_assoc()) { ?>
+                <li class="flex gap-5">
+                    <?php 
+                    echo " <p class='font-bold text-orange-400'>-Nombre de la Tarea:</p> " .  htmlspecialchars($tarea['nombre']) . 
+                    " <p class='font-bold text-orange-400'>Estado:</p> " . $tarea['estado']; ?>
+                    <div class="flex gap-1">
+                    <a href="editar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>">
+                    <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/> 
+                    </a>
+                    <a href="borrar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>" class="text-red-400">
+                    <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-400'/> 
+                    </a>
+                    </div>
+
+                </li>
+                <?php } ?>
+            </ul>
+            <form action="logout.php" method="POST">
+                <button type="submit" class="p-2 bg-orange-400 rounded-xl shadow-lg cursor-pointer p-3 text-white hover:bg-orange-700">Cerrar Sesión</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
-<!--LogOut-->
-<form action="logout.php" method="POST">
-    <button type="submit" class="logout-button">Cerrar Sesión</button>
-</form>

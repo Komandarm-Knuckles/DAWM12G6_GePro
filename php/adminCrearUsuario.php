@@ -73,42 +73,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
     <title>Crear Usuario</title>
     <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="../js/regExp.js"></script>
 </head>
-<body>
-    <h1>Crear Nuevo Usuario</h1>
-    <form id="formUsuarios" method="POST" action="">
-    <label>Usuario:</label>
-    <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required><br>
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
+    <div class="max-w-[90%] w-[40em] bg-white p-8 rounded shadow-xl">
+        <h1 class="text-2xl font-bold text-center underline p-2">Crear Nuevo Usuario</h1>
+        <form id="formUsuarios" method="POST" action="" class="flex flex-col gap-3 justify-center items-center ">
+                Usuario:
+                <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required class="mt-1 p-2 border rounded w-full" />
+                  
+                Nombre:
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre" minlength="3" required class="mt-1 p-2 border rounded w-full" />
+            
+                Apellido:
+                <input type="text" name="apellido" id="apellido" placeholder="Apellido" minlength="3" required class="mt-1 p-2 border rounded w-full" />
 
-    <label>Nombre:</label>
-    <input type="text" name="nombre" id="nombre" placeholder="Nombre" minlength="3" required><br>
-
-    <label>Apellido:</label>
-    <input type="text" name="apellido" id="apellido" placeholder="Apellido" minlength="3" required><br>
-
-    <label>DNI:</label>
-    <input type="text" name="dni" id="dni" placeholder="DNI" required><br>
-
-    <label>Email:</label>
-    <input type="email" name="email" id="email" placeholder="Correo electrónico" required><br>
-
-    <label>Teléfono:</label>
-    <input type="number" name="telefono" id="telefono" placeholder="Teléfono" minlength="9" required><br>
-
-    <label>Contraseña:</label>
-    <input type="text" name="pass" id="pass" placeholder="Contraseña" required><br>
-
-    <label>Tipo:</label>
-    <select name="tipo" required>
-        <option value="">Selecciona...</option>
-        <option value="0">Administrador</option>
-        <option value="1">Jefe de Equipo</option>
-        <option value="2">Empleado</option>
-    </select><br>
-
-    <input type="submit" value="Crear Usuario">
-</form>
- <script src="../js/regExp.js"></script>
+                DNI:
+                <input type="text" name="dni" id="dni" placeholder="DNI" required class="mt-1 p-2 border rounded w-full" />
+        
+                Email:
+                <input type="email" name="email" id="email" placeholder="Correo electrónico" required class="mt-1 p-2 border rounded w-full" />
+            
+                Teléfono:
+                <input type="number" name="telefono" id="telefono" placeholder="Teléfono" minlength="9" required class="mt-1 p-2 border rounded w-full" />
+            
+                Contraseña:
+                <input type="text" name="pass" id="pass" placeholder="Contraseña" required class="mt-1 p-2 border rounded w-full" />
+            
+                 Tipo:
+                <select name="tipo" required class="mt-1 p-2 border rounded w-full">
+                    <option value="">Selecciona...</option>
+                    <option value="0">Administrador</option>
+                    <option value="1">Jefe de Equipo</option>
+                    <option value="2">Empleado</option>
+                </select>
+            <div class="flex gap-5">
+                <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-50 items-center cursor-pointer hover:bg-orange-700 font-bold" />
+                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Volver</button>
+            </div>
+        </form>
+    </div>
+    
 </body>
 </html>
 <?php #endregion ?>
