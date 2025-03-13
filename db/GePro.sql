@@ -78,3 +78,7 @@ INSERT INTO proyectos (nombre, descripcion, fecha_inicio, estado) VALUES
 INSERT INTO tareas (nombre, descripcion, id_proyecto, usuario, fecha_asignacion, estado) VALUES
 ('Diseño UI', 'Crear el diseño de la interfaz de usuario', 1, 'empleado', '2024-03-01', 'en progreso'),
 ('Desarrollo Backend', 'Programar la lógica del servidor', 1, 'jefe', '2024-03-01', 'pendiente');
+
+-- INSERTAR REUNIONES
+INSERT INTO reuniones (titulo, descripcion, fecha, hora, id_proyecto) VALUES 
+('Reunion Proyecto Alpha', 'Reunion para retener conceptos', '2024-02-19', '14:00:00',1);

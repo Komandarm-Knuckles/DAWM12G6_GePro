@@ -86,10 +86,44 @@ function modificar_usuarios($con, $usuario, $nueva_pass, $nuevo_nombre, $nuevo_a
     #endregion
 }
 
+#BORRAR
 
+//Borra el usuario completo
 function borrar_usuario($con, $usuario) {
+    // eliminamos las tareas del usuario (ON DELETE CASCADE en la BD ya lo haría, pero por seguridad)
+    $stmt = $con->prepare("DELETE FROM tareas WHERE usuario=?");
+    $stmt->bind_param("s", $usuario);
+    $stmt->execute();
+    
+    // Eliminamos al usuario de los grupos
+    $stmt = $con->prepare("DELETE FROM usuarios_grupos WHERE usuario=?");
+    $stmt->bind_param("s", $usuario);
+    $stmt->execute();
+
+    // eliminamos al usuario
     $stmt = $con->prepare("DELETE FROM usuarios WHERE usuario=?");
     $stmt->bind_param("s", $usuario);
+    return $stmt->execute();
+}
+
+// Eliminar una tarea por su ID
+function borrar_tarea($con, $id_tarea) {
+    $stmt = $con->prepare("DELETE FROM tareas WHERE id_tarea=?");
+    $stmt->bind_param("i", $id_tarea);
+    return $stmt->execute();
+}
+
+// Eliminar un proyecto por su ID (esto también eliminará tareas y reuniones asociadas debido a ON DELETE CASCADE)
+function borrar_proyecto($con, $id_proyecto) {
+    $stmt = $con->prepare("DELETE FROM proyectos WHERE id_proyecto=?");
+    $stmt->bind_param("i", $id_proyecto);
+    return $stmt->execute();
+}
+
+// Eliminar una reunión por su ID
+function borrar_reunion($con, $id_reunion) {
+    $stmt = $con->prepare("DELETE FROM reuniones WHERE id_reunion=?");
+    $stmt->bind_param("i", $id_reunion);
     return $stmt->execute();
 }
 

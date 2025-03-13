@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
                 </select>
             <div class="flex gap-10 mt-10">
                 <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-50 items-center cursor-pointer hover:bg-orange-700 font-bold" />
-                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold p-2 rounded-md w-50    ">Volver</button>
+                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold p-2 rounded-md w-50">Volver</button>
             </div>
         </form>
     </div>

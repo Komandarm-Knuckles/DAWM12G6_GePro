@@ -21,7 +21,7 @@ $result = $stmt->get_result();
 $tipo_usuario = $result->fetch_assoc()['tipo'];
 
 if ($tipo_usuario != 1) {
-    header("Location: empleado.php");
+    $_SESSION['error'] = "No eres un jefe de equipo";
     exit();
 }
 
@@ -80,6 +80,77 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
     $stmt->execute();
     header("Location: jefes-equipo.php");
 }
+
+// ELIMINAR TAREAS
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_tarea'])) {
+    $id_tarea = intval($_POST['eliminar_tarea']); 
+    borrar_tarea($con, $id_tarea);
+    header("Location: jefes-equipo.php");
+    exit();
+}
+
+// ELIMINAR PROYECTOS
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_proyecto'])) {
+    $id_proyecto = intval($_POST['eliminar_proyecto']);
+    borrar_proyecto($con, $id_proyecto);
+    header("Location: jefes-equipo.php");
+    exit();
+}
+
+// ELIMINAR REUNIONES
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_reunion'])) {
+    $id_reunion = intval($_POST['eliminar_reunion']);
+    borrar_reunion($con, $id_reunion);
+    header("Location: jefes-equipo.php");
+    exit();
+}
+
+// EDITAR TAREAS
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_tarea'])) {
+    $id_tarea = intval($_POST['id_tarea']);
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $estado = $_POST['estado'];
+
+    $stmt = $con->prepare("UPDATE tareas SET nombre=?, descripcion=?, estado=? WHERE id_tarea=?");
+    $stmt->bind_param("sssi", $nombre, $descripcion, $estado, $id_tarea);
+    $stmt->execute();
+
+    header("Location: adminTareas.php");
+    exit();
+}
+
+// EDITAR PROYECTOS
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_proyecto'])) {
+    $id_proyecto = intval($_POST['id_proyecto']);
+    $nombre = $_POST['nombre'];
+    $descripcion = $_POST['descripcion'];
+    $estado = $_POST['estado'];
+
+    $stmt = $con->prepare("UPDATE proyectos SET nombre=?, descripcion=?, estado=? WHERE id_proyecto=?");
+    $stmt->bind_param("sssi", $nombre, $descripcion, $estado, $id_proyecto);
+    $stmt->execute();
+
+    header("Location: adminProyectos.php");
+    exit();
+}
+
+// EDITAR REUNIONES
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
+    $id_reunion = intval($_POST['id_reunion']);
+    $titulo = $_POST['titulo'];
+    $descripcion = $_POST['descripcion'];
+    $fecha = $_POST['fecha'];
+
+    $stmt = $con->prepare("UPDATE reuniones SET titulo=?, descripcion=?, fecha=? WHERE id_reunion=?");
+    $stmt->bind_param("sssi", $titulo, $descripcion, $fecha, $id_reunion);
+    $stmt->execute();
+
+    header("Location: adminReuniones.php");
+    exit();
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -129,12 +200,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
                      " <p class='font-bold text-orange-400'>Estado:</p> " . htmlspecialchars($proyecto['estado'])
                 ?>
                     <div class="flex gap-1">
-                    <a href="editar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>">
-                        <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/> 
-                    </a>
-                    <a href="borrar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>">
-                        <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'/> 
-                    </a>
+                    <form method="POST" action="">
+                        <input type="hidden" name="editar_proyecto" value="<?php echo $proyecto['id_proyecto']; ?>">
+                        <button type="submit" class="cursor-pointer">
+                        <img src='../img/square-pen.png' alt='Editar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/>
+                        </button>
+                    </form>
+                    <form method="POST" action="">
+                        <input type="hidden" name="eliminar_proyecto" value="<?php echo $proyecto['id_proyecto']; ?>">
+                        <button type="submit" class="cursor-pointer">
+                            <img src="../img/trash-2.png" alt="Eliminar" style="width: 20px; height: 20px;" class="hover:bg-red-500 hover:scale-105">
+                        </button>
+                    </form>
+
                     </div>
                 </li>
                 <?php } ?>
@@ -148,12 +226,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
                     echo " <p class='font-bold text-orange-400'>-Nombre de la Reunión:</p> " .  htmlspecialchars($reunion['titulo']) . 
                     " <p class='font-bold text-orange-400'>Fecha:</p>" . $reunion['fecha']; ?>
                     <div class="flex gap-1">
-                        <a href="editar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>">
-                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/>
-                        </a>
-                        <a href="borrar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>">
-                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/>
-                        </a>
+                    <form method="POST" action="">
+                        <input type="hidden" name="editar_reunion" value="<?php echo $proyecto['id_proyecto']; ?>">
+                        <button type="submit" class="cursor-pointer">
+                        <img src='../img/square-pen.png' alt='Editar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/>
+                        </button>
+                    </form>
+                        <form method="POST" action="">
+    <input type="hidden" name="eliminar_reunion" value="<?php echo $reunion['id_reunion']; ?>">
+    <button type="submit" class="cursor-pointer">
+        <img src="../img/trash-2.png" alt="Eliminar" style="width: 20px; height: 20px;" class="hover:bg-red-500 hover:scale-105">
+    </button>
+</form>
+
                     </div>
                 </li>
                 <?php } ?>
@@ -167,12 +252,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
                     echo " <p class='font-bold text-orange-400'>-Nombre de la Tarea:</p> " .  htmlspecialchars($tarea['nombre']) . 
                     " <p class='font-bold text-orange-400'>Estado:</p> " . $tarea['estado']; ?>
                     <div class="flex gap-1">
-                    <a href="editar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>">
-                    <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/> 
-                    </a>
-                    <a href="borrar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>">
-                    <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'/> 
-                    </a>
+                    <form method="POST" action="">
+                        <input type="hidden" name="editar_tarea" value="<?php echo $proyecto['id_proyecto']; ?>">
+                        <button type="submit" class="cursor-pointer">
+                        <img src='../img/square-pen.png' alt='Editar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/>
+                        </button>
+                    </form>
+                    <form method="POST" action="">
+                        <input type="hidden" name="eliminar_tarea" value="<?php echo $tarea['id_tarea']; ?>">
+                        <button type="submit" class="cursor-pointer">
+                            <img src="../img/trash-2.png" alt="Eliminar" style="width: 20px; height: 20px;" class="hover:bg-red-500 hover:scale-105">
+                        </button>
+                    </form>
+
                     </div>
 
                 </li>
