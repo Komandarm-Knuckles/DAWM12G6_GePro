@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_reunion'])) {
     $stmt = $con->prepare("INSERT INTO reuniones (titulo, descripcion, fecha, hora, id_proyecto) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssi", $titulo, $descripcion, $fecha, $hora, $id_proyecto);
     $stmt->execute();
-    header("Location: jefeEquipo.php");
+    header("Location: jefes-equipo.php");
 }
 
 // Crear tarea
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
     $stmt = $con->prepare("INSERT INTO tareas (nombre, descripcion, id_proyecto, usuario, fecha_asignacion, fecha_vencimiento, estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssissss", $nombre, $descripcion, $id_proyecto, $usuario_asignado, $fecha_asignacion, $fecha_vencimiento, $estado);
     $stmt->execute();
-    header("Location: jefeEquipo.php");
+    header("Location: jefes-equipo.php");
 }
 
 // Crear proyecto
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
     $stmt = $con->prepare("INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado);
     $stmt->execute();
-    header("Location: jefeEquipo.php");
+    header("Location: jefes-equipo.php");
 }
 ?>
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
-<div class="flex flex-col gap-10 p-10 w-full max-w-[40%] bg-gray-300 justify-center items-center">
+<div class="flex flex-col gap-10 p-10 w-full max-w-[65%] bg-gray-300 justify-center items-center">
             <h2 class="font-bold text-orange-400 text-4xl underline">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
 
             <h3 class="font-bold text-orange-400 text-3xl underline">Crear Proyecto</h3>
@@ -125,15 +125,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
                 <?php while ($proyecto = $proyectos->fetch_assoc()) { ?>
                 <li class="flex gap-5">
                 <?php
-                echo " <p class='font-bold text-orange-400'>-Nombre del Proyecto:</p> " . htmlspecialchars($proyecto['nombre']) . 
-                     " <p class='font-bold text-orange-400'>Estado:</p> " . htmlspecialchars($proyecto['estado']);
+                echo " <p class='font-bold text-orange-400'>-Nombre del Proyecto:</p> " . htmlspecialchars($proyecto['nombre']) .
+                     " <p class='font-bold text-orange-400'>Estado:</p> " . htmlspecialchars($proyecto['estado'])
                 ?>
                     <div class="flex gap-1">
                     <a href="editar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>">
-                        <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/> 
+                        <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/> 
                     </a>
                     <a href="borrar_proyecto.php?id=<?php echo $proyecto['id_proyecto']; ?>">
-                        <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-400'/> 
+                        <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'/> 
                     </a>
                     </div>
                 </li>
@@ -149,10 +149,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
                     " <p class='font-bold text-orange-400'>Fecha:</p>" . $reunion['fecha']; ?>
                     <div class="flex gap-1">
                         <a href="editar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>">
-                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/>
+                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/>
                         </a>
                         <a href="borrar_reunion.php?id=<?php echo $reunion['id_reunion']; ?>">
-                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/>
+                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/>
                         </a>
                     </div>
                 </li>
@@ -168,10 +168,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_proyecto'])) {
                     " <p class='font-bold text-orange-400'>Estado:</p> " . $tarea['estado']; ?>
                     <div class="flex gap-1">
                     <a href="editar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>">
-                    <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-400'/> 
+                    <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'/> 
                     </a>
-                    <a href="borrar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>" class="text-red-400">
-                    <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-400'/> 
+                    <a href="borrar_tarea.php?id=<?php echo $tarea['id_tarea']; ?>">
+                    <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'/> 
                     </a>
                     </div>
 
