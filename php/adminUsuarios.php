@@ -41,14 +41,26 @@ echo "<div class='flex w-full min-h-screen justify-center items-center'>";
 echo "<div class='flex w-full md:flex-row flex-col justify-center items-stretch max-w-[90%]'>"; // items-stretch extiende el div izquiedo en el eje Y
 
 // Div Izquierdo con altura total del contenedor
-echo "<div class='flex md:flex-col md:w-80 w-full flex-wrap md:justify-start  justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5'>";
+echo "<section class='flex md:flex-col md:w-80 w-full flex-wrap md:justify-start  justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5'>";
 echo "<img class='md:w-50 w-15' src='../img/LogoEmpresa.png' alt='logo Empresa'/>
-      <p class='font-bold text-white text-lg'>Reuniones</p>
-      <p class='font-bold text-white text-lg'>Proyectos</p>
-      <p class='font-bold text-white text-lg'>Tareas</p>
-      <p class='font-bold text-white text-lg'>Grupos</p>";
+      <div class='flex gap-2'>
+      <img src='../img/projector.svg' alt='imagenReuniones'/>
+      <a href='adminReuniones.php' class='font-bold text-white text-lg'>Reuniones</a>
+      </div>
+      <div class='flex gap-2'>
+      <img src='../img/folder-git-2.svg' alt='imagenProyectos'/>
+      <a href='adminProyectos.php' class='font-bold text-white text-lg'>Proyectos</a>
+      </div>
+      <div class='flex gap-2'>
+      <img src='../img/clipboard-list.svg' alt='imagenProyectos'/>
+      <a href='adminTareas.php' class='font-bold text-white text-lg'>Tareas</a>
+      </div>
+      <div class='flex gap-2'>
+      <img src='../img/users.svg' alt='imagenProyectos'/>
+      <a href='adminGrupos.php' class='font-bold text-white text-lg'>Grupos</a>
+      </div>";
 // final div izquierdo
-echo "</div>";
+echo "</section>";
 
 // Div derecho 
 echo "<div class='flex flex-col py-10 max-h-screen gap-6 justify-center items-center bg-gray-300 w-full'>";
