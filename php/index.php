@@ -87,7 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GePro</title>
     <!-- <link rel="stylesheet" href="../css/styles.css"/> -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body class="h-screen w-full justify-center bg-cover bg-center bg-fixed" style="background-image: url('../img/pixels14.jpg');">
     <!-- Contenedor Principal -->
@@ -100,9 +101,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
             </div>
             <span class="block h-0.5 w-80 bg-black opacity-40"></span>
             <!-- Div Formulario -->
-            <div class="flex flex-col w-100 items-center gap-5 px-10">
+            <div class="flex flex-col w-full items-center gap-5 px-10">
                 <p class="font-bold text-3xl">Inicia Sesión</p>
-                <form method="POST" class="flex flex-col w-full">
+                <form method="POST" class="flex flex-col w-full ">
                     <p class="font-bold">USUARIO</p>
                     <input type="text" name="user" placeholder="Nombre" required
                         class="bg-gray-700 shadow-xl text-white caret-white rounded-md p-2 outline-none"/><br>
@@ -113,7 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
                         class="bg-orange-400 p-2 hover:bg-orange-700 transition-transform duration-300 rounded-md cursor-pointer"/>
                 </form>
             </div>
-            
         </section>
             <!-- div derecho -->
             <div class="flex hidden md:block">

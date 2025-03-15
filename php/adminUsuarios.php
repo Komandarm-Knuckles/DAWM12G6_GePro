@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Administrador</title>
      <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <?php
 // (Asumiendo que tienes las funciones obtener_todos_los_usuarios() y obtener_resultados() definidas)
@@ -41,8 +41,8 @@ echo "<div class='flex w-full min-h-screen justify-center items-center'>";
 echo "<div class='flex w-full md:flex-row flex-col justify-center items-stretch max-w-[90%]'>"; // items-stretch extiende el div izquiedo en el eje Y
 
 // Div Izquierdo con altura total del contenedor
-echo "<section class='flex md:flex-col md:w-80 w-full flex-wrap md:justify-start  justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5'>";
-echo "<img class='md:w-50 w-15' src='../img/LogoEmpresa.png' alt='logo Empresa'/>
+echo "<section class='flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5'>";
+echo "<img class='md:w-13 w-[10em]' src='../img/LogoEmpresa.png' alt='logo Empresa'/>
       <div class='flex gap-2'>
       <img src='../img/projector.svg' alt='imagenReuniones'/>
       <a href='adminReuniones.php' class='font-bold text-white text-lg'>Reuniones</a>
@@ -63,7 +63,7 @@ echo "<img class='md:w-50 w-15' src='../img/LogoEmpresa.png' alt='logo Empresa'/
 echo "</section>";
 
 // Div derecho 
-echo "<div class='flex flex-col py-10 max-h-screen gap-6 justify-center items-center bg-gray-300 w-full'>";
+echo "<div class='flex flex-col py-5 max-h-screen gap-6 justify-center items-center bg-gray-300 w-full'>";
 
 echo "<h1 class='text-center text-4xl font-bold underline'>Bienvenido a la Página de Administrador</h1>";
 
@@ -138,18 +138,22 @@ if ($usuarios->num_rows === 0) {
 }
 
 ?>
-<div class="flex p-4 gap-2 justify-center items-center shadow-2xl">
+<div class="flex gap-4 justify-center items-center shadow-2xl px-5 ">
     <h4 class="font-semibold">Dar de alta nuevos usuarios:</h4>
-    <form method='POST' action='adminCrearUsuario.php' class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg cursor-pointer font-bold text-white">
-        <button class="cursor-pointer" type='submit'> Añadir Usuario</button>
+    <form method="POST" action="adminCrearUsuario.php" class="flex justify-center items-center mt-4">
+        <button type="submit" class="bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg font-bold text-white px-4 py-2">
+            Añadir Usuario
+        </button>
     </form>
 </div>
-<div class="flex gap-10">
-<form action="logout.php" method="POST">
-    <button type="submit" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg cursor-pointer font-bold text-white w-50">Cerrar Sesión</button>
+
+
+
+<form action="logout.php" method="POST" class="p-5 flex gap-10">
+    <button type="submit" class="bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg font-bold text-white w-[10em] p-3">Cerrar Sesión</button>
+    <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
 </form>
-<button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold p-3 rounded-xl w-50">Volver</button>
-</div>
+
 <?php
 
 // Final divs

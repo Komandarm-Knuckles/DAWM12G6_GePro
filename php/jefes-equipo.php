@@ -105,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_reunion'])) 
     exit();
 }
 
+
 // EDITAR TAREAS
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_tarea'])) {
     $id_tarea = intval($_POST['id_tarea']);
@@ -156,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
 <html>
 <head>
     <title>Panel de Jefe de Equipo</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
 <div class="flex flex-col gap-10 p-10 w-full max-w-[65%] bg-gray-300 justify-center items-center">
@@ -208,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
                     </form>
                     <form method="POST" action="">
                         <input type="hidden" name="eliminar_proyecto" value="<?php echo $proyecto['id_proyecto']; ?>">
-                        <button type="submit" class="cursor-pointer">
+                        <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');" class="cursor-pointer">
                             <img src="../img/trash-2.png" alt="Eliminar" style="width: 20px; height: 20px;" class="hover:bg-red-500 hover:scale-105">
                         </button>
                     </form>
@@ -234,7 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
                     </form>
                         <form method="POST" action="">
     <input type="hidden" name="eliminar_reunion" value="<?php echo $reunion['id_reunion']; ?>">
-    <button type="submit" class="cursor-pointer">
+    <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');" class="cursor-pointer">
         <img src="../img/trash-2.png" alt="Eliminar" style="width: 20px; height: 20px;" class="hover:bg-red-500 hover:scale-105">
     </button>
 </form>
@@ -260,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
                     </form>
                     <form method="POST" action="">
                         <input type="hidden" name="eliminar_tarea" value="<?php echo $tarea['id_tarea']; ?>">
-                        <button type="submit" class="cursor-pointer">
+                        <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');" class="cursor-pointer">
                             <img src="../img/trash-2.png" alt="Eliminar" style="width: 20px; height: 20px;" class="hover:bg-red-500 hover:scale-105">
                         </button>
                     </form>

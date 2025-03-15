@@ -43,7 +43,7 @@ $proyectos = $con->query($sql_proyectos);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de Empleado</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 <h3 class="font-bold text-orange-400 text-3xl underline">Proyectos</h3>

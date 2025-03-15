@@ -72,16 +72,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Usuario</title>
     <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/regExp.js"></script>
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
-    <div class="flex flex-col max-w-[90%] w-[40em] bg-white p-8 rounded shadow-xl gap-10">
-        <h1 class="text-4xl font-bold text-center underline p-5">Crear Nuevo Usuario</h1>
+    <div class="flex flex-col max-w-[90%] w-[40em] bg-white p-8 rounded shadow-xl gap-6">
+        <h1 class="text-4xl font-bold text-center underline text-orange-400">Crear Nuevo Usuario</h1>
         <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
-        <form id="formUsuarios" method="POST" action="" class="flex flex-col gap-1 justify-center items-center ">
+        <div class="flex flex-col justify-center text-center items-center">
+        <form id="formUsuarios" method="POST" action="">
                 Usuario:
                 <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required class=" p-2 border rounded w-full" />
                   
@@ -110,9 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
                     <option value="1">Jefe de Equipo</option>
                     <option value="2">Empleado</option>
                 </select>
-            <div class="flex gap-10 mt-10">
-                <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-50 items-center cursor-pointer hover:bg-orange-700 font-bold" />
-                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold p-2 rounded-md w-50">Volver</button>
+            </div>
+            <div class="flex justify-center items-center gap-10 ">
+                <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
+                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold p-2 rounded-md w-[10em]">Volver</button>
             </div>
         </form>
     </div>

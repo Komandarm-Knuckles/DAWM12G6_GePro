@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user']))
     {
         if (modificar_usuarios($con, $usuario, $nuevo_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo)) 
         {
-            header("Location: administradores.php");
+            header("Location: adminUsuarios.php");
             exit();
         } 
         else 
@@ -80,29 +80,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Usuario</title>
     <!-- <link rel="stylesheet" type="text/css" href="../css/styles.css"> -->
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
-        <div class="flex flex-col justify-center items-center bg-gray-300 p-10 gap-10">
-            <h1 class="font-bold text-4xl">Editar Usuario</h1>
+        <div class="flex flex-col justify-center items-center bg-gray-300 p-10 gap-5">
+            <h1 class="font-bold text-4xl text-orange-400 underline">Editar Usuario</h1>
             <span class="block h-0.5 w-100 bg-black opacity-40"></span>
             <form method="POST" action="" id="formEditarUsuarios" class="flex flex-col gap-3 text-center w-[30em]">
                 <input type="hidden" name="editar_usuario" value="<?php echo $usuario; ?>">
                 <p class="text-lg font-bold">CONTRASEÑA</p>
-                <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-1 rounded-md text-center p-1 focus:outline-none">
+                <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-1 rounded-md text-center p-2 focus:outline-none">
                 <p class="text-lg font-bold">NOMBRE</p>
-                <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-1 rounded-md text-center p-1 focus:outline-none">
+                <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
                 <p class="text-lg font-bold">APELLIDO</p>
-                <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-1 rounded-md text-center p-1 focus:outline-none">
+                <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
                 <p class="text-lg font-bold">DNI</p>
-                <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-1 rounded-md text-center p-1 focus:outline-none">
+                <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
                 <p class="text-lg font-bold">EMAIL</p>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-1 rounded-md text-center p-1 focus:outline-none">
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
                 <p class="text-lg font-bold">TELEFONO</p>
-                <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-1 rounded-md text-center p-1 focus:outline-none">
+                <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
                 <p class="text-lg font-bold">TIPO</p>
-                <select name="tipo" class="border-1 rounded-md text-center p-1 focus:outline-none" required>
+                <select name="tipo" class="border-1 rounded-md text-center p-2 focus:outline-none" required>
                     <option value="0" <?php echo ($datos_usuario['tipo'] == 0) ? 'selected' : ''; ?>>Administrador</option>
                     <option value="1" <?php echo ($datos_usuario['tipo'] == 1) ? 'selected' : ''; ?>>Jefe de Equipo</option>
                     <option value="2" <?php echo ($datos_usuario['tipo'] == 2) ? 'selected' : ''; ?>>Empleado</option>
