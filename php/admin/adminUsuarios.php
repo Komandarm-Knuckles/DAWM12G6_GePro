@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
     exit();
 }
 
-require_once("database.php");
+require_once("../database.php");
 $con = crearConexion();
 
 // ELIMINAR USUARIOS
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
 <?php
 // (Asumiendo que tienes las funciones obtener_todos_los_usuarios() y obtener_resultados() definidas)
 
-echo "<body class='w-full  bg-cover bg-center bg-fixed z-10 bg-[url(\"../img/pixels14.jpg\")]'>";
+echo "<body class='w-full  bg-cover bg-center bg-fixed z-10 bg-[url(\"../../img/pixels14.jpg\")]'>";
 
 // div principal
 echo "<div class='flex w-full min-h-screen justify-center items-center'>";
@@ -42,21 +42,21 @@ echo "<div class='flex w-full md:flex-row flex-col justify-center items-stretch 
 
 // Div Izquierdo con altura total del contenedor
 echo "<section class='flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5'>";
-echo "<img class='md:w-13 w-[10em]' src='../img/LogoEmpresa.png' alt='logo Empresa'/>
+echo "<img class='md:w-13 w-[10em]' src='../../img/LogoEmpresa.png' alt='logo Empresa'/>
       <div class='flex gap-2'>
-      <img src='../img/projector.svg' alt='imagenReuniones'/>
+      <img src='../../img/projector.svg' alt='imagenReuniones'/>
       <a href='adminReuniones.php' class='font-bold text-white text-lg'>Reuniones</a>
       </div>
       <div class='flex gap-2'>
-      <img src='../img/folder-git-2.svg' alt='imagenProyectos'/>
+      <img src='../../img/folder-git-2.svg' alt='imagenProyectos'/>
       <a href='adminProyectos.php' class='font-bold text-white text-lg'>Proyectos</a>
       </div>
       <div class='flex gap-2'>
-      <img src='../img/clipboard-list.svg' alt='imagenProyectos'/>
+      <img src='../../img/clipboard-list.svg' alt='imagenProyectos'/>
       <a href='adminTareas.php' class='font-bold text-white text-lg'>Tareas</a>
       </div>
       <div class='flex gap-2'>
-      <img src='../img/users.svg' alt='imagenProyectos'/>
+      <img src='../../img/users.svg' alt='imagenProyectos'/>
       <a href='adminGrupos.php' class='font-bold text-white text-lg'>Grupos</a>
       </div>";
 // final div izquierdo
@@ -110,13 +110,13 @@ if ($usuarios->num_rows === 0) {
                         <form method='POST' action='adminEditarUsuario.php'>
                             <input type='hidden' name='editar_usuario' value='$usuario'>
                             <button type='submit' value='Editar' class='cursor-pointer'>
-                                <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'  class='hover:bg-green-500 hover:scale-105'/> 
+                                <img src='../../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'  class='hover:bg-green-500 hover:scale-105'/> 
                             </button>
                         </form>
                         <form method='POST' action=''>
                             <input type='hidden' name='eliminar_usuario' value='$usuario'>
                             <button type='submit' onclick=\"return confirm('¿Estás seguro de que quieres eliminar este usuario?');\" class='cursor-pointer'>
-                                <img src='../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'> 
+                                <img src='../../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'> 
                             </button>
                         </form>
                     </div>
@@ -127,7 +127,7 @@ if ($usuarios->num_rows === 0) {
                     <form class='flex justify-center items-center' method='POST' action='adminEditarUsuario.php'>
                         <input type='hidden' name='editar_usuario' value='$usuario'>
                         <button type='submit' value='Editar' class='cursor-pointer'>
-                            <img src='../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'  class='hover:bg-green-500 hover:scale-105'/> 
+                            <img src='../../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;'  class='hover:bg-green-500 hover:scale-105'/> 
                         </button>
                     </form>
                 </td>";
@@ -149,7 +149,7 @@ if ($usuarios->num_rows === 0) {
 
 
 
-<form action="logout.php" method="POST" class="p-5 flex gap-10">
+<form action="../logout.php" method="POST" class="p-5 flex gap-10">
     <button type="submit" class="bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg font-bold text-white w-[10em] p-3">Cerrar Sesión</button>
     <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
 </form>

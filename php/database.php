@@ -18,6 +18,11 @@ function obtener_todos_los_usuarios($con) {
     return $con->query($sql);
 }
 
+function obtener_todas_las_tareas($con) {
+    $sql = "SELECT * FROM tareas";
+    return $con->query($sql);
+}
+
 function obtener_resultados($resultado) {
     return $resultado->fetch_assoc();
 }
@@ -91,6 +96,7 @@ function modificar_usuarios($con, $usuario, $nueva_pass, $nuevo_nombre, $nuevo_a
 //Borra el usuario completo
 function borrar_usuario($con, $usuario) {
     // eliminamos las tareas del usuario (ON DELETE CASCADE en la BD ya lo haría, pero por seguridad)
+    // TODO - mirar si esto está bien, y diria de incluir tambien que se elimine de los proyectos y reuniones
     $stmt = $con->prepare("DELETE FROM tareas WHERE usuario=?");
     $stmt->bind_param("s", $usuario);
     $stmt->execute();

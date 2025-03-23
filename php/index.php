@@ -7,13 +7,13 @@ if (isset($_SESSION['usuario']))
     switch ($_SESSION['tipo']) 
     {
         case 0:
-            header("Location: administradores.php");
+            header("Location: admin/administradores.php");
             exit();
         case 1:
-            header("Location: jefes-equipo.php");
+            header("Location: jefeEquipo/jefes-equipo.php");
             exit();
         case 2:
-            header("Location: empleados.php");
+            header("Location: empleado/empleados.php");
             exit();
     }
 }
@@ -57,15 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
             switch ($result['tipo'])
             {
                 case '0':
-                    header('Location: administradores.php');
+                    header('Location: admin/administradores.php');
                     exit();
                 
                 case '1':
-                    header('Location: jefes-equipo.php');
+                    header('Location: jefeEquipo/jefes-equipo.php');
                     exit();
                 
                 case '2':
-                    header('Location: empleados.php');
+                    header('Location: empleado/empleados.php');
                     exit();
             }
             #endregion

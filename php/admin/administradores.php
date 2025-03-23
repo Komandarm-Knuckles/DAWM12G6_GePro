@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
     header("Location: index.php");
     exit();
 }
-require_once("database.php");
+require_once("../database.php");
 
 
 $usuario = $_SESSION['usuario'];
@@ -37,7 +37,7 @@ if ($tipo_usuario != 0) {
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
     <div class="flex flex-col gap-10 rounded-xl p-10 w-200 max-w-[80%] bg-gray-300 justify-center items-center">
         <div class="flex flex-col items-center gap-6">   
             <h1 class="font-bold text-5xl underline">Bienvenid@ , <?php echo htmlspecialchars($usuario); ?></h1>
@@ -69,7 +69,7 @@ if ($tipo_usuario != 0) {
             </a>
             <span class="block h-0.5 w-[20em] bg-black opacity-40"></span>
         </div>
-        <form action="logout.php" method="POST">
+        <form action="../logout.php" method="POST">
             <button type="submit" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-40 shadow-lg cursor-pointer font-bold text-white">Cerrar Sesión</button>
         </form>
     </div>
