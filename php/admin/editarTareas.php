@@ -42,28 +42,45 @@ if (isset($_POST['guardar_cambios'])) {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Editar Tarea Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-<div class="flex flex-col gap-10 p-5 w-full max-w-[65%] rounded-xl bg-gray-300 justify-center items-center">
-<h2 class="text-orange-500 text-4xl">Editar Tarea</h2>
-<form method="POST" action="" class="flex flex-col w-full p-4 gap-6 rounded-lg shadow-xl text-center items-center">
-    <input type="hidden" name="id_tarea" value="<?php echo $tarea['id_tarea']; ?>">
-    <label for="nombre" class="text-xl text-black">Nombre:</label>
-    <input type="text" name="nombre" class="flex text-center w-[20em] rounded-lg p-1" value="<?php echo htmlspecialchars($tarea['nombre']); ?>" required>
-    <label for="descripcion" class="text-xl text-black">Descripción:</label>
-    <textarea name="descripcion" class="text-black rounded-lg p-1" rows="5" cols="45" required><?php echo htmlspecialchars($tarea['descripcion']); ?></textarea>
-    <label for="estado" class="text-xl text-black">Estado:</label>
-    <select name="estado" class="w-[20em] rounded-lg p-1">
-        <option value="pendiente" <?php if ($tarea['estado'] == "pendiente") echo "selected"; ?>>Pendiente</option>
-        <option value="en progreso" <?php if ($tarea['estado'] == "en progreso") echo "selected"; ?>>En progreso</option>
-        <option value="completada" <?php if ($tarea['estado'] == "completada") echo "selected"; ?>>Completada</option>
-    </select>
-    <button type="submit" class="rounded-lg bg-orange-500 p-3 text-white" name="guardar_cambios">Guardar Cambios</button>
-</form>
 
-<?php
-$con->close();
-?>
+<body
+    class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
+    <div class="flex flex-col gap-10 p-5 w-full max-w-[65%] rounded-xl bg-gray-300 justify-center items-center">
+        <h2 class="text-orange-500 text-4xl">Editar Tarea</h2>
+        <form method="POST" action=""
+            class="flex flex-col w-full p-4 gap-6 rounded-lg shadow-xl text-center items-center">
+            <input type="hidden" name="id_tarea" value="<?php echo $tarea['id_tarea']; ?>">
+            <label for="nombre" class="text-xl text-black">Nombre:</label>
+            <input type="text" name="nombre" class="flex text-center w-[20em] rounded-lg p-1"
+                value="<?php echo htmlspecialchars($tarea['nombre']); ?>" required>
+            <label for="descripcion" class="text-xl text-black">Descripción:</label>
+            <textarea name="descripcion" class="text-black rounded-lg p-1" rows="5" cols="45"
+                required><?php echo htmlspecialchars($tarea['descripcion']); ?></textarea>
+            <label for="estado" class="text-xl text-black">Estado:</label>
+            <select name="estado" class="w-[20em] rounded-lg p-1">
+                <option value="pendiente" <?php if ($tarea['estado'] == "pendiente")
+                    echo "selected"; ?>>Pendiente
+                </option>
+                <option value="en progreso" <?php if ($tarea['estado'] == "en progreso")
+                    echo "selected"; ?>>En progreso
+                </option>
+                <option value="completada" <?php if ($tarea['estado'] == "completada")
+                    echo "selected"; ?>>Completada
+                </option>
+            </select>
+            <button type="submit" class="rounded-lg bg-orange-500 p-3 text-white" name="guardar_cambios">Guardar
+                Cambios</button>
+            <form action="../logout.php" method="POST" class="p-5 flex gap-10">
+                <button type="button" onclick="history.back()"
+                    class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+            </form>
+        </form>
+
+        <?php
+        $con->close();
+        ?>
