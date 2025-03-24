@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
     <h3 class="font-bold text-orange-400 text-3xl underline">Tareas</h3>
     <ul>
         <?php while ($tarea = $tareas->fetch_assoc()) { ?>
-            <li class="flex gap-1">
+            <li class="flex md:flex-row flex-col gap-1">
                 <?php
                 echo " <p class='font-bold text-orange-400'>-ID:</p> " . htmlspecialchars($tarea['id_tarea']) .
                     " <p class='font-bold text-orange-400'>-Nombre:</p> " . htmlspecialchars($tarea['nombre']) .

@@ -44,25 +44,25 @@ if (isset($_POST['guardar_cambios'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Editar Tarea</title>
+    <title>Editar Tarea Jefe Equipo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-<div class="flex flex-col gap-10 p-10 w-full max-w-[65%] bg-gray-300 justify-center items-center">
-    <h2>Editar Tarea</h2>
-    <form method="POST" action="">
+<div class="flex flex-col gap-10 p-5 w-full max-w-[65%] rounded-xl bg-gray-300 justify-center items-center">
+    <h2 class="text-orange-500 text-4xl">Editar Tarea</h2>
+    <form method="POST" action="" class="flex flex-col w-full p-4 gap-6 rounded-lg shadow-xl text-center items-center">
         <input type="hidden" name="id_tarea" value="<?php echo $tarea['id_tarea']; ?>">
-        <label for="nombre">Nombre:</label><br>
-        <input type="text" name="nombre" value="<?php echo htmlspecialchars($tarea['nombre']); ?>" required><br><br>
-        <label for="descripcion">Descripción:</label><br>
-        <textarea name="descripcion" required><?php echo htmlspecialchars($tarea['descripcion']); ?></textarea><br><br>
-        <label for="estado">Estado:</label><br>
-        <select name="estado">
+        <label for="nombre" class="text-xl text-black">Nombre:</label>
+        <input type="text" name="nombre" class="flex text-center w-[20em] rounded-lg p-1" value="<?php echo htmlspecialchars($tarea['nombre']); ?>" required>
+        <label for="descripcion" class="text-xl text-black">Descripción:</label>
+        <textarea name="descripcion" class="text-black rounded-lg p-1" rows="5" cols="45"  required><?php echo htmlspecialchars($tarea['descripcion']); ?></textarea>
+        <label for="estado" class="text-xl text-black">Estado:</label>
+        <select name="estado" class="w-[20em] rounded-lg p-1">
             <option value="pendiente" <?php if ($tarea['estado'] == "pendiente") echo "selected"; ?>>Pendiente</option>
             <option value="en progreso" <?php if ($tarea['estado'] == "en progreso") echo "selected"; ?>>En progreso</option>
             <option value="completada" <?php if ($tarea['estado'] == "completada") echo "selected"; ?>>Completada</option>
-        </select><br><br>
-        <button type="submit" name="guardar_cambios">Guardar Cambios</button>
+        </select>
+        <button type="submit" class="rounded-lg bg-orange-500 p-3 text-white" name="guardar_cambios">Guardar Cambios</button>
     </form>
 </div>
 </body>
