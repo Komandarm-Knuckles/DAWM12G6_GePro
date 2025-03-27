@@ -83,7 +83,7 @@ if (isset($_POST['guardar_cambios'])) {
             <input type="date" name="fecha_inicio" class="flex text-center w-[20em] rounded-lg p-1"
                 value="<?php echo htmlspecialchars($proyectos['fecha_inicio']); ?>" required>
             
-            <strong><label for="fecha_fin" class="text-xl text-black">Fecha de fin:</label></strong>
+            <strong><label for="fecha_fin" class="text-xl text-black">Fecha de fin (opcional):</label></strong>
             <input type="date" name="fecha_fin" class="flex text-center w-[20em] rounded-lg p-1"
                 value="<?php echo htmlspecialchars($proyectos['fecha_fin']); ?>">
             
