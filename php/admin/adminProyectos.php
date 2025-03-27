@@ -140,7 +140,7 @@ $result_proyectos = obtener_todos_proyectos($con);
             <!-- Botones de volver y logOut -->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex gap-10">
-                <button type="button" onclick="window.location.href='./administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+                <button type="button" onclick="window.location.href='./administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Inicio</button>
                 <button type="submit" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-40 shadow-lg cursor-pointer font-bold text-white">Cerrar Sesión</button>
                 </form>
             </div>
