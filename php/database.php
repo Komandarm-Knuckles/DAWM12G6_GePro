@@ -26,6 +26,7 @@ function obtener_todas_las_tareas($con) {
 function obtener_resultados($resultado) {
     return $resultado->fetch_assoc();
 }
+
 function crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, $telefono, $tipo) {
     // Comprobar si el usuario ya existe
     $check = $con->prepare("SELECT usuario FROM usuarios WHERE usuario = ?");
@@ -44,8 +45,6 @@ function crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, 
     $stmt->bind_param("sssssssi", $usuario, $hashed_pass, $nombre, $apellido, $dni, $email, $telefono, $tipo);
     return $stmt->execute();
 }
-
-
 
 function modificar_usuarios($con, $usuario, $nueva_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo) 
 {
@@ -141,6 +140,40 @@ function obtener_usuario_por_nombre($con, $usuario) {
     return $result->fetch_assoc();
 }
 
-?>
+# PROYECTOS
+
+// obtener proyectos
+function obtener_todos_proyectos($con){
+    $sql = "SELECT * FROM proyectos";
+    return $con->query($sql);
+}
+
+// crear nuevo proyecto (fecha fin opcional)
+function crear_proyecto($con, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado) {
+    if (empty($fecha_fin)) {
+        $query = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, NULL, ?)";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("ssss", $nombre, $descripcion, $fecha_inicio, $estado);
+    } else {
+        $query = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("sssss", $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado);
+    }
+    if ($stmt->execute()) {
+        echo "
+        <script>
+            alert('Proyecto creado correctamente.');
+            window.location.href = 'adminProyectos.php';
+        </script>";
+        exit;
+    } else {
+        echo "<script>
+            alert('Error al crear Proyecto.');
+            window.location.href = 'adminProyectos.php';
+        </script>";
+        exit;
+    }
+}
+
 
 
