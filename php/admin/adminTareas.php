@@ -123,15 +123,14 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                             <?php echo htmlspecialchars($usuario['usuario']); ?></option>
                     <?php } ?>
                 </select>
-                <input type="date" name="fecha_vencimiento" class="p-2 rounded" required class="p-2 border rounded" />
+                <input type="date" name="fecha_vencimiento" class="p-2 rounded"  class="p-2 border rounded" required />
                 <button type="submit" name="crear_tarea"
-                    class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Nueva
-                    Tarea</button>
-                <form action="../logout.php" method="POST" class="p-5 flex gap-10">
-                    <button type="button" onclick="history.back()"
-                        class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
-                </form>
+                    class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Nueva Tarea
+                </button>
             </form>
+            
+            <button type="button" onclick="window.location.href='administradores.php'" class="flex justify-center items-center bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+        
         </div>
         <?php
         $con->close();

@@ -76,7 +76,7 @@ if (isset($_POST['guardar_cambios'])) {
             <button type="submit" class="rounded-lg bg-orange-500 p-3 text-white" name="guardar_cambios">Guardar
                 Cambios</button>
             <form action="../logout.php" method="POST" class="p-5 flex gap-10">
-                <button type="button" onclick="history.back()"
+                <button type="button" onclick="window.location.href='adminTareas.php'"
                     class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
             </form>
         </form>
