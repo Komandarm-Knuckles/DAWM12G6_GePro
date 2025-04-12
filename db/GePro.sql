@@ -10,7 +10,8 @@ CREATE TABLE usuarios (
     dni VARCHAR(20) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     telefono VARCHAR(20) NOT NULL,
-    tipo TINYINT NOT NULL CHECK (tipo IN (0,1,2))
+    tipo TINYINT NOT NULL CHECK (tipo IN (0,1,2)),
+    imagen_perfil VARCHAR(255)
 );
 
 -- TABLA DE GRUPOS
