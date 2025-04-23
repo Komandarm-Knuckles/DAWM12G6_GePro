@@ -132,6 +132,7 @@ function borrar_reunion($con, $id_reunion) {
     return $stmt->execute();
 }
 
+
 function obtener_usuario_por_nombre($con, $usuario) {
     $stmt = $con->prepare("SELECT * FROM usuarios WHERE usuario = ?");
     $stmt->bind_param("s", $usuario);
