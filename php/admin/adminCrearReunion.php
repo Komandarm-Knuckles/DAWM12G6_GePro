@@ -42,34 +42,44 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 <head>
     <meta charset="UTF-8">
     <title>Crear Reunión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Crear nueva reunión</h1>
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
+<div class="flex flex-col max-w-[90%] w-[40em] bg-white p-8 rounded shadow-xl gap-6">
+    
+<h1 class="text-4xl font-bold text-center underline text-orange-400">Crear Nueva Reunión</h1>
+<div class="flex justify-center items-center">
+            <span class="block h-0.5 w-130 bg-black opacity-40"></span>
+        </div>
     <form method="POST">
-        <label>Título:</label><br>
-        <input type="text" name="titulo" required><br><br>
+        Título:
+        <input type="text" name="titulo" required class=" p-2 border rounded w-full">
 
-        <label>Descripción:</label><br>
-        <textarea name="descripcion" required></textarea><br><br>
+        Descripción:
+        <textarea name="descripcio" required class=" p-2 border rounded w-full" ></textarea>
 
-        <label>Fecha:</label><br>
-        <input type="date" name="fecha" required><br><br>
+        Fecha:
+        <input type="date" name="fecha" required class=" p-2 border rounded w-full">
 
-        <label>Hora:</label><br>
-        <input type="time" name="hora" required><br><br>
+        Hora:
+        <input type="time" name="hora" required class=" p-2 border rounded w-full">
 
-        <label>Proyecto:</label><br>
-        <select name="id_proyecto" required>
+        Proyecto:
+        <select name="id_proyecto" required class=" p-2 border rounded w-full">
             <option value="">Selecciona un proyecto</option>
             <?php while ($proyecto = $proyectos->fetch_assoc()): ?>
                 <option value="<?php echo htmlspecialchars($proyecto['id_proyecto']); ?>">
                     <?php echo htmlspecialchars($proyecto['nombre']); ?>
                 </option>
             <?php endwhile; ?>
-        </select><br><br>
-
-        <button type="submit">Crear reunión</button>
+        </select>
+        <div class="flex justify-center items-center gap-10 ">
+                <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
+                <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
+        </div>
+       
     </form>
+</div>
 </body>
 </html>
 <?php #endregion ?>

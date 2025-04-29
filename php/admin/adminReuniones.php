@@ -33,10 +33,11 @@ $resultado = $con->query("SELECT * FROM reuniones");
 <head>
     <meta charset="UTF-8">
     <title>Administrar Reuniones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <h1>Lista de Reuniones</h1>
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <?php
