@@ -56,7 +56,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
         <input type="text" name="titulo" required class=" p-2 border rounded w-full">
 
         Descripción:
-        <textarea name="descripcio" required class=" p-2 border rounded w-full" ></textarea>
+        <textarea name="descripcion" required class=" p-2 border rounded w-full" ></textarea>
 
         Fecha:
         <input type="date" name="fecha" required class=" p-2 border rounded w-full">
@@ -74,7 +74,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             <?php endwhile; ?>
         </select>
         <div class="flex justify-center items-center gap-10 ">
-                <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
+                <input type="submit" value="Crear Reunion" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
                 <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
         </div>
        

@@ -132,7 +132,7 @@ $reuniones = $stmt_reuniones->get_result();
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- Script para la subida de la imagen de perfil de los usuarios -->
         <script>
-document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const uploadButton = document.getElementById('uploadButton');
     const imageInput = document.getElementById('imageInput');
     const imageForm = document.getElementById('imageUploadForm');
@@ -150,15 +150,14 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
     </head>
     <body class="w-full min-h-screen flex flex-col justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col w-full justify-center bg-opacity-70 items-center">
+    <div class="flex flex-col w-full justify-center items-center bg-opacity-25">
     
 
-    <section class="flex flex-col w-full p-10">
-        <h1 class="text-3xl text-center font-bold">Bienvenido/a, <?php echo htmlspecialchars($usuario);?></h1>
+    <section class="flex flex-col w-fit p-10 gap-3">
+        <h1 class="text-3xl text-center font-bold text-orange-600">Bienvenido/a, <?php echo htmlspecialchars($usuario);?></h1>
         <div class="flex flex-col w-full p-6">
-            <h2 class="text-center text-2xl font-bold">Información del Usuario</h2>
-            <div class="flex w-full bg-white items-center justify-center shadow-md rounded-lg gap-10 p-6">
-                <div class=" flex flex-col items-center justify-center relative ">
+            <div class="flex items-center justify-center bg-white p-10 bg-opacity-80 shadow-md rounded-lg gap-10">
+                <div class=" flex flex-col items-center justify-center relative p-2 ">
                 <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>" 
      alt="Imagen Usuario" 
      class="w-[15em] h-[15em] rounded-lg" 
@@ -169,13 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <input type="file" name="profileImage" id="imageInput" accept="image/*">
         <input type="hidden" name="upload_image" value="1">
     </form>
-    <button class="absolute right-1 top-1 bg-white" id="uploadButton">
-        <img src="../../img/pencil-line.svg" alt="Editar imagen"/>
+    <button class="absolute right-1 top-1" id="uploadButton">
+        <img src="../../img/pencil-line.svg" alt="Editar imagen" class="bg-orange-600 rounded-lg p-1"/>
     </button>
                 </div>
                 <div class="flex flex-col text-xl justify-center gap-5">
                 <p class="text-orange-400 font-bold">Nombre: <span class="text-gray-600"> <?php echo htmlspecialchars($usuario); ?></span></p>
-                <p class="text-orange-400 font-bold">Tipo de Usuario:<span class="text-gray-600"> <?php echo htmlspecialchars($tipo_usuario); ?></span></p>
                 <p class="text-orange-400 font-bold">Proyectos Asignados:<span class="text-gray-600"> <?php echo htmlspecialchars($proyectos->num_rows); ?></span></p>
             </div>
             </div>
@@ -184,9 +182,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   
         
-        <div class="flex flex-col p-10 w-full gap-10 bg-gray-300 bg-opacity-70 rounded">
+        <div class="flex flex-col p-10 w-full justify-center items-center gap-10 bg-gray-300 bg-opacity-25 rounded">
             <h2 class="font-bold text-center text-orange-400 text-3xl underline">Información de Proyectos</h2>
-            <ul class="flex flex-wrap gap-2 w-full">
+            <ul class="flex flex-wrap justify-center items-center gap-2 w-full">
         <?php if ($proyectos->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay proyectos.</span>
                     <?php } ?>
@@ -210,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <?php } ?>
         </ul>
             <h3 class="font-bold text-orange-400 text-3xl underline">Información de Reuniones</h3>
-            <ul class="flex gap-2 flex-wrap w-full">
+            <ul class="flex gap-2 flex-wrap justify-center items-center w-full">
         <?php if ($reuniones->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay reuniones.</span>
                     <?php } ?>
@@ -234,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </ul>
 
             <h3 class="font-bold text-orange-400 text-3xl underline">información de Tareas</h3>
-            <ul class="flex gap-2 flex-wrap w-full">
+            <ul class="flex gap-2 flex-wrap justify-center items-center w-full">
         <?php if ($tareas->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay tareas.</span>
                     <?php } ?>

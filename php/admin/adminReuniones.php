@@ -27,7 +27,6 @@ $resultado = $con->query("SELECT * FROM reuniones");
 #endregion
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,11 +34,16 @@ $resultado = $con->query("SELECT * FROM reuniones");
     <title>Administrar Reuniones</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Lista de Reuniones</h1>
-    <table>
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
+    <div class="flex flex-col w-full max-w-[90%] justify-center items-center gap-20 pt-20">
+        <h1 class="font-bold text-orange-600 text-4xl underline">Lista de Reuniones</h1>
+        <div class="flex flex-col p-10 w-full  gap-5 bg-gray-300 rounded">
+            <div class="flex justify-center items-center bg-gray-300">
+            <div class="flex flex-col bg-gray-300 max-h-[300px] text-center gap-5 overflow-y-auto shadow-2xl w-full">
+                
+        <table class='styled-table w-full p-4 text-center rounded'>
         <thead>
-            <tr>
+            <tr class='sticky bg-orange-400 text-white top-0 p-4'>
                 <?php
                 #region Tabla dinámica
                 if ($resultado->num_rows > 0) 
@@ -59,11 +63,15 @@ $resultado = $con->query("SELECT * FROM reuniones");
                     echo "<td>
                             <form method='GET' action='editarReunion.php' style='display:inline;'>
                                 <input type='hidden' name='id' value='" . htmlspecialchars($primeraFila['id_reunion']) . "'>
-                                <button type='submit'>Editar</button>
+                                <button type='submit'>
+                                    <img src='../../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'>
+                                </button>
                             </form>
                             <form method='POST' style='display:inline;'>
                                 <input type='hidden' name='eliminar_reunion' value='" . htmlspecialchars($primeraFila['id_reunion']) . "'>
-                                <button type='submit'>Eliminar</button>
+                                <button type='submit'>
+                                    <img src='../../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'>
+                                </button>
                             </form>
                           </td>";
                     echo "</tr>";
@@ -77,11 +85,15 @@ $resultado = $con->query("SELECT * FROM reuniones");
                         echo "<td>
                                 <form method='GET' action='editarReunion.php' style='display:inline;'>
                                     <input type='hidden' name='id' value='" . htmlspecialchars($fila['id_reunion']) . "'>
-                                    <button type='submit'>Editar</button>
+                                    <button type='submit'>
+                                    <img src='../../img/square-pen.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-green-500 hover:scale-105'>
+                                    </button>
                                 </form>
                                 <form method='POST' style='display:inline;'>
                                     <input type='hidden' name='eliminar_reunion' value='" . htmlspecialchars($fila['id_reunion']) . "'>
-                                    <button type='submit'>Eliminar</button>
+                                    <button type='submit'>
+                                    <img src='../../img/trash-2.png' alt='Eliminar' style='width: 20px; height: 20px;' class='hover:bg-red-500 hover:scale-105'>
+                                    </button>
                                 </form>
                               </td>";
                         echo "</tr>";
@@ -95,12 +107,16 @@ $resultado = $con->query("SELECT * FROM reuniones");
                 ?>
             </tr>
         </tbody>
-    </table>
+        </table>
+            </div>
+            </div>
+        </div>
+        </div>
 
-    <br>
+
     <!-- Botón de creación de reuniones -->
     <form method="GET" action="adminCrearReunion.php">
-        <button type="submit">Crear nueva reunión</button>
+        <button type="submit" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[15em] p-3 shadow-lg">Crear nueva reunión</button>
     </form>
 </body>
 </html>

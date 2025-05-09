@@ -55,34 +55,38 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 <head>
     <meta charset="UTF-8">
     <title>Editar Reunión</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Editar reunión</h1>
-    <form method="POST">
-        <label>Título:</label><br>
-        <input type="text" name="titulo" value="<?php echo htmlspecialchars($reunion['titulo']); ?>" required><br><br>
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
+<div class="flex flex-col w-full max-w-[90%] justify-center items-center gap-20">
 
-        <label>Descripción:</label><br>
-        <textarea name="descripcion" required><?php echo htmlspecialchars($reunion['descripcion']); ?></textarea><br><br>
+    <h1 class="font-bold text-orange-600 text-4xl underline mt-10">Editar reunión</h1>
+    <form method="POST" class="flex flex-col w-full max-w-[40em] text-center bg-white p-8 shadow-xl gap-6">
+        Nombre de la reunión:
+        <input type="text" name="titulo" class="text-center border-2 rounded-lg p-2 border-black" value="<?php echo htmlspecialchars($reunion['titulo']); ?>" required>
+        Descripción:
+        <textarea name="descripcion" class="text-center border-2 rounded-lg p-2 border-black" required><?php echo htmlspecialchars($reunion['descripcion']); ?></textarea>
 
-        <label>Fecha:</label><br>
-        <input type="date" name="fecha" value="<?php echo htmlspecialchars($reunion['fecha']); ?>" required><br><br>
+        Fecha:
+        <input type="date" name="fecha" class="text-center border-2 rounded-lg p-2 border-black" value="<?php echo htmlspecialchars($reunion['fecha']); ?>" required>
 
-        <label>Hora:</label><br>
-        <input type="time" name="hora" value="<?php echo htmlspecialchars($reunion['hora']); ?>" required><br><br>
+        Hora:
+        <input type="time" name="hora" class="text-center border-2 rounded-lg p-2 border-black" value="<?php echo htmlspecialchars($reunion['hora']); ?>" required>
 
-        <label>Proyecto:</label><br>
-        <select name="id_proyecto" required>
+        <select name="id_proyecto" class="text-center border-2 rounded-lg p-2 border-black" required>
             <option value="">Selecciona un proyecto</option>
             <?php while ($proyecto = $proyectos->fetch_assoc()): ?>
                 <option value="<?php echo $proyecto['id_proyecto']; ?>" <?php if ($proyecto['id_proyecto'] == $reunion['id_proyecto']) echo 'selected'; ?>>
                     <?php echo htmlspecialchars($proyecto['nombre']); ?>
                 </option>
             <?php endwhile; ?>
-        </select><br><br>
-
-        <button type="submit">Guardar cambios</button>
+        </select>
+        <div class="flex justify-center items-center gap-10">
+        <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Cancelar</button>
+        <button type="submit" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Guardar cambios</button>
+        </div>
     </form>
+    </div>
 </body>
 </html>
 <?php #endregion ?>

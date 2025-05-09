@@ -115,19 +115,14 @@ $result_proyectos = obtener_todos_proyectos($con);
             <?php if (isset($error)) { echo "<p class='text-red-600'>$error</p>"; } ?>
 
             <form method="POST" action="" class="flex flex-col w-full gap-6">
-                <strong><label>Nombre:</label></strong>
                 <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded" />
 
-                <strong><label>Descripción:</label></strong>
                 <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
-                
-                <strong><label>Fecha Inicio:</label></strong>
+                Fecha Inicio:
                 <input type="date" name="fecha_inicio" required class="p-2 border rounded" />
-
-                <strong><label>Fecha Fin (Opcional):</label></strong>
+                Fecha Fin:
                 <input type="date" name="fecha_fin" class="p-2 border rounded" />
 
-                <strong><label>Estado:</label></strong>
                 <select name="estado" class="w-[20em] rounded-lg p-1">
                     <option value="pendiente">Pendiente</option>
                     <option value="en proceso">En proceso</option>

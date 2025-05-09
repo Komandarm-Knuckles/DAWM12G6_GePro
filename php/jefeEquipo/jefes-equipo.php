@@ -99,6 +99,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
     header("Location: editarReunionesJefeEquipo.php");
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_image'])) {
+    // Verificar si hay algún error en la subida
+    if ($_FILES['profileImage']['error'] == 0) {
+        $usuario = $_SESSION['usuario']; // Asegúrate de tener el ID del usuario en la sesión
+        
+        // Directorio donde se guardarán las imágenes
+        $upload_dir = '../../uploads/profile_images/';
+        
+        // Crear el directorio si no existe
+        if (!file_exists($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+        
+        // Obtener la extensión del archivo
+        $file_extension = pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION);
+        
+        // Generar un nombre único para la imagen
+        $new_file_name = 'user_' . $usuario . '_' . time() . '.' . $file_extension;
+        
+        // Ruta completa donde se guardará la imagen en el sistema de archivos
+$upload_path = $upload_dir . $new_file_name;
+
+// Ruta relativa para la base de datos (URL que usará el navegador)
+$image_path = '../../uploads/profile_images/' . $new_file_name;
+
+// Mover el archivo subido al directorio destino
+if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $upload_path)) {
+    // Actualizar la ruta de la imagen en la base de datos
+    $stmt = $con->prepare("UPDATE usuarios SET imagen_perfil = ? WHERE usuario = ?");
+    $stmt->bind_param("ss", $image_path, $usuario);
+            
+            if ($stmt->execute()) {
+                // Redireccionar para evitar reenvío del formulario
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
+            } else {
+                echo "Error al actualizar la base de datos: " . $stmt->error;
+            }
+        } else {
+            echo "Error al subir la imagen.";
+        }
+    } else {
+        echo "Error: " . $_FILES['profileImage']['error'];
+    }
+}
+
+// Obtener la ruta de la imagen del usuario desde la base de datos
+$usuario = $_SESSION['usuario'];
+$imagen_perfil = ''; 
+
+$stmt = $con->prepare("SELECT imagen_perfil FROM usuarios WHERE usuario = ?");
+$stmt->bind_param("s", $usuario);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    // Solo asignar si existe y no está vacío
+    if (!empty($row['imagen_perfil'])) {
+        $imagen_perfil = $row['imagen_perfil'];
+    }
+}
+// Define una imagen por defecto
+$default_image = '../../img/perfilPorDefecto.png';
+
+// Verificar si la imagen de perfil está vacía o no existe
+if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
+    $imagen_a_mostrar = $default_image;
+} else {
+    $imagen_a_mostrar = $imagen_perfil;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -106,11 +178,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
     <title>Panel de Jefe de Equipo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const uploadButton = document.getElementById('uploadButton');
+    const imageInput = document.getElementById('imageInput');
+    const imageForm = document.getElementById('imageUploadForm');
+    
+    uploadButton.addEventListener('click', function() {
+        imageInput.click();
+    });
+    
+    imageInput.addEventListener('change', function() {
+        if (imageInput.files.length > 0) {
+            imageForm.submit();
+        }
+    });
+});
+</script>
 <body class="w-full min-h-screen flex flex-col justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col gap-10 p-10 w-full bg-gray-300 justify-center bg-opacity-50 items-center">
+    <div class="flex flex-col gap-10 p-10 w-full bg-gray-300 justify-center bg-opacity-25 items-center">
         <h2 class="font-bold text-orange-600 text-4xl underline">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
+
+        <section class="flex flex-col w-fit p-10 gap-3">
+        <div class="flex flex-col w-full p-6">
+            <div class="flex items-center justify-center bg-white p-10 bg-opacity-80 shadow-md rounded-lg gap-10">
+                <div class=" flex flex-col items-center justify-center relative p-2 ">
+                <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>" 
+     alt="Imagen Usuario" 
+     class="w-[15em] h-[15em] rounded-lg" 
+     id="profileImage"
+     
+/>
+                <form id="imageUploadForm" method="post" enctype="multipart/form-data" style="display:none;">
+        <input type="file" name="profileImage" id="imageInput" accept="image/*">
+        <input type="hidden" name="upload_image" value="1">
+    </form>
+    <button class="absolute right-1 top-1" id="uploadButton">
+        <img src="../../img/pencil-line.svg" alt="Editar imagen" class="bg-orange-600 rounded-lg p-1"/>
+    </button>
+                </div>
+                <div class="flex flex-col text-xl justify-center gap-5">
+                <p class="text-orange-400 font-bold">Nombre: <span class="text-gray-600"> <?php echo htmlspecialchars($usuario); ?></span></p>
+                <p class="text-orange-400 font-bold">Proyectos Asignados:<span class="text-gray-600"> <?php echo htmlspecialchars($proyectos->num_rows); ?></span></p>
+            </div>
+            </div>
+        </div>
+    </section>
+
         <h2 class="font-bold text-orange-600 text-4xl underline">Proyectos</h2>
-        <ul class="flex flex-wrap gap-2 w-full">
+        <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
         <?php if ($proyectos->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay proyectos.</span>
                     <?php } ?>
@@ -135,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
         </ul>
 
         <h3 class="font-bold text-orange-600 text-3xl underline">Reuniones</h3>
-        <ul>
+        <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
         <?php if ($reuniones->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay reuniones.</span>
                     <?php } ?>
@@ -171,7 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
         </ul>
 
         <h3 class="font-bold text-orange-400 text-3xl underline">Tareas</h3>
-        <ul class="flex gap-2 flex-wrap w-full">
+        <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
         <?php if ($tareas->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay tareas.</span>
                     <?php } ?>
@@ -213,7 +329,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
         </ul>
 
         <h3 class="font-bold text-orange-400 text-3xl underline">Crear Reunión</h3>
-        <form method="post" class="flex flex-col w-full gap-2">
+        <form method="post" class="flex flex-col w-[40em]  gap-2">
             <input type="text" name="titulo" placeholder="Título" required class="p-2 border rounded" />
             <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
             <input type="date" name="fecha" required class="p-2 border rounded" />
@@ -224,7 +340,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
         </form>
 
         <h3 class="font-bold text-orange-400 text-3xl underline">Crear Tarea</h3>
-        <form method="post" class="flex flex-col w-full gap-2">
+        <form method="post" class="flex flex-col w-[40em]  gap-2">
             <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded" />
             <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
             <input type="number" name="id_proyecto" placeholder="ID Proyecto" required class="p-2 border rounded" />
