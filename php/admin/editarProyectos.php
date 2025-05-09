@@ -65,30 +65,30 @@ if (isset($_POST['guardar_cambios'])) {
 
 <body
     class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col gap-10 p-5 w-full max-w-[65%] rounded-xl bg-gray-300 justify-center items-center">
-        <h2 class="font-bold text-orange-400 text-3xl underline">EDITAR PROYECTO</h2>
+    <div class="flex flex-col gap-10 p-5 w-full md:w-[50em] max-w-[90%] mt-10 rounded-xl bg-gray-300 justify-center items-center">
+        <h2 class="font-bold text-orange-600 text-4xl text-center underline">EDITAR PROYECTO</h2>
         <form method="POST" action=""
             class="flex flex-col w-full p-4 gap-6 rounded-lg shadow-xl text-center items-center">
             <input type="hidden" name="id_proyecto" value="<?php echo $proyectos['id_proyecto']; ?>">
             
-            <strong><label for="nombre" class="text-xl text-black">Nombre:</label></strong>
-            <input type="text" name="nombre" class="flex text-center w-[20em] rounded-lg p-1"
+            <label for="nombre" class="text-xl text-black">Nombre:</label>
+            <input type="text" name="nombre" class="text-center md:w-[20em] rounded-lg p-1"
                 value="<?php echo htmlspecialchars($proyectos['nombre']); ?>" required>
             
-            <strong><label for="descripcion" class="text-xl text-black">Descripción:</label></strong>
-            <textarea name="descripcion" class="text-black rounded-lg p-1" rows="5" cols="45"
+            <label for="descripcion" class="text-xl text-black">Descripción:</label>
+            <textarea name="descripcion" class="text-black text-center rounded-lg p-1 w-full md:w-[20em]" rows="5" cols="45"
                 required><?php echo htmlspecialchars($proyectos['descripcion']); ?></textarea>
             
-            <strong><label for="fecha_inicio" class="text-xl text-black">Fecha de inicio:</label></strong>
-            <input type="date" name="fecha_inicio" class="flex text-center w-[20em] rounded-lg p-1"
+            <label for="fecha_inicio" class="text-xl text-black">Fecha de inicio:</label>
+            <input type="date" name="fecha_inicio" class="text-center md:w-[20em] rounded-lg p-1"
                 value="<?php echo htmlspecialchars($proyectos['fecha_inicio']); ?>" required>
             
-            <strong><label for="fecha_fin" class="text-xl text-black">Fecha de fin (opcional):</label></strong>
-            <input type="date" name="fecha_fin" class="flex text-center w-[20em] rounded-lg p-1"
-                value="<?php echo htmlspecialchars($proyectos['fecha_fin']); ?>">
+            <label for="fecha_fin" class="text-xl text-black">Fecha de fin (opcional):</label>
+            <input type="date" name="fecha_fin" class="text-center md:w-[20em] rounded-lg p-1"
+                value="<?php echo htmlspecialchars($proyectos['fecha_fin']);?>">
             
-            <strong><label for="estado" class="text-xl text-black">Estado:</label></strong>
-            <select name="estado" class="w-[20em] rounded-lg p-1">
+            <label for="estado" class="text-xl text-black">Estado:</label>
+            <select name="estado" class="md:w-[20em] rounded-lg text-center p-1">
                 <option value="pendiente" <?php echo ($proyectos['estado'] == 'pendiente') ? 'selected' : ''; ?>>Pendiente</option>
                 <option value="en progreso" <?php echo ($proyectos['estado'] == 'en progreso') ? 'selected' : ''; ?>>En Progreso</option>
                 <option value="completado" <?php echo ($proyectos['estado'] == 'completado') ? 'selected' : ''; ?>>Completado</option>
@@ -97,6 +97,7 @@ if (isset($_POST['guardar_cambios'])) {
             <button type="submit" class="hover:bg-orange-700 rounded-lg bg-orange-500 p-3 text-white" name="guardar_cambios">Guardar Cambios</button>
             
             <!-- Botones de volver y logOut -->
+            <span class="block h-0.5 w-full bg-black opacity-40"></span>
 
             <div class="flex justify-center items-center gap-10">
                     <button type="button" onclick="window.location.href='adminProyectos.php'"class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>

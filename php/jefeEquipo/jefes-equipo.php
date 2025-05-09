@@ -195,13 +195,11 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
     });
 });
 </script>
-<body class="w-full min-h-screen flex flex-col justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col gap-10 p-10 w-full bg-gray-300 justify-center bg-opacity-25 items-center">
-        <h2 class="font-bold text-orange-600 text-4xl underline">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
+<body class="w-full min-h-screen flex flex-col justify-center gap-4 items-center bg-cover bg-center bg-fixed z-10 py-10 bg-[url('../../img/pixels14.jpg')]">
+        <h2 class="font-bold text-orange-400 text-4xl underline">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
 
-        <section class="flex flex-col w-fit p-10 gap-3">
-        <div class="flex flex-col w-full p-6">
-            <div class="flex items-center justify-center bg-white p-10 bg-opacity-80 shadow-md rounded-lg gap-10">
+    <section class="flex flex-col md:flex-row justify-center items-center bg-gray-300 p-10 gap-3">
+            
                 <div class=" flex flex-col items-center justify-center relative p-2 ">
                 <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>" 
      alt="Imagen Usuario" 
@@ -214,18 +212,18 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
         <input type="hidden" name="upload_image" value="1">
     </form>
     <button class="absolute right-1 top-1" id="uploadButton">
-        <img src="../../img/pencil-line.svg" alt="Editar imagen" class="bg-orange-600 rounded-lg p-1"/>
+        <img src="../../img/pencil-line.svg" alt="Editar imagen" class="bg-orange-400 rounded-lg p-1"/>
     </button>
                 </div>
                 <div class="flex flex-col text-xl justify-center gap-5">
                 <p class="text-orange-400 font-bold">Nombre: <span class="text-gray-600"> <?php echo htmlspecialchars($usuario); ?></span></p>
                 <p class="text-orange-400 font-bold">Proyectos Asignados:<span class="text-gray-600"> <?php echo htmlspecialchars($proyectos->num_rows); ?></span></p>
             </div>
-            </div>
-        </div>
+            
     </section>
 
-        <h2 class="font-bold text-orange-600 text-4xl underline">Proyectos</h2>
+        <div class="flex flex-col p-10 gap-10 bg-white bg-opacity-70 justify-center items-center shadow-md rounded-lg">
+        <h2 class="font-bold text-orange-500 text-4xl underline">Proyectos</h2>
         <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
         <?php if ($proyectos->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay proyectos.</span>
@@ -234,14 +232,14 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
                 <li class="flex gap-5">
                     <?php
                     echo
-                    "<div class='flex w-full bg-gray-200 gap-2 rounded-lg shadow-lg p-5'>". 
+                    "<div class='flex w-full bg-gray-300 gap-2 rounded-lg shadow-lg p-5'>". 
                     "<div class='flex flex-col w-full gap-2 p-5'>". 
-                        "<p class='font-bold text-orange-600'>-ID: <span class='text-black'>".htmlspecialchars($proyecto['id_proyecto'])."</p>".
-                        "<p class='font-bold text-orange-600'>Nombre: <span class='text-black'>".htmlspecialchars($proyecto['nombre'])."</p>".
-                        "<p class='font-bold text-orange-600'>Descripción: <span class='text-black'>".htmlspecialchars($proyecto['descripcion'])."</p>".
-                        "<p class='font-bold text-orange-600'>Fecha de Inicio: <span class='text-black'>".htmlspecialchars($proyecto['fecha_inicio'])."</p>".
-                        "<p class='font-bold text-orange-600'>Fecha de Fin: <span class='text-black'>".htmlspecialchars($proyecto['fecha_fin'])."</p>".
-                        "<p class='font-bold text-orange-600'>Estado: <span class='text-black'>".htmlspecialchars($proyecto['estado'])."</p>"
+                        "<p class='font-bold text-orange-400'>-ID: <span class='text-black'>".htmlspecialchars($proyecto['id_proyecto'])."</p>".
+                        "<p class='font-bold text-orange-400'>Nombre: <span class='text-black'>".htmlspecialchars($proyecto['nombre'])."</p>".
+                        "<p class='font-bold text-orange-400'>Descripción: <span class='text-black'>".htmlspecialchars($proyecto['descripcion'])."</p>".
+                        "<p class='font-bold text-orange-400'>Fecha de Inicio: <span class='text-black'>".htmlspecialchars($proyecto['fecha_inicio'])."</p>".
+                        "<p class='font-bold text-orange-400'>Fecha de Fin: <span class='text-black'>".htmlspecialchars($proyecto['fecha_fin'])."</p>".
+                        "<p class='font-bold text-orange-400'>Estado: <span class='text-black'>".htmlspecialchars($proyecto['estado'])."</p>"
 
 
                     ?>
@@ -250,7 +248,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
             <?php } ?>
         </ul>
 
-        <h3 class="font-bold text-orange-600 text-3xl underline">Reuniones</h3>
+        <h3 class="font-bold text-orange-500 text-3xl underline">Reuniones</h3>
         <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
         <?php if ($reuniones->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay reuniones.</span>
@@ -286,7 +284,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
             <?php } ?>
         </ul>
 
-        <h3 class="font-bold text-orange-400 text-3xl underline">Tareas</h3>
+        <h3 class="font-bold text-orange-500 text-3xl underline">Tareas</h3>
         <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
         <?php if ($tareas->num_rows == 0) { ?>
                         <span class="text-center font-bold">No hay tareas.</span>
@@ -295,7 +293,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
                 <li class="flex gap-5">
                     <?php
                     echo
-                    "<div class='flex w-full bg-gray-200 gap-2 rounded-lg shadow-lg p-5'>". 
+                    "<div class='flex w-full bg-gray-300 gap-2 rounded-lg shadow-lg p-5'>". 
                     "<div class='flex flex-col w-full gap-2 p-5'>".
                         " <p class='font-bold text-orange-400'>-ID: <span class='text-black'>". htmlspecialchars($tarea['id_tarea'])."</span></p> ".
                         " <p class='font-bold text-orange-400'>-Nombre: <span class='text-black'>".htmlspecialchars($tarea['nombre'])."</p> ". 
@@ -328,7 +326,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
             <?php } ?>
         </ul>
 
-        <h3 class="font-bold text-orange-400 text-3xl underline">Crear Reunión</h3>
+        <h3 class="font-bold text-orange-500 text-3xl underline">Crear Reunión</h3>
         <form method="post" class="flex flex-col w-[40em]  gap-2">
             <input type="text" name="titulo" placeholder="Título" required class="p-2 border rounded" />
             <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
@@ -336,10 +334,10 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
             <input type="time" name="hora" required class="p-2 border rounded" />
             <input type="number" name="id_proyecto" placeholder="ID Proyecto" required class="p-2 border rounded" />
             <button type="submit" name="crear_reunion"
-                class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Reunión</button>
+                class="p-2 bg-orange-500 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Reunión</button>
         </form>
 
-        <h3 class="font-bold text-orange-400 text-3xl underline">Crear Tarea</h3>
+        <h3 class="font-bold text-orange-500 text-3xl underline">Crear Tarea</h3>
         <form method="post" class="flex flex-col w-[40em]  gap-2">
             <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded" />
             <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
@@ -348,15 +346,15 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
                 class="p-2 border rounded" />
             <input type="date" name="fecha_vencimiento" required class="p-2 border rounded" />
             <button type="submit" name="crear_tarea"
-                class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Tarea</button>
+                class="p-2 bg-orange-500 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Tarea</button>
         </form>
-
         <form action="../logout.php" method="POST">
             <button type="submit"
-                class="p-2 bg-orange-400 rounded-xl shadow-lg cursor-pointer p-3 text-white hover:bg-orange-700">Cerrar
+                class="p-2 bg-orange-500 rounded-xl shadow-lg cursor-pointer p-3 text-white hover:bg-orange-700">Cerrar
                 Sesión</button>
         </form>
-    </div>
+        </div>
+
 </body>
 
 </html>

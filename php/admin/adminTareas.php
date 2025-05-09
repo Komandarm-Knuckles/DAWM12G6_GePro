@@ -59,11 +59,9 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 
 <body
     class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col w-full max-w-[90%] justify-center items-center gap-20 pt-20">
-        <div class="flex flex-col p-10 w-full max-w-[65%] gap-5 bg-gray-300 rounded">
-            <div class="flex justify-center items-center bg-gray-300">
-                <h2 class="font-bold text-orange-400 text-3xl underline">Tareas</h2>
-            </div>
+    <div class="flex flex-col w-full md:max-w-[65%] max-w-[95%] justify-center items-center gap-20 pt-20">
+        <div class="flex flex-col p-10 w-full max-w-full gap-5 bg-gray-300 rounded">
+                <h2 class="font-bold text-orange-500 text-center text-3xl underline">Tareas</h2>
             <div
                 class='flex flex-col bg-gray-300 max-h-[300px] text-center gap-5 overflow-y-auto shadow-2xl bg-color w-full'>
                 <table class='styled-table w-full p-4 text-center rounded'>
@@ -106,31 +104,35 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             </div>
         </div>
 
-        <div class="flex flex-col gap-10 p-10 w-full max-w-[65%] bg-gray-300 justify-center items-center">
+        <div class="flex flex-col gap-10 p-10 w-full max-w-full bg-gray-300 justify-center items-center">
             <h2 class="font-bold text-orange-400 text-3xl underline">Crear Nueva Tarea</h2>
-            <form method="POST" action="" class="flex flex-col w-full gap-6">
-                <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded" />
-                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
-                <select name="id_proyecto" class="p-2 rounded">
+            <form method="POST" action="" class="flex flex-col w-full justify-center items-center gap-6">
+                <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded w-full" />
+                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded w-full"></textarea>
+                <select name="id_proyecto" class="p-2 rounded w-full">
                     <?php while ($proyecto = $result_proyectos->fetch_assoc()) { ?>
                         <option value="<?php echo $proyecto['id_proyecto']; ?>">
                             <?php echo htmlspecialchars($proyecto['nombre']); ?></option>
                     <?php } ?>
                 </select>
-                <select name="usuario_asignado" class="p-2 rounded">
+                <select name="usuario_asignado" class="p-2 rounded w-full">
                     <?php while ($usuario = $result_usuarios->fetch_assoc()) { ?>
                         <option value="<?php echo $usuario['usuario']; ?>">
                             <?php echo htmlspecialchars($usuario['usuario']); ?></option>
                     <?php } ?>
                 </select>
-                <input type="date" name="fecha_vencimiento" class="p-2 rounded"  class="p-2 border rounded" required />
+                <input type="date" name="fecha_vencimiento" class="p-2 rounded w-full" class="p-2 border rounded" required />
                 <button type="submit" name="crear_tarea"
-                    class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Nueva Tarea
+                    class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white w-[15em] rounded-xl">Crear Nueva Tarea
                 </button>
             </form>
-            
-            <button type="button" onclick="window.location.href='administradores.php'" class="flex justify-center items-center bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
-        
+            <span class="block h-0.5 w-full bg-black opacity-40"></span>
+
+            <div class="flex justify-center items-center gap-10">
+                <form action="../logout.php" method="POST" class="p-5 flex flex-col md:flex-row gap-10">
+                    <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+                </form>
+            </div>
         </div>
         <?php
         $con->close();

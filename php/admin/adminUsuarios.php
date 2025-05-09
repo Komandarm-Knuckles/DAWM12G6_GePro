@@ -52,18 +52,14 @@ echo "<img class='md:w-13 w-[10em]' src='../../img/LogoEmpresa.png' alt='logo Em
       <a href='adminProyectos.php' class='font-bold text-white text-lg'>Proyectos</a>
       </div>
       <div class='flex gap-2'>
-      <img src='../../img/clipboard-list.svg' alt='imagenProyectos'/>
+      <img src='../../img/clipboard-list.svg' alt='imagentareas'/>
       <a href='adminTareas.php' class='font-bold text-white text-lg'>Tareas</a>
-      </div>
-      <div class='flex gap-2'>
-      <img src='../../img/users.svg' alt='imagenProyectos'/>
-      <a href='adminGrupos.php' class='font-bold text-white text-lg'>Grupos</a>
       </div>";
 // final div izquierdo
 echo "</section>";
 
 // Div derecho 
-echo "<div class='flex flex-col py-5 max-h-screen gap-6 justify-center items-center bg-gray-300 w-full'>";
+echo "<div class='flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full'>";
 
 echo "<h1 class='text-center text-4xl font-bold underline'>Bienvenido a la Página de Administrador</h1>";
 
@@ -149,8 +145,7 @@ if ($usuarios->num_rows === 0) {
 
 
 
-<form action="../logout.php" method="POST" class="p-5 flex gap-10">
-    <button type="submit" class="bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg font-bold text-white w-[10em] p-3">Cerrar Sesión</button>
+<form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col justify-center items-center gap-10">
     <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
 </form>
 

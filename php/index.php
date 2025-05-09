@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['user'], $_POST['pass']
                     <input type="password" name="pass" placeholder="Contraseña" required
                         class="bg-gray-700 shadow-xl text-white caret-white rounded-md p-2 outline-none"/><br>
                     <input type="submit" value="INICIAR SESIÓN"
-                        class="bg-orange-400 p-2 hover:bg-orange-700 transition-transform duration-300 rounded-md cursor-pointer"/>
+                        class="bg-orange-400 p-2 hover:bg-orange-800 transition-transform duration-300 rounded-md cursor-pointer"/>
                 </form>
             </div>
         </section>
