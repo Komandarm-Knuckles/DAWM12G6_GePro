@@ -11,23 +11,30 @@ require_once("../database.php");
 $usuario = $_SESSION['usuario'];
 $con = crearConexion();
 
-// Obtener reuniones
-$sql_reuniones = "SELECT * FROM reuniones WHERE id_proyecto = ?";
-$stmt = $con->prepare($sql_reuniones);
-$stmt->bind_param("s", $usuario);
-$stmt->execute();
-$reuniones = $stmt->get_result();
-
-// Obtener tareas
+// Obtener tareas asignadas al usuario actual
 $sql_tareas = "SELECT * FROM tareas WHERE usuario = ?";
-$stmt = $con->prepare($sql_tareas);
-$stmt->bind_param("s", $usuario);
-$stmt->execute();
-$tareas = $stmt->get_result();
+$stmt_tareas = $con->prepare($sql_tareas);
+$stmt_tareas->bind_param("s", $usuario);
+$stmt_tareas->execute();
+$tareas = $stmt_tareas->get_result();
 
-// Obtener proyectos
-$sql_proyectos = "SELECT * FROM proyectos";
-$proyectos = $con->query($sql_proyectos);
+// Obtener proyectos del usuario actual (a través de sus tareas)
+$sql_proyectos = "SELECT DISTINCT p.* FROM proyectos p 
+                  INNER JOIN tareas t ON p.id_proyecto = t.id_proyecto 
+                  WHERE t.usuario = ?";
+$stmt_proyectos = $con->prepare($sql_proyectos);
+$stmt_proyectos->bind_param("s", $usuario);
+$stmt_proyectos->execute();
+$proyectos = $stmt_proyectos->get_result();
+
+// Obtener reuniones relacionadas con los proyectos del usuario
+$sql_reuniones = "SELECT DISTINCT r.* FROM reuniones r 
+                  INNER JOIN tareas t ON r.id_proyecto = t.id_proyecto 
+                  WHERE t.usuario = ?";
+$stmt_reuniones = $con->prepare($sql_reuniones);
+$stmt_reuniones->bind_param("s", $usuario);
+$stmt_reuniones->execute();
+$reuniones = $stmt_reuniones->get_result();
 
 // Crear reunión
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_reunion'])) {
