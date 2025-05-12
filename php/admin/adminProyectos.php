@@ -11,6 +11,24 @@ if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
 require_once("../database.php");
 $con = crearConexion();
 
+// Eliminar proyecto
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['eliminar_proyecto'])) {
+    $id_proyecto = $_POST['id_proyecto'];
+
+    if (borrar_proyecto($con, $id_proyecto)) {
+        header("Location: " . $_SERVER['PHP_SELF']); 
+        exit();
+    } else {
+        $error = "Error al eliminar el proyecto.";
+    }
+}
+
+// Editar proyecto
+if (isset($_POST['editar_proyecto'])) {
+    $id_proyecto = $_POST['id_proyecto'];
+    header("Location: editarProyectos.php?id=" . $id_proyecto);
+    exit;
+}
 
 $result_proyectos = obtener_todos_proyectos($con);
 ?>
