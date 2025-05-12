@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_reunion'])) {
     $stmt = $con->prepare("UPDATE reuniones SET titulo=?, descripcion=?, fecha=? WHERE id_reunion=?");
     $stmt->bind_param("sssi", $titulo, $descripcion, $fecha, $id_reunion);
     $stmt->execute();
-    header("Location: editarReunionesJefeEquipo.php");
+    header("Location: editarReunionesJefeEquipo.php?id=" . urlencode($id_reunion));
     exit();
 }
 
@@ -270,13 +270,14 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
                          ?>
                    
                     <div class="flex gap-1">
-                        <form method="POST" action="">
-                            <input type="hidden" name="editar_reunion" value="<?php echo $reunion['id_reunion']; ?>">
+                        <form method="GET" action="editarReunionesJefeEquipo.php">
+                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($reunion['id_reunion']); ?>">
                             <button type="submit" class="cursor-pointer">
                                 <img src='../../img/square-pen.png' alt='Editar' style='width: 20px; height: 20px;'
                                     class='hover:bg-green-500 hover:scale-105' />
                             </button>
                         </form>
+
                         <form method="POST" action="">
                             <input type="hidden" name="eliminar_reunion" value="<?php echo $reunion['id_reunion']; ?>">
                             <button type="submit"
