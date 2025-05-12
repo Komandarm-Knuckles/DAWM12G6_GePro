@@ -105,34 +105,10 @@ $result_proyectos = obtener_todos_proyectos($con);
                 </table>
             </div>
         </div>
-        <!-- Crear Nuevo Proyecto -->
-        <button type="button" onclick="window.location.href='adminCrearProyecto.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR PROYECTO</button>
+<!-- Boton crear proyecto -->
 
-        <div class="flex flex-col gap-10 p-10 w-full md:max-w-[85%] bg-gray-300 justify-center items-center">
-            <h2 class="font-bold text-orange-400 text-2xl text-center underline"> CREAR NUEVO PROYECTO</h2>
-            
-            
-            <?php if (isset($error)) { echo "<p class='text-red-600'>$error</p>"; } ?>
-            <form method="POST" action="" class="flex flex-col w-full md:max-w-[85%]  justify-center items-center  gap-6">
-                <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded" />
-
-                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border w-full rounded"></textarea>
-                Fecha Inicio:
-                <input type="date" name="fecha_inicio" required class="p-2 border w-full rounded" />
-                Fecha Fin:
-                <input type="date" name="fecha_fin" class="p-2 border w-full rounded" />
-                Estado:
-                <select name="estado" class="rounded-lg w-full p-1">
-                    <option value="pendiente">Pendiente</option>
-                    <option value="en proceso">En proceso</option>
-                    <option value="completado">Completado</option>
-                </select>
-
-                <button type="submit" name="crear_proyecto" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded-xl">Crear Nuevo Proyecto</button>
-            </form>
-            <span class="block h-0.5 w-full bg-black opacity-40"></span>
-
-            <!-- Botones de volver y logOut -->
+            <button type="button" onclick="window.location.href='adminCrearProyecto.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR PROYECTO</button>
+<!-- Botones de volver y logOut -->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
                 <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Administrador</button>
