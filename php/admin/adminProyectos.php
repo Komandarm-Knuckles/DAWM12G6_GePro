@@ -105,8 +105,8 @@ $result_proyectos = obtener_todos_proyectos($con);
                 </table>
             </div>
         </div>
-
         <!-- Crear Nuevo Proyecto -->
+        <button type="button" onclick="window.location.href='adminCrearProyecto.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR PROYECTO</button>
 
         <div class="flex flex-col gap-10 p-10 w-full md:max-w-[85%] bg-gray-300 justify-center items-center">
             <h2 class="font-bold text-orange-400 text-2xl text-center underline"> CREAR NUEVO PROYECTO</h2>
