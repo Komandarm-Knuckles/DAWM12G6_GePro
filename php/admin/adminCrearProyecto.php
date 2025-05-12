@@ -61,9 +61,6 @@ $result_proyectos = obtener_todos_proyectos($con);
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
     <div class="flex flex-col w-full max-w-[90%] justify-center items-center gap-20 pt-20">
  
-        <!-- Crear Nuevo Proyecto -->
-        <button type="button" onclick="window.location.href='adminCrearProyecto.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR PROYECTO</button>
-
         <div class="flex flex-col gap-10 p-10 w-full md:max-w-[85%] bg-gray-300 justify-center items-center">
             <h2 class="font-bold text-orange-400 text-2xl text-center underline"> CREAR NUEVO PROYECTO</h2>
             

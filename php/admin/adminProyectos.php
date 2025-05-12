@@ -11,44 +11,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
 require_once("../database.php");
 $con = crearConexion();
 
-// Envio del formulario proyecto
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_proyecto'])) {
-    $nombre = trim($_POST['nombre']);
-    $descripcion = trim($_POST['descripcion']);
-    $fecha_inicio = $_POST['fecha_inicio'];
-    $fecha_fin = !empty($_POST['fecha_fin']) ? $_POST['fecha_fin'] : null; 
-    $estado = $_POST['estado'];
-
-    if (!empty($nombre) && !empty($descripcion) && !empty($fecha_inicio) && !empty($estado)) {
-        if (crear_proyecto($con, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado)) {
-            header("Location: " . $_SERVER['PHP_SELF']); 
-            exit();
-        } else {
-            $error = "Error al crear el proyecto.";
-        }
-    } else {
-        $error = "Todos los campos son obligatorios excepto la fecha de fin.";
-    }
-}
-
-// Eliminar proyecto
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['eliminar_proyecto'])) {
-    $id_proyecto = $_POST['id_proyecto'];
-
-    if (borrar_proyecto($con, $id_proyecto)) {
-        header("Location: " . $_SERVER['PHP_SELF']); 
-        exit();
-    } else {
-        $error = "Error al eliminar el proyecto.";
-    }
-}
-
-// Editar proyecto
-if (isset($_POST['editar_proyecto'])) {
-    $id_proyecto = $_POST['id_proyecto'];
-    header("Location: editarProyectos.php?id=" . $id_proyecto);
-    exit;
-}
 
 $result_proyectos = obtener_todos_proyectos($con);
 ?>
