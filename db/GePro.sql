@@ -64,6 +64,15 @@ CREATE TABLE reuniones (
     FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto) ON DELETE CASCADE
 );
 
+-- TABLA DE MENSAJES
+CREATE TABLE chat_mensajes (
+    id_mensaje INT AUTO_INCREMENT PRIMARY KEY,
+    id_emisor INT NOT NULL,
+    mensaje TEXT NOT NULL,
+    fecha_envio DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (emisor_id) REFERENCES jefes_equipo(id)
+);
+
 -- INSERTAR USUARIOS
 INSERT INTO usuarios (usuario, pass, nombre, apellido, dni, email, telefono, tipo) VALUES
 ('admin', '$2y$10$HOSftQSI0gMU/1IKkpV6buCjdux1n1u68EfKAy2aYDN9ayG97NVQe', 'Admin', 'Principal', '12345678A', 'admin@gepro.com', '600000001', 0),
