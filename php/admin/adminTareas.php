@@ -1,6 +1,13 @@
 <?php
-include '../database.php';
+// Control de sesión
+session_start();
+if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
+    $_SESSION['error'] = "Debes iniciar sesión antes de acceder.";
+    header("Location: index.php");
+    exit();
+}
 
+require_once("../database.php");
 $con = crearConexion();
 
 // Obtener todas las tareas
@@ -103,37 +110,17 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                 </table>
             </div>
         </div>
+<!-- Boton crear tarea -->
 
-        <div class="flex flex-col gap-10 p-10 w-full max-w-full bg-gray-300 justify-center items-center">
-            <h2 class="font-bold text-orange-400 text-3xl underline">Crear Nueva Tarea</h2>
-            <form method="POST" action="" class="flex flex-col w-full justify-center items-center gap-6">
-                <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded w-full" />
-                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded w-full"></textarea>
-                <select name="id_proyecto" class="p-2 rounded w-full">
-                    <?php while ($proyecto = $result_proyectos->fetch_assoc()) { ?>
-                        <option value="<?php echo $proyecto['id_proyecto']; ?>">
-                            <?php echo htmlspecialchars($proyecto['nombre']); ?></option>
-                    <?php } ?>
-                </select>
-                <select name="usuario_asignado" class="p-2 rounded w-full">
-                    <?php while ($usuario = $result_usuarios->fetch_assoc()) { ?>
-                        <option value="<?php echo $usuario['usuario']; ?>">
-                            <?php echo htmlspecialchars($usuario['usuario']); ?></option>
-                    <?php } ?>
-                </select>
-                <input type="date" name="fecha_vencimiento" class="p-2 rounded w-full" class="p-2 border rounded" required />
-                <button type="submit" name="crear_tarea"
-                    class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white w-[15em] rounded-xl">Crear Nueva Tarea
-                </button>
-            </form>
-            <span class="block h-0.5 w-full bg-black opacity-40"></span>
+            <button type="button" onclick="window.location.href='adminCrearTarea.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR TAREA</button>
 
+<!-- Botones de volver y logOut -->
             <div class="flex justify-center items-center gap-10">
-                <form action="../logout.php" method="POST" class="p-5 flex flex-col md:flex-row gap-10">
-                    <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+                <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
+                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Administrador</button>
+                <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Usuarios</button>
                 </form>
             </div>
-        </div>
         <?php
         $con->close();
         ?>

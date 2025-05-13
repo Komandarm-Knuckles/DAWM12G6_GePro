@@ -31,25 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_proyecto'])) {
     }
 }
 
-// Eliminar proyecto
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['eliminar_proyecto'])) {
-    $id_proyecto = $_POST['id_proyecto'];
-
-    if (borrar_proyecto($con, $id_proyecto)) {
-        header("Location: " . $_SERVER['PHP_SELF']); 
-        exit();
-    } else {
-        $error = "Error al eliminar el proyecto.";
-    }
-}
-
-// Editar proyecto
-if (isset($_POST['editar_proyecto'])) {
-    $id_proyecto = $_POST['id_proyecto'];
-    header("Location: editarProyectos.php?id=" . $id_proyecto);
-    exit;
-}
-
 $result_proyectos = obtener_todos_proyectos($con);
 ?>
 
@@ -84,8 +65,14 @@ $result_proyectos = obtener_todos_proyectos($con);
                 <button type="submit" name="crear_proyecto" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded-xl">Crear Nuevo Proyecto</button>
             </form>
             <span class="block h-0.5 w-full bg-black opacity-40"></span>
-
-            <!-- Botones de volver y logOut -->
+            
+            <!-- Boton de volver -->
+            <div class="flex justify-center items-center gap-10">
+                <form action="../logout.php" method="POST" class="p-5 flex flex-col md:flex-row gap-10">
+                    <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+                </form>
+            </div>
+            <!-- Botones de volver a panel administrados o panel usuario -->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
                 <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Administrador</button>
