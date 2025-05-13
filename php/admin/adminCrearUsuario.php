@@ -102,7 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 
 
         </div>
-
+            <div class="flex justify-center items-center gap-10 ">
+            <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
+        </div>
             <!-- Botones de volver a panel administrador o panel usuario -->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
