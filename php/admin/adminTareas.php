@@ -110,11 +110,11 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                 </table>
             </div>
         </div>
-<!-- Boton crear tarea -->
 
+            <!-- Boton crear tarea -->
             <button type="button" onclick="window.location.href='adminCrearTarea.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR TAREA</button>
 
-<!-- Botones de volver y logOut -->
+            <!-- Botones de volver a panel administrador o panel usuario -->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
                 <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Administrador</button>

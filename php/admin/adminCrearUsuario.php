@@ -102,10 +102,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 
 
         </div>
-        <div class="flex justify-center items-center gap-10 ">
-            <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
-            <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold p-2 rounded-md w-[10em]">Volver</button>
-        </div>
+
+            <!-- Boton de volver -->
+            <div class="flex justify-center items-center gap-10">
+                <form action="../logout.php" method="POST" class="p-5 flex flex-col md:flex-row gap-10">
+                    <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+                </form>
+            </div>
+
+            <!-- Botones de volver a panel administrador o panel usuario -->
+            <div class="flex justify-center items-center gap-10">
+                <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
+                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Administrador</button>
+                <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Usuarios</button>
+                </form>
+            </div>
         </form>
     </div>
 
