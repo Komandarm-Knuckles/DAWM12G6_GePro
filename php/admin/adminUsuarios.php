@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario']))
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Administrador</title>
+    <title>Página de Usuarios</title>
      <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
      <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -65,7 +65,7 @@ echo "<h1 class='text-center text-4xl font-bold underline'>Bienvenido a la Pági
 
 // ---------------------------GESTIÓN DE USUARIOS-----------------------------
 
-echo "<h2 class='font-bold text-2xl underline'>- Gestión de Usuarios -</h2>";
+echo "<h2 class='font-bold text-2xl underline'>GESTIÓN DE USUARIOS</h2>";
 $usuarios = obtener_todos_los_usuarios($con);
 
 // MOSTRAR TABLA USUARIOS
