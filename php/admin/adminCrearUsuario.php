@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
         <div class="flex flex-col justify-center text-center items-center">
-            <form id="formUsuarios" method="POST" action="">
+            <form id="formUsuarios" method="POST" action="" class="flex flex-col w-full gap-2">
                 Usuario:
                 <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required class=" p-2 border rounded w-full" />
 
@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
                 <input type="number" name="telefono" id="telefono" placeholder="Teléfono" minlength="9" required class=" p-2 border rounded w-full" />
 
                 Tipo:
-                <select name="tipo" required class=" p-2 border rounded w-full">
+                <select name="tipo" required class=" p-2 border rounded text-center w-full">
                     <option value="">Selecciona...</option>
                     <option value="0">Administrador</option>
                     <option value="1">Jefe de Equipo</option>
@@ -103,19 +103,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 
         </div>
             <div class="flex justify-center items-center gap-10 ">
-            <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
-        </div>
+            <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
+        </div>      
+            <span class="block h-0.5 w-full bg-black opacity-40"></span>
+
         
-        <!-- Boton de volver -->
-        <div class="flex justify-center items-center gap-10 ">
-            <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
-        </div>       
-        
-        <!-- Botones de volver a panel administrados o panel usuario -->
         <div class="flex justify-center items-center gap-10">
             <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-            <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
-            <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Usuarios</button>
+            <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
             </form>
         </div>
         </form>

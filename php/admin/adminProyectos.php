@@ -47,7 +47,7 @@ $usuarios = obtener_todos_los_usuarios($con);
             <section class="flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5">
                 <img class="md:w-13 w-[10em]" src="../../img/LogoEmpresa.png" alt="logo Empresa"/>
                 <div class="flex gap-2">
-                    <img src="../../img/folder-git-2.svg" alt="imagenProyectos"/>
+                    <img src="../../img/users.svg" alt="imagenProyectos"/>
                     <a href="adminUsuarios.php" class="font-bold text-white text-lg">Usuarios</a>
                 </div>
                 <div class="flex gap-2">
@@ -61,7 +61,7 @@ $usuarios = obtener_todos_los_usuarios($con);
             </section>
 
             <!-- Contenido principal -->
-            <div class="flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
+            <div class="flex flex-col min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
                 <h1 class="text-center text-4xl font-bold underline">Bienvenido a la Página de Administrador</h1>
 
                 <h2 class="font-bold text-2xl underline">GESTIÓN DE PROYECTOS</h2>
@@ -114,13 +114,12 @@ $usuarios = obtener_todos_los_usuarios($con);
                 <?php endif; ?>
 
                 <!-- Botón crear proyecto -->
-                <button type="button" onclick="window.location.href='adminCrearProyecto.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR PROYECTO</button>
+                <button type="button" onclick="window.location.href='adminCrearProyecto.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">CREAR PROYECTO</button>
 
                 <!-- Botones de navegación -->
                 <div class="flex justify-center items-center gap-10">
                     <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                        <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
-                        <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Usuarios</button>
+                        <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
                     </form>
                 </div>
             </div>

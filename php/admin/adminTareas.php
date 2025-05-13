@@ -68,15 +68,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
             <section class="flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5">
                 <img class="md:w-13 w-[10em]" src="../../img/LogoEmpresa.png" alt="logo Empresa"/>
                 <div class="flex gap-2">
-                    <img src="../../img/folder-git-2.svg" alt="imagenProyectos"/>
+                    <img src="../../img/users.svg" alt="imagenProyectos"/>
                     <a href="adminUsuarios.php" class="font-bold text-white text-lg">Usuarios</a>
                 </div>
                 <div class="flex gap-2">
-                    <img src="../../img/projector.svg" alt="imagenReuniones"/>
+                    
+                    <img src="../../img/folder-git-2.svg" alt="imagenReuniones"/>
                     <a href="adminProyectos.php" class="font-bold text-white text-lg">Proyectos</a>
                 </div>
                 <div class="flex gap-2">
-                    <img src="../../img/clipboard-list.svg" alt="imagentareas"/>
+                    <img src="../../img/projector.svg" alt="imagentareas"/>
                     <a href="adminReuniones.php" class="font-bold text-white text-lg">Reuniones</a>
                 </div>
             </section>
@@ -136,8 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
                 <!-- Botones de navegación -->
                 <div class="flex justify-center items-center gap-10">
                     <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                        <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
-                        <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Usuarios</button>
+                        <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
                     </form>
                 </div>
             </div>

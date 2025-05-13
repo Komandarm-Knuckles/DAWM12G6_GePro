@@ -13,21 +13,20 @@ require_once("../database.php");
 $con = crearConexion();
 
 // ELIMINAR USUARIOS
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario'])) 
-    {
-        $usuario = $_POST['eliminar_usuario'];
-        borrar_usuario($con, $usuario);
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario'])) {
+    $usuario = $_POST['eliminar_usuario'];
+    borrar_usuario($con, $usuario);
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
 ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página de Usuarios</title>
-     <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
-     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <?php
 // (Asumiendo que tienes las funciones obtener_todos_los_usuarios() y obtener_resultados() definidas)
@@ -43,13 +42,13 @@ echo "<div class='flex w-full md:flex-row flex-col justify-center items-stretch 
 // Div Izquierdo con altura total del contenedor
 echo "<section class='flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5'>";
 echo "<img class='md:w-13 w-[10em]' src='../../img/LogoEmpresa.png' alt='logo Empresa'/>
+        <div class='flex gap-2'>
+        <img src='../../img/folder-git-2.svg' alt='imagenProyectos'/>
+        <a href='adminProyectos.php' class='font-bold text-white text-lg'>Proyectos</a>
+        </div>
       <div class='flex gap-2'>
       <img src='../../img/projector.svg' alt='imagenReuniones'/>
       <a href='adminReuniones.php' class='font-bold text-white text-lg'>Reuniones</a>
-      </div>
-      <div class='flex gap-2'>
-      <img src='../../img/folder-git-2.svg' alt='imagenProyectos'/>
-      <a href='adminProyectos.php' class='font-bold text-white text-lg'>Proyectos</a>
       </div>
       <div class='flex gap-2'>
       <img src='../../img/clipboard-list.svg' alt='imagentareas'/>
@@ -137,19 +136,22 @@ if ($usuarios->num_rows === 0) {
 <div class="flex gap-4 justify-center items-center shadow-2xl px-5 ">
     <h4 class="font-semibold">Dar de alta nuevos usuarios:</h4>
     <form method="POST" action="adminCrearUsuario.php" class="flex justify-center items-center mt-4">
-        <button type="submit" class="bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg font-bold text-white px-4 py-2">
+        <button type="submit"
+            class="bg-orange-400 hover:bg-orange-700 rounded-xl shadow-lg font-bold text-white px-4 py-2">
             Añadir Usuario
         </button>
     </form>
 </div>
 
 
-            <!-- Botones de volver a panel administrador o volver -->
-            <div class="flex justify-center items-center gap-10">
-                <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
-                </form>
-            </div>
+<!-- Botones de volver a panel administrador o volver -->
+<div class="flex justify-center items-center gap-10">
+    <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
+        <button type="button" onclick="window.location.href='administradores.php'"
+            class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de
+            Administrador</button>
+    </form>
+</div>
 <?php
 
 // Final divs

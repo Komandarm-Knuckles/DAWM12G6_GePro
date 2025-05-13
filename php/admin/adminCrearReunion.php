@@ -23,10 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     $stmt = $con->prepare("INSERT INTO reuniones (titulo, descripcion, fecha, hora, id_proyecto) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssi", $titulo, $descripcion, $fecha, $hora, $id_proyecto);
-    $stmt->execute();
-
-    header("Location: adminReuniones.php");
+   if ($stmt->execute()) {
+        echo "<script>alert('Reunión creada con éxito.');
+                window.location.href='adminReuniones.php'; 
+            </script>";
     exit();
+   }
 }
 #endregion
 
@@ -51,21 +53,21 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
-    <form method="POST">
+    <form method="POST" class="flex flex-col w-full justify-center items-center gap-4">
         Título:
-        <input type="text" name="titulo" required class=" p-2 border rounded w-full">
+        <input type="text" name="titulo" required class=" p-2 border rounded-xl w-full">
 
         Descripción:
-        <textarea name="descripcion" required class=" p-2 border rounded w-full" ></textarea>
+        <textarea name="descripcion" required class=" p-2 border rounded-xl w-full" ></textarea>
 
         Fecha:
-        <input type="date" name="fecha" required class=" p-2 border rounded w-full">
+        <input type="date" name="fecha" required class=" p-2 border rounded-xl text-center w-full">
 
         Hora:
-        <input type="time" name="hora" required class=" p-2 border rounded w-full">
+        <input type="time" name="hora" required class=" p-2 border rounded-xl text-center w-full">
 
         Proyecto:
-        <select name="id_proyecto" required class=" p-2 border rounded w-full">
+        <select name="id_proyecto" required class=" p-2 border rounded-xl text-center w-full">
             <option value="">Selecciona un proyecto</option>
             <?php while ($proyecto = $proyectos->fetch_assoc()): ?>
                 <option value="<?php echo htmlspecialchars($proyecto['id_proyecto']); ?>">
@@ -73,23 +75,24 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                 </option>
             <?php endwhile; ?>
         </select>
-        <br>
-        <br>
-        <div class="flex justify-center items-center gap-10 ">
-                <input type="submit" value="Crear Reunion" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
+        
+        <div class="flex justify-center items-center">
+                <input type="submit" value="Crear Reunion" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
         </div>
+        <!-- Boton de volver -->
+        <div class="flex justify-center items-center  ">
+            <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
+        </div>    
     </form>
         
-        <!-- Boton de volver -->
-        <div class="flex justify-center items-center gap-10 ">
-            <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 text-white p-2 rounded w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
-        </div>    
+
+            <span class="block h-0.5 w-full bg-black opacity-40"></span>
+
            
         <!-- Botones de volver a panel administrados o panel usuario -->
         <div class="flex justify-center items-center gap-10">
-            <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
+            <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col ">
             <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
-            <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Usuarios</button>
             </form>
         </div>
 </div>

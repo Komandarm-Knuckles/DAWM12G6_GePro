@@ -45,7 +45,7 @@ if ($tipo_usuario != 0) {
         </div>
         <div class="flex flex-col w-full gap-5 items-center">
             <a href="adminUsuarios.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
-                Mostrar Usuarios
+                Usuarios
             </a>
             <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
             <a href="adminCrearUsuario.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">

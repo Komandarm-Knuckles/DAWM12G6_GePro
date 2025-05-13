@@ -40,47 +40,47 @@ $result_proyectos = obtener_todos_proyectos($con);
 </head>
 
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col w-full max-w-[90%] justify-center items-center gap-20 pt-20">
- 
-        <div class="flex flex-col gap-10 p-10 w-full md:max-w-[85%] bg-gray-300 justify-center items-center">
-            <h2 class="font-bold text-orange-400 text-2xl text-center underline"> CREAR NUEVO PROYECTO</h2>
-            
-            
+        <div class="flex flex-col max-w-[90%] w-[40em] bg-white p-8 rounded shadow-xl gap-6">
+            <h1 class="text-4xl font-bold text-center underline text-orange-400"> CREAR NUEVO PROYECTO</h1>
+            <div class="flex justify-center items-center">
+            <span class="block h-0.5 w-130 bg-black opacity-40"></span>
+            </div>
+            <div class="flex flex-col justify-center text-center items-center">
             <?php if (isset($error)) { echo "<p class='text-red-600'>$error</p>"; } ?>
             <form method="POST" action="" class="flex flex-col w-full md:max-w-[85%]  justify-center items-center  gap-6">
-                <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded" />
-
+                Nombre:
+                <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded placeholder-center" />
+                Descripción:
                 <textarea name="descripcion" placeholder="Descripción" required class="p-2 border w-full rounded"></textarea>
                 Fecha Inicio:
-                <input type="date" name="fecha_inicio" required class="p-2 border w-full rounded" />
+                <input type="date" name="fecha_inicio" required class="p-2 border text-center w-full rounded" />
                 Fecha Fin:
-                <input type="date" name="fecha_fin" class="p-2 border w-full rounded" />
+                <input type="date" name="fecha_fin" class="p-2 border text-center w-full rounded" />
                 Estado:
-                <select name="estado" class="rounded-lg w-full p-1">
+                <select name="estado" class="rounded-lg border-2 text-center w-full p-1">
                     <option value="pendiente">Pendiente</option>
                     <option value="en proceso">En proceso</option>
                     <option value="completado">Completado</option>
                 </select>
 
                 <button type="submit" name="crear_proyecto" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded-xl">Crear Nuevo Proyecto</button>
+                <!-- Boton de volver -->
+            <div class="flex justify-center items-center ">
+                <button type="button" onclick="window.location.href='adminProyectos.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
+            </div>    
             </form>
+        
             <span class="block h-0.5 w-full bg-black opacity-40"></span>
             
-            <!-- Boton de volver -->
+            <!-- Botones de volver a panel administrados-->
             <div class="flex justify-center items-center gap-10">
-                <form action="../logout.php" method="POST" class="p-5 flex flex-col md:flex-row gap-10">
-                    <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+                <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col">
+                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
                 </form>
             </div>
-            <!-- Botones de volver a panel administrados o panel usuario -->
-            <div class="flex justify-center items-center gap-10">
-                <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
-                <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Usuarios</button>
-                </form>
             </div>
         </div>
-    </div>
+   
 
     <?php
     $con->close();
