@@ -147,8 +147,7 @@ if ($usuarios->num_rows === 0) {
             <!-- Botones de volver a panel administrador o volver -->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
-                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Administrador</button>
+                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
                 </form>
             </div>
 <?php

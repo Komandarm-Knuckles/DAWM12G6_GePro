@@ -75,8 +75,8 @@ $result_proyectos = obtener_todos_proyectos($con);
             <!-- Botones de volver a panel administrados o panel usuario -->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Administrador</button>
-                <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver al Panel de Usuarios</button>
+                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Administrador</button>
+                <button type="button" onclick="window.location.href='adminUsuarios.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Panel de Usuarios</button>
                 </form>
             </div>
         </div>
