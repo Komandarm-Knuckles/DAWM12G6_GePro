@@ -36,36 +36,6 @@ $stmt_reuniones->bind_param("s", $usuario);
 $stmt_reuniones->execute();
 $reuniones = $stmt_reuniones->get_result();
 
-// Crear reunión
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_reunion'])) {
-    $titulo = $_POST['titulo'];
-    $descripcion = $_POST['descripcion'];
-    $fecha = $_POST['fecha'];
-    $hora = $_POST['hora'];
-    $id_proyecto = $_POST['id_proyecto'];
-
-    $stmt = $con->prepare("INSERT INTO reuniones (titulo, descripcion, fecha, hora, id_proyecto) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssi", $titulo, $descripcion, $fecha, $hora, $id_proyecto);
-    $stmt->execute();
-    header("Location: jefes-equipo.php");
-}
-
-// Crear tarea
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $id_proyecto = $_POST['id_proyecto'];
-    $usuario_asignado = $_POST['usuario_asignado'];
-    $fecha_asignacion = date("Y-m-d");
-    $fecha_vencimiento = $_POST['fecha_vencimiento'];
-    $estado = "pendiente";
-
-    $stmt = $con->prepare("INSERT INTO tareas (nombre, descripcion, id_proyecto, usuario, fecha_asignacion, fecha_vencimiento, estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssissss", $nombre, $descripcion, $id_proyecto, $usuario_asignado, $fecha_asignacion, $fecha_vencimiento, $estado);
-    $stmt->execute();
-    header("Location: jefes-equipo.php");
-}
-
 // ELIMINAR TAREAS
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_tarea'])) {
     $id_tarea = intval($_POST['eliminar_tarea']);
@@ -333,29 +303,10 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
                 </li>
             <?php } ?>
         </ul>
-
-        <h3 class="font-bold text-orange-500 text-3xl underline">Crear Reunión</h3>
-        <form method="post" class="flex flex-col w-[40em]  gap-2">
-            <input type="text" name="titulo" placeholder="Título" required class="p-2 border rounded" />
-            <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
-            <input type="date" name="fecha" required class="p-2 border rounded" />
-            <input type="time" name="hora" required class="p-2 border rounded" />
-            <input type="number" name="id_proyecto" placeholder="ID Proyecto" required class="p-2 border rounded" />
-            <button type="submit" name="crear_reunion"
-                class="p-2 bg-orange-500 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Reunión</button>
-        </form>
-
-        <h3 class="font-bold text-orange-500 text-3xl underline">Crear Tarea</h3>
-        <form method="post" class="flex flex-col w-[40em]  gap-2">
-            <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded" />
-            <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded"></textarea>
-            <input type="number" name="id_proyecto" placeholder="ID Proyecto" required class="p-2 border rounded" />
-            <input type="text" name="usuario_asignado" placeholder="Usuario asignado" required
-                class="p-2 border rounded" />
-            <input type="date" name="fecha_vencimiento" required class="p-2 border rounded" />
-            <button type="submit" name="crear_tarea"
-                class="p-2 bg-orange-500 hover:bg-orange-700 cursor-pointer text-white rounded">Crear Tarea</button>
-        </form>
+        <div class="flex gap-4 my-4">
+            <a href="jefeCrearReunion.php" class="p-2 bg-orange-500 rounded-xl shadow-lg cursor-pointer text-white hover:bg-orange-700">Crear Reunión</a>
+            <a href="jefeCrearTarea.php" class="p-2 bg-orange-500 rounded-xl shadow-lg cursor-pointer text-white hover:bg-orange-700">Crear Tarea</a>
+        </div>
         <form action="../logout.php" method="POST">
             <button type="submit"
                 class="p-2 bg-orange-500 rounded-xl shadow-lg cursor-pointer p-3 text-white hover:bg-orange-700">Cerrar
