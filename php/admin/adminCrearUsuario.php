@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
 </head>
 
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col max-w-[90%] w-[40em] bg-white p-8 rounded shadow-xl gap-6">
+    <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
         <h1 class="text-4xl font-bold text-center underline text-orange-400">Crear Nuevo Usuario</h1>
         <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>

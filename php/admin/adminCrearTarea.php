@@ -61,7 +61,7 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 
 <body
     class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-<div class="flex flex-col max-w-[90%] w-[40em] bg-white p-8 rounded shadow-xl gap-6">
+<div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
 
             <h1 class="text-4xl font-bold text-center underline text-orange-400">Crear Nueva Tarea</h1>
             <div class="flex justify-center items-center">
