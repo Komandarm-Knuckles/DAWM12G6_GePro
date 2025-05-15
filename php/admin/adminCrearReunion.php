@@ -54,18 +54,23 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
     <form method="POST" class="flex flex-col w-full justify-center items-center gap-4">
+        <div class="flex flex-col w-full">
         Título:
         <input type="text" name="titulo" required class=" p-2 border rounded-xl w-full">
-
+        </div>
+        <div class="flex flex-col w-full">
         Descripción:
         <textarea name="descripcion" required class=" p-2 border rounded-xl w-full" ></textarea>
-
+        </div>
+        <div class="flex flex-col w-full">
         Fecha:
         <input type="date" name="fecha" required class=" p-2 border rounded-xl text-center w-full">
-
+        </div>
+        <div class="flex flex-col w-full">
         Hora:
         <input type="time" name="hora" required class=" p-2 border rounded-xl text-center w-full">
-
+        </div>
+        <div class="flex flex-col w-full">
         Proyecto:
         <select name="id_proyecto" required class=" p-2 border rounded-xl text-center w-full">
             <option value="">Selecciona un proyecto</option>
@@ -75,7 +80,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                 </option>
             <?php endwhile; ?>
         </select>
-        
+        </div>
         <div class="flex justify-center items-center">
                 <input type="submit" value="Crear Reunion" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
         </div>

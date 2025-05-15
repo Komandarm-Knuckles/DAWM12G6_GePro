@@ -58,21 +58,19 @@ echo "<img class='md:w-13 w-[10em]' src='../../img/LogoEmpresa.png' alt='logo Em
 echo "</section>";
 
 // Div derecho 
-echo "<div class='flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full'>";
-
-echo "<h1 class='text-center text-4xl font-bold underline'>Bienvenido a la Página de Administrador</h1>";
+echo "<div class='flex flex-col min-h-screen gap-6 justify-center items-center bg-gray-300 w-full'>";
 
 // ---------------------------GESTIÓN DE USUARIOS-----------------------------
 
-echo "<h2 class='font-bold text-2xl underline'>GESTIÓN DE USUARIOS</h2>";
+echo "<h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE USUARIOS</h1>";
+echo "<h3 class='text-xl font-bold text-orange-400'>Usuarios registrados:</h3>";
 $usuarios = obtener_todos_los_usuarios($con);
 
 // MOSTRAR TABLA USUARIOS
-echo "<h4 class='text-xl font-bold underline'>Usuarios registrados:</h4>";
 if ($usuarios->num_rows === 0) {
     echo "<p>No se encuentran usuarios</p>";
 } else {
-    echo "<div class='max-h-[300px] overflow-y-auto shadow-2xl w-full'>"; // Aseguramos que el div tenga ancho total
+    echo "<div class='max-h-[800px] overflow-y-auto shadow-2xl w-full'>"; // Aseguramos que el div tenga ancho total
     echo "<table class='styled-table w-full'>"; // Aseguramos que la tabla tenga ancho total
     echo "<thead>
             <tr class='sticky bg-orange-400 text-white top-0 bg-gray-300'>

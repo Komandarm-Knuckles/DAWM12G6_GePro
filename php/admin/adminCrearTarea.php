@@ -68,10 +68,15 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
             <form method="POST" action="" class="flex flex-col w-full justify-center items-center gap-6">
+                <div class="flex flex-col w-full">
                 <laber for="bombre">Nombre de la tarea:</laber>
                 <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded-xl w-full" />
+                </div>
+                <div class="flex flex-col w-full">
                 <laber for="descripcion">Descripción de la tarea: </laber>
                 <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded-xl w-full"></textarea>
+                </div>
+                <div class="flex flex-col w-full">
                 <laber for="id_proyecto">Asignación de Proyecto: </laber>
                 <select name="id_proyecto" class="p-2 rounded-xl border-2 text-center w-full">
                     <?php while ($proyecto = $result_proyectos->fetch_assoc()) { ?>
@@ -79,6 +84,8 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                             <?php echo htmlspecialchars($proyecto['nombre']); ?></option>
                     <?php } ?>
                 </select>
+                </div>
+                <div class="flex flex-col w-full">
                 <laber for="usuario_asignado">Asignación de Usuario: </laber>
                 <select name="usuario_asignado" class="p-2 rounded-xl border-2 text-center w-full">
                     <?php while ($usuario = $result_usuarios->fetch_assoc()) { ?>
@@ -86,8 +93,11 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                             <?php echo htmlspecialchars($usuario['usuario']); ?></option>
                     <?php } ?>
                 </select>
+                </div>
+                <div class="flex flex-col w-full">
                 <laber for="fecha_vencimiento">Fecha de vencimiento de la tarea: </laber>
                 <input type="date" name="fecha_vencimiento" class="p-2 rounded-xl border-2 text-center w-full" class="p-2 border rounded" required />
+                </div>
                 <button type="submit" name="crear_tarea"
                     class="p-2 bg-orange-400 hover:bg-orange-700 cursor-pointer text-white w-[15em] rounded-xl">Crear Nueva Tarea
                 </button>

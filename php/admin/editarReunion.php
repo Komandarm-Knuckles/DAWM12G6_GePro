@@ -60,20 +60,27 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
     <div class="flex flex-col gap-10 p-5 w-full md:w-[50em] max-w-[90%] mt-10 rounded-xl bg-gray-300 justify-center items-center">
 
-        <h1 class="font-bold text-orange-600 text-4xl underline">EDITAR REUNIÓN</h1>
-        <form method="POST" class="flex flex-col w-full p-4 gap-6 rounded-lg shadow-xl text-center items-center">
+        <h1 class="font-bold text-orange-400 text-4xl underline">EDITAR REUNIÓN</h1>
+        <form method="POST" class="flex flex-col w-full p-4 gap-6 rounded-lg justify-center items-center">
+            <div class="flex flex-col w-full">
             Nombre de la reunión:
-            <input type="text" name="titulo" class="text-center border-2 rounded-lg p-2 w-full md:w-[20em]" value="<?php echo htmlspecialchars($reunion['titulo']); ?>" required>
+            <input type="text" name="titulo" class="text-center border-2 rounded-lg p-2 w-full" value="<?php echo htmlspecialchars($reunion['titulo']); ?>" required>
+            </div>
+            <div class="flex flex-col w-full">
             Descripción:
-            <textarea name="descripcion" class="text-center border-2 rounded-lg p-2 w-full md:w-[20em]" required><?php echo htmlspecialchars($reunion['descripcion']); ?></textarea>
-
+            <textarea name="descripcion" class="text-center border-2 rounded-lg p-2 w-full" required><?php echo htmlspecialchars($reunion['descripcion']); ?></textarea>
+            </div>
+            <div class="flex flex-col w-full">
             Fecha:
-            <input type="date" name="fecha" class="text-center border-2 rounded-lg p-2 w-full md:w-[20em]" value="<?php echo htmlspecialchars($reunion['fecha']); ?>" required>
-
+            <input type="date" name="fecha" class="text-center border-2 rounded-lg p-2 w-full" value="<?php echo htmlspecialchars($reunion['fecha']); ?>" required>
+            </div>
+            <div class="flex flex-col w-full">
             Hora:
-            <input type="time" name="hora" class="text-center border-2 rounded-lg p-2 w-full md:w-[20em]" value="<?php echo htmlspecialchars($reunion['hora']); ?>" required>
+            <input type="time" name="hora" class="text-center border-2 rounded-lg p-2 w-full" value="<?php echo htmlspecialchars($reunion['hora']); ?>" required>
+            </div>
+            <div class="flex flex-col w-full">
             Estado:
-            <select name="id_proyecto" class="text-center border-2 rounded-lg p-2 w-full md:w-[20em]" required>
+            <select name="id_proyecto" class="text-center border-2 rounded-lg p-2 w-full" required>
                 <option value="">Selecciona un proyecto</option>
                 <?php while ($proyecto = $proyectos->fetch_assoc()): ?>
                     <option value="<?php echo $proyecto['id_proyecto']; ?>" <?php if ($proyecto['id_proyecto'] == $reunion['id_proyecto']) echo 'selected'; ?>>
@@ -81,6 +88,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
                     </option>
                 <?php endwhile; ?>
             </select>
+            </div>
             <div class="flex w-full justify-center flex-col justify-center items-center gap-10">
                 <button type="submit" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Guardar cambios</button>
                 <span class="block h-0.5 w-full bg-black opacity-40"></span>

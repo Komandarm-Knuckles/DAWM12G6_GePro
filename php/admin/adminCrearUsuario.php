@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
             echo "<p style='color: red;'>Error: La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.</p>";
         } else {
             if (crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, $telefono, $tipo)) {
-                header("Location: administradores.php");
+                header("Location: adminUsuarios.php");
                 exit();
             } else {
                 echo "<p style='color: red;'>Error al crear usuario.</p>";
@@ -69,48 +69,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
         <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
-        <div class="flex flex-col justify-center text-center items-center">
-            <form id="formUsuarios" method="POST" action="" class="flex flex-col w-full gap-2">
-                Usuario:
-                <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required class=" p-2 border rounded w-full" />
-
-                Nombre:
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre" minlength="3" required class=" p-2 border rounded w-full" />
-
-                Apellido:
-                <input type="text" name="apellido" id="apellido" placeholder="Apellido" minlength="3" required class=" p-2 border rounded w-full" />
-
-                DNI:
-                <input type="text" name="dni" id="dni" placeholder="DNI" required class=" p-2 border rounded w-full" />
-
-                Email:
-                <input type="email" name="email" id="email" placeholder="Correo electrónico" required class=" p-2 border rounded w-full" />
-
-                Teléfono:
-                <input type="number" name="telefono" id="telefono" placeholder="Teléfono" minlength="9" required class=" p-2 border rounded w-full" />
-
-                Tipo:
-                <select name="tipo" required class=" p-2 border rounded text-center w-full">
-                    <option value="">Selecciona...</option>
-                    <option value="0">Administrador</option>
-                    <option value="1">Jefe de Equipo</option>
-                    <option value="2">Empleado</option>
-                </select>
-
-                Contraseña:
-                <input type="text" name="pass" id="pass" placeholder="Contraseña" required class=" p-2 border rounded w-full" />
-
-
+        <div class="flex flex-col ">
+            <form id="formUsuarios" method="POST" action="" class="flex flex-col w-full gap-6">
+                <div>
+                    Usuario:
+                    <input type="text" name="usuario" id="usuario" placeholder="Nombre de usuario" minlength="4" required class=" p-2 border rounded-xl w-full" />
+                </div>
+                <div>
+                    Nombre:
+                    <input type="text" name="nombre" id="nombre" placeholder="Nombre" minlength="3" required class=" p-2 border rounded-xl w-full" />
+                </div>
+                <div>
+                    Apellido:
+                    <input type="text" name="apellido" id="apellido" placeholder="Apellido" minlength="3" required class=" p-2 border rounded-xl w-full" />
+                </div>
+                <div>
+                    DNI:
+                    <input type="text" name="dni" id="dni" placeholder="DNI" required class=" p-2 border rounded-xl w-full" />
+                </div>
+                <div>
+                    Email:
+                    <input type="email" name="email" id="email" placeholder="Correo electrónico" required class=" p-2 border rounded-xl w-full" />
+                </div>
+                <div>
+                    Teléfono:
+                    <input type="number" name="telefono" id="telefono" placeholder="Teléfono" minlength="9" required class=" p-2 border rounded-xl w-full" />
+                </div>
+                <div>
+                    Tipo:
+                    <select name="tipo" required class=" p-2 border rounded-xl text-center w-full">
+                        <option value="">Selecciona...</option>
+                        <option value="0">Administrador</option>
+                        <option value="1">Jefe de Equipo</option>
+                        <option value="2">Empleado</option>
+                    </select>
+                </div>
+                <div>
+                    Contraseña:
+                    <input type="text" name="pass" id="pass" placeholder="Contraseña" required class=" p-2 border rounded-xl w-full" />
+                </div>
         </div>
-            <div class="flex justify-center items-center gap-10 ">
+        <div class="flex justify-center items-center gap-10 ">
             <input type="submit" value="Crear Usuario" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
-        </div>      
-            <span class="block h-0.5 w-full bg-black opacity-40"></span>
+            <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
+        </div>
+        <span class="block h-0.5 w-full bg-black opacity-40"></span>
 
-        
+
         <div class="flex justify-center items-center gap-10">
             <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-            <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
+                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
+
             </form>
         </div>
         </form>

@@ -54,21 +54,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea']))
 </head>
 
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
+    <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl justify-center items-center gap-6">
         <h1 class="text-4xl font-bold text-center underline text-orange-400">Crear Nueva Tarea</h1>
         <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
 
-        <form method="POST" action="" class="flex flex-col w-full justify-center items-center gap-6">
+        <form method="POST" action="" class="flex flex-col w-full gap-6">
+            <div class="flex flex-col w-full">
             <label for="nombre">Nombre de la tarea:</label>
             <input type="text" name="nombre" placeholder="Nombre" required class="p-2 border rounded-xl w-full" />
-
+            </div>
+            <div class="flex flex-col w-full">
             <label for="descripcion">Descripción:</label>
             <textarea name="descripcion" placeholder="Descripción" required class="p-2 border rounded-xl w-full"></textarea>
-
+            </div>
+            <div class="flex flex-col w-full">
             <label for="id_proyecto">Proyecto:</label>
-            <select name="id_proyecto" required class="p-2 border rounded-xl w-full">
+            <select name="id_proyecto" required class="p-2 border rounded-xl text-center w-full">
                 <option value="" disabled selected>Selecciona un proyecto</option>
                 <?php while ($proyecto = $result_proyectos->fetch_assoc()) { ?>
                     <option value="<?php echo $proyecto['id_proyecto']; ?>">
@@ -76,9 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea']))
                     </option>
                 <?php } ?>
             </select>
-
+            </div>
+            
+            <div class="flex flex-col w-full">
             <label for="usuario_asignado">Usuario asignado:</label>
-            <select name="usuario_asignado" required class="p-2 border rounded-xl w-full">
+            <select name="usuario_asignado" required class="p-2 border rounded-xl text-center w-full">
                 <option value="" disabled selected>Selecciona un usuario</option>
                 <?php while ($usuario = $result_usuarios->fetch_assoc()) { ?>
                     <option value="<?php echo $usuario['usuario']; ?>">
@@ -86,13 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea']))
                     </option>
                 <?php } ?>
             </select>
-
+            </div>
+            <div class="flex flex-col w-full">
             <label for="fecha_vencimiento">Fecha de vencimiento:</label>
-            <input type="date" name="fecha_vencimiento" required class="p-2 border rounded-xl w-full" />
-
-            <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Tarea</button>
-            <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+            <input type="date" name="fecha_vencimiento" required class="p-2 border rounded-xl text-center w-full" />
+            </div>        
         </form>
+        <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Tarea</button>
+        <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
     </div>
 </body>
 </html>

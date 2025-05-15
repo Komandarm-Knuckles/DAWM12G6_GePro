@@ -62,11 +62,9 @@ $result_reuniones = $con->query("SELECT * FROM reuniones");
 
             <!-- Contenido principal -->
             <div class="flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
-                <h1 class="text-center text-4xl font-bold underline">Bienvenido a la Página de Administrador</h1>
-
-                <h2 class="font-bold text-2xl underline">GESTIÓN DE REUNIONES</h2>
-                <h4 class="text-xl font-bold underline">Reuniones registradas:</h4>
-
+                <h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE REUNIONES</h1>
+                <h3 class='text-xl font-bold text-orange-400'>Reuniones registradas:</h3>
+        
                 <?php if ($result_reuniones->num_rows === 0): ?>
                     <p>No hay reuniones registradas.</p>
                 <?php else: ?>

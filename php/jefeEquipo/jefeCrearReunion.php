@@ -45,26 +45,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
+    <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6 justify-center items-center">
 
         <h1 class="text-4xl font-bold text-center underline text-orange-400">Crear Nueva Reunión</h1>
         <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
 
-        <form method="POST" class="flex flex-col w-full justify-center items-center gap-4">
+        <form method="POST" class="flex flex-col w-full gap-6">
+            <div class="flex flex-col w-full">
             <label for="titulo">Título:</label>
-            <input type="text" name="titulo" required class="p-2 border rounded-xl w-full">
-
+            <input type="text" name="titulo" required class="p-2 border rounded-xl w-full" placeholder="Escribe un título...">
+            </div>
+            <div class="flex flex-col w-full">
             <label for="descripcion">Descripción:</label>
-            <textarea name="descripcion" required class="p-2 border rounded-xl w-full"></textarea>
-
+            <textarea name="descripcion" required class="p-2 border rounded-xl w-full" placeholder="Escribe una descripción..."></textarea>
+            </div>
+            <div class="flex flex-col w-full">
             <label for="fecha">Fecha:</label>
             <input type="date" name="fecha" required class="p-2 border rounded-xl text-center w-full">
-
+            </div>
+            <div class="flex flex-col w-full">
             <label for="hora">Hora:</label>
             <input type="time" name="hora" required class="p-2 border rounded-xl text-center w-full">
-
+            </div>
+            <div class="flex flex-col w-full">
             <label for="id_proyecto">Proyecto:</label>
             <select name="id_proyecto" required class="p-2 border rounded-xl text-center w-full">
                 <option value="">Selecciona un proyecto</option>
@@ -74,10 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     </option>
                 <?php endwhile; ?>
             </select>
-
-            <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Reunión</button>
-            <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+            </div>    
         </form>
+        <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Reunión</button>
+        <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
 
     </div>
 </body>

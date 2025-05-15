@@ -84,11 +84,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
 
             <!-- Contenido principal -->
             <div class="flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
-                <h1 class="text-center text-4xl font-bold underline">Bienvenido a la Página de Administrador</h1>
 
-                <h2 class="font-bold text-2xl underline">GESTIÓN DE TAREAS</h2>
-                <h4 class="text-xl font-bold underline">Tareas registradas:</h4>
 
+                <h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE TAREAS</h1>
+                <h3 class='text-xl font-bold text-orange-400'>Tareas registradas:</h3>
+               
                 <?php if ($result_tareas->num_rows === 0): ?>
                     <p>No hay tareas registradas.</p>
                 <?php else: ?>

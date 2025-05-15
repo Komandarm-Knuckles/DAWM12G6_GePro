@@ -175,7 +175,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
 <body class="w-full min-h-screen flex flex-col justify-center gap-4 items-center bg-cover bg-center bg-fixed z-10 py-10 bg-[url('../../img/pixels14.jpg')]">
         <h2 class="font-bold text-orange-400 text-4xl underline">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h2>
 
-    <section class="flex flex-col md:flex-row justify-center items-center bg-gray-300 p-10 gap-3">
+    <section class="flex flex-col md:flex-row justify-center items-center rounded-xl bg-gray-300 p-10 gap-3">
             
                 <div class=" flex flex-col items-center justify-center relative p-2 ">
                 <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>" 
@@ -193,13 +193,12 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
     </button>
                 </div>
                 <div class="flex flex-col text-xl justify-center gap-5">
-                <p class="text-orange-400 font-bold">Nombre: <span class="text-gray-600"> <?php echo htmlspecialchars($usuario); ?></span></p>
                 <p class="text-orange-400 font-bold">Proyectos Asignados:<span class="text-gray-600"> <?php echo htmlspecialchars($proyectos->num_rows); ?></span></p>
             </div>
             
     </section>
 
-        <div class="flex flex-col p-10 gap-10 bg-white bg-opacity-70 justify-center items-center shadow-md rounded-lg">
+        <div class="flex flex-col p-10 w-full max-w-[90%] gap-10 bg-white bg-opacity-70 justify-center items-center shadow-md rounded-lg">
         <h2 class="font-bold text-orange-500 text-4xl underline">Proyectos</h2>
         <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
         <?php if ($proyectos->num_rows == 0) { ?>
@@ -217,8 +216,6 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
                         "<p class='font-bold text-orange-400'>Fecha de Inicio: <span class='text-black'>".htmlspecialchars($proyecto['fecha_inicio'])."</p>".
                         "<p class='font-bold text-orange-400'>Fecha de Fin: <span class='text-black'>".htmlspecialchars($proyecto['fecha_fin'])."</p>".
                         "<p class='font-bold text-orange-400'>Estado: <span class='text-black'>".htmlspecialchars($proyecto['estado'])."</p>"
-
-
                     ?>
                 <?php echo "</div></div>"; ?>
                 </li>
@@ -233,11 +230,15 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
             <?php while ($reunion = $reuniones->fetch_assoc()) { ?>
                 <li class="flex gap-5">
                     <?php
-                    echo " <p class='font-bold text-orange-400'>-Nombre de la Reunión:".htmlspecialchars($reunion['titulo'])."</p>".
-                        " <p class='font-bold text-orange-400'>Fecha:". $reunion['fecha']."</p>".
-                        "<p class='font-bold text-orange-400'>Hora:". $reunion['hora']."</p>". 
-                        "<p class='font-bold text-orange-400'>Descripción:".htmlspecialchars($reunion['descripcion'])."</p>"
+                    echo
+                    "<div class='flex w-full bg-gray-300 gap-2 rounded-lg shadow-lg p-5'>". 
+                    "<div class='flex flex-col w-full gap-2 p-5'>".  
+                        " <p class='font-bold text-orange-400'>-Nombre de la Reunión: <span class='text-black'> " .htmlspecialchars($reunion['titulo'])."</span></p>".
+                        " <p class='font-bold text-orange-400'>Fecha: <span class='text-black'>". $reunion['fecha']."</span></p>".
+                        "<p class='font-bold text-orange-400'>Hora: <span class='text-black'>". $reunion['hora']."</span></p>". 
+                        "<p class='font-bold text-orange-400'>Descripción: <span class='text-black'>".htmlspecialchars($reunion['descripcion'])."</span></p>"
                          ?>
+
                    
                     <div class="flex gap-1">
                         <form method="GET" action="editarReunionesJefeEquipo.php">
@@ -258,6 +259,8 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
                             </button>
                         </form>
                     </div>
+                <?php echo "</div></div>"; ?>
+
                 </li>
             <?php } ?>
         </ul>
@@ -304,8 +307,8 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
             <?php } ?>
         </ul>
         <div class="flex gap-4 my-4">
-            <a href="jefeCrearReunion.php" class="p-2 bg-orange-500 rounded-xl shadow-lg cursor-pointer text-white hover:bg-orange-700">Crear Reunión</a>
-            <a href="jefeCrearTarea.php" class="p-2 bg-orange-500 rounded-xl shadow-lg cursor-pointer text-white hover:bg-orange-700">Crear Tarea</a>
+            <a href="jefeCrearReunion.php" class="p-3 bg-orange-500 rounded-xl shadow-lg cursor-pointer text-center text-white w-[10em] hover:bg-orange-700">Crear Reunión</a>
+            <a href="jefeCrearTarea.php" class="p-3 bg-orange-500 rounded-xl shadow-lg cursor-pointer text-center text-white w-[10em] hover:bg-orange-700">Crear Tarea</a>
         </div>
         <form action="../logout.php" method="POST">
             <button type="submit"

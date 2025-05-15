@@ -71,38 +71,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
-
-<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../img/pixels14.jpg')]">
-    <div class="flex flex-col justify-center items-center bg-gray-300 p-10 gap-5">
-        <h1 class="font-bold text-4xl text-orange-500 underline">Editar Usuario</h1>
-        <span class="block h-0.5 w-100 bg-black opacity-40"></span>
-        <form method="POST" action="" id="formEditarUsuarios" class="flex flex-col gap-3 text-center w-[30em]">
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
+        <div class="flex flex-col gap-10 p-5 md:max-w-[65%] max-w-[95%] rounded-xl bg-gray-300 justify-center items-center">
+        <h1 class="font-bold text-4xl text-orange-500 underline">EDITAR USUARIO</h1>
+        <form method="POST" action="" id="formEditarUsuarios" class="flex flex-col gap-6  items-center w-[40em]">
             <input type="hidden" name="editar_usuario" value="<?php echo $usuario; ?>">
-            <p class="text-lg font-bold text-orange-500">CONTRASEÑA</p>
-            <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-1 rounded-md text-center p-2 focus:outline-none">
-            <p class="text-lg font-bold text-orange-500">NOMBRE</p>
-            <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
-            <p class="text-lg font-bold text-orange-500">APELLIDO</p>
-            <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
-            <p class="text-lg font-bold text-orange-500">DNI</p>
-            <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
-            <p class="text-lg font-bold text-orange-500">EMAIL</p>
-            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
-            <p class="text-lg font-bold text-orange-500">TELEFONO</p>
-            <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none">
-            <p class="text-lg font-bold text-orange-500">TIPO</p>
-            <select name="tipo" class="border-1 rounded-md text-center p-2 focus:outline-none" required>
+            <div class="w-full">
+            <p class="text-lg">Contraseña: - (Opcional):</p>
+            <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
+            </div>
+            <div class="w-full">
+            <p class="text-lg">Nombre:</p>
+            <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
+            </div>
+            <div class="w-full">
+            <p class="text-lg">Apellido:</p>
+            <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
+            </div>
+            <div class="w-full">
+            <p class="text-lg">Dni:</p>
+            <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
+            </div>
+            <div class="w-full">
+            <p class="text-lg">Email:</p>
+            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
+            </div>
+            <div class="w-full">
+            <p class="text-lg">Teléfono:</p>
+            <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
+            </div>
+            <div class="w-full">
+            <p class="text-lg">Tipo:</p>
+            <select name="tipo" class="border-1 rounded-md text-center p-2 focus:outline-none w-full" required>
                 <option value="0" <?php echo ($datos_usuario['tipo'] == 0) ? 'selected' : ''; ?>>Administrador</option>
                 <option value="1" <?php echo ($datos_usuario['tipo'] == 1) ? 'selected' : ''; ?>>Jefe de Equipo</option>
                 <option value="2" <?php echo ($datos_usuario['tipo'] == 2) ? 'selected' : ''; ?>>Empleado</option>
-            </select><br>
+            </select>
+            </div>
+            
             <div class="flex gap-5 justify-center items-center">
                 <button type="submit" name="update_user" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Actualizar</button>
                 <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Volver</button>
             </div>
         </form>
     </div>
-    </div>
+    
 </body>
 
 </html>

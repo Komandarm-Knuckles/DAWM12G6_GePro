@@ -155,9 +155,9 @@
 
 
       <section class="flex flex-col p-10 gap-10">
-          <h1 class="text-3xl text-center text-orange-400 underline font-bold">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h1>
+          <h1 class="text-4xl text-center text-orange-400 underline font-bold">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h1>
           <div class="flex flex-col w-full p-6">
-              <div class="flex flex-col md:flex-row w-full bg-white items-center justify-center shadow-md rounded-lg gap-10 p-6">
+              <div class="flex flex-col md:flex-row w-full bg-gray-300 items-center justify-center shadow-md rounded-lg gap-10 p-6">
                   <div class=" flex flex-col items-center justify-center relative ">
                       <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>"
                           alt="Imagen Usuario"
@@ -167,13 +167,11 @@
                           <input type="file" name="profileImage" id="imageInput" accept="image/*">
                           <input type="hidden" name="upload_image" value="1">
                       </form>
-                      <button class="absolute right-1 top-1 bg-white" id="uploadButton">
+                      <button class="absolute right-1 top-1" id="uploadButton">
                           <img src="../../img/pencil-line.svg" alt="Editar imagen" class="bg-orange-400 rounded-lg p-1" />
                       </button>
                   </div>
                   <div class="flex flex-col text-xl justify-center gap-5">
-                      <p class="text-orange-400 font-bold">Nombre: <span class="text-gray-600"> <?php echo htmlspecialchars($usuario); ?></span></p>
-                      <p class="text-orange-400 font-bold">Tipo de Usuario:<span class="text-gray-600"> <?php echo htmlspecialchars($tipo_usuario); ?></span></p>
                       <p class="text-orange-400 font-bold">Proyectos Asignados:<span class="text-gray-600"> <?php echo htmlspecialchars($proyectos->num_rows); ?></span></p>
                   </div>
               </div>
@@ -182,7 +180,7 @@
 
 
 
-      <div class="flex flex-col p-10 bg-gray-300 bg-opacity-90 gap-10 rounded">
+      <div class="flex flex-col p-10 bg-gray-300 bg-opacity-90 gap-10 rounded w-full max-w-[90%]">
           <h2 class="font-bold text-center text-orange-500 text-3xl underline rounded p-4">Información de Proyectos</h2>
           <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
               <?php if ($proyectos->num_rows == 0) { ?>

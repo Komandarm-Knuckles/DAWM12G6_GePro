@@ -31,6 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_proyecto'])) {
     }
 }
 
+ // Validar fecha fin (controlando el error de poner fecha actual)
+    if (strtotime($fecha_fin) <= strtotime($fecha_inicio)) {
+        echo "<script>alert('La fecha de fin no puede ser la de hoy.');
+             window.location.href = window.location.href; </script>";
+        exit();
+    }
+
 $result_proyectos = obtener_todos_proyectos($con);
 ?>
 
@@ -45,24 +52,33 @@ $result_proyectos = obtener_todos_proyectos($con);
             <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
             </div>
-            <div class="flex flex-col justify-center text-center items-center">
+            <div class="flex flex-col justify-center items-center">
             <?php if (isset($error)) { echo "<p class='text-red-600'>$error</p>"; } ?>
-            <form method="POST" action="" class="flex flex-col w-full md:max-w-[85%]  justify-center items-center  gap-6">
+            <form method="POST" action="" class="flex flex-col w-full md:max-w-[85%] justify-center items-center  gap-6">
+                <div class="flex flex-col w-full">
                 Nombre:
-                <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded placeholder-center" />
+                <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded" />
+                </div>
+                <div class="flex flex-col w-full">
                 Descripción:
                 <textarea name="descripcion" placeholder="Descripción" required class="p-2 border w-full rounded"></textarea>
+                </div>
+                <div class="flex flex-col w-full">
                 Fecha Inicio:
                 <input type="date" name="fecha_inicio" required class="p-2 border text-center w-full rounded" />
+                </div>
+                <div class="flex flex-col w-full">
                 Fecha Fin:
                 <input type="date" name="fecha_fin" class="p-2 border text-center w-full rounded" />
+                </div>
+                <div class="flex flex-col w-full">                
                 Estado:
                 <select name="estado" class="rounded-lg border-2 text-center w-full p-1">
                     <option value="pendiente">Pendiente</option>
                     <option value="en proceso">En proceso</option>
                     <option value="completado">Completado</option>
                 </select>
-
+                </div>
                 <button type="submit" name="crear_proyecto" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded-xl">Crear Nuevo Proyecto</button>
                 <!-- Boton de volver -->
             <div class="flex justify-center items-center ">

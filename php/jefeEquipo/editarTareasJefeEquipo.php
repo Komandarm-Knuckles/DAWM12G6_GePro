@@ -51,24 +51,27 @@ if (isset($_POST['guardar_cambios'])) {
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body
-    class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col gap-10 p-5 w-full md:max-w-[65%] max-w-[95%] rounded-xl bg-gray-300 justify-center items-center">
+<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
+        <div class="flex flex-col gap-10 p-5 w-full md:w-[50em] max-w-[90%] mt-10 rounded-xl bg-gray-300 justify-center items-center">
+
         <h2 class="text-orange-500 text-4xl underline">EDITAR TAREA</h2>
         <form method="POST" action=""
-            class="flex flex-col p-10 gap-6 rounded-lg shadow-xl text-center items-center">
+           class="flex flex-col w-full p-4 gap-6 rounded-lg items-center">
+            <div class="flex flex-col w-full">
             <label for="nombre" class="text-xl">Nombre:</label>
-            <input type="text" name="nombre" class="text-center w-[20em] rounded-lg p-1"
+            <input type="text" name="nombre" class="text-center  rounded-lg p-1"
                 value="<?php echo htmlspecialchars($tarea['nombre']); ?>" required>
+            </div>
 
+            <div class="flex flex-col w-full">
             <label for="fecha" class="text-xl">Fecha:</label>
-            <input type="date" name="fecha" class="text-center rounded-lg w-[20em] p-1"
+            <input type="date" name="fecha" class="text-center rounded-lg  p-1"
                 value="<?php echo htmlspecialchars($tarea['fecha_vencimiento']); ?>" required>
-
+            </div>
+            <div class="flex flex-col w-full">
             <label for="usuario" class="text-xl">Usuario Asignado:</label>
-            <select name="usuario" class="text-center w-[20em] rounded-lg p-1" required>
+            <select name="usuario" class="text-center  rounded-lg p-1" required>
                 <?php
-                // Get list of users from the database
                 $users_query = $con->query("SELECT usuario FROM usuarios");
                 while ($user = $users_query->fetch_assoc()) {
                     $selected = ($user['usuario'] == $tarea['usuario_asignado']) ? 'selected' : '';
@@ -76,13 +79,16 @@ if (isset($_POST['guardar_cambios'])) {
                 }
                 ?>
             </select>
+            </div>
 
+            <div class="flex flex-col w-full">
             <label for="descripcion" class="text-xl">Descripción:</label>
-            <textarea name="descripcion" class="text-black text-center rounded-lg p-1 w-[20em]" rows="5" cols="45"
+            <textarea name="descripcion" class="text-black text-center rounded-lg p-1 " rows="5" cols="45" 
                 required><?php echo htmlspecialchars($tarea['descripcion']); ?></textarea>
-
+            </div>
+            <div class="flex flex-col w-full">
             <label for="estado" class="text-xl">Estado:</label>
-            <select name="estado" class="w-[20em] text-center rounded-lg p-1">
+            <select name="estado" class=" text-center rounded-lg p-1">
                 <option value="pendiente" <?php if ($tarea['estado'] == "pendiente")
                                                 echo "selected"; ?>>Pendiente
                 </option>
@@ -93,10 +99,10 @@ if (isset($_POST['guardar_cambios'])) {
                                                 echo "selected"; ?>>Completada
                 </option>
             </select>
-
+            </div>
             <button type="submit" class="rounded-lg bg-orange-500 hover:bg-orange-700 p-3 w-[10em] text-white" name="guardar_cambios">Guardar
                 Cambios</button>
-                <span class="block h-0.5 w-full bg-black opacity-40"></span>
+            <span class="block h-0.5 w-full bg-black opacity-40"></span>
 
             <form action="../logout.php" method="POST" class="p-5 flex gap-10">
                 <button type="button" onclick="window.location.href='jefes-equipo.php'"

@@ -62,10 +62,9 @@ $usuarios = obtener_todos_los_usuarios($con);
 
             <!-- Contenido principal -->
             <div class="flex flex-col min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
-                <h1 class="text-center text-4xl font-bold underline">Bienvenido a la Página de Administrador</h1>
 
-                <h2 class="font-bold text-2xl underline">GESTIÓN DE PROYECTOS</h2>
-                <h4 class="text-xl font-bold underline">Proyectos registrados:</h4>
+                <h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE PROYECTOS</h1>
+                <h3 class='text-xl font-bold text-orange-400'>Proyectos registrados:</h3>
 
                 <?php if ($usuarios->num_rows === 0): ?>
                     <p>No se encuentran usuarios</p>
