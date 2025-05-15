@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_proyecto'])) {
 
     // Validar fecha fin (controlando el error de poner fecha actual)
     if (strtotime($fecha_fin) <= strtotime($fecha_inicio)) {
-        echo "<script>alert('La fecha de vencimiento debe ser posterior a hoy.');
+        echo "<script>alert('La fecha de fin debe ser posterior a hoy.');
              window.location.href = window.location.href; </script>";
         exit();
     }
