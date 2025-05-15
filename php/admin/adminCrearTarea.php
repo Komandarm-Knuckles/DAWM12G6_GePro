@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
 
     // Validar fecha vencimiento (controlando el error de poner fecha actual)
     if (strtotime($fecha_vencimiento) <= strtotime($fecha_asignacion)) {
-        echo "<script>alert('La fecha de vencimiento debe ser posterior a hoy.');
+        echo "<script>alert('La fecha de vencimiento no puede ser la de hoy.');
              window.location.href = window.location.href; </script>";
         exit();
     }
