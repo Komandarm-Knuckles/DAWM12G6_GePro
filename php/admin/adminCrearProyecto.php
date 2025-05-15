@@ -19,6 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_proyecto'])) {
     $fecha_fin = !empty($_POST['fecha_fin']) ? $_POST['fecha_fin'] : null; 
     $estado = $_POST['estado'];
 
+    // Validar fecha fin (controlando el error de poner fecha actual)
+    if (strtotime($fecha_fin) <= strtotime($fecha_inicio)) {
+        echo "<script>alert('La fecha de fin no puede ser la de hoy.');
+             window.location.href = window.location.href; </script>";
+        exit();
+    }
+
     if (!empty($nombre) && !empty($descripcion) && !empty($fecha_inicio) && !empty($estado)) {
         if (crear_proyecto($con, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado)) {
             header("Location: " . $_SERVER['PHP_SELF']); 
