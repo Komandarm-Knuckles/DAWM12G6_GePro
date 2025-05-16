@@ -81,6 +81,9 @@ if ($resultado_proyectos->num_rows > 0) {
 
                 <h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE PROYECTOS</h1>
                 <h3 class='text-xl font-bold text-orange-400'>Proyectos registrados:</h3>
+                <?php if ($result_proyectos->num_rows === 0): ?>
+                    <p>No hay proyectos registrados.</p>
+                <?php else: ?>
 
                     <div class="max-h-[600px] overflow-y-auto shadow-2xl w-full">
                         <table class="styled-table w-full">
@@ -107,21 +110,19 @@ if ($resultado_proyectos->num_rows > 0) {
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
+                        
                     </div>
-                
                 <!-- Botones de navegación -->
-                <div class="flex justify-center items-center gap-10">
-                    <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                        <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Jefe de Equipo</button>
-                    </form>
+    <div class="flex justify-center items-center gap-10">
+        <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
+            <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Jefe de Equipo</button>
+        </form>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
+    
     <?php $con->close(); ?>
-</body>
-    
-
-    
 </body>
 </html>

@@ -145,7 +145,7 @@ function obtener_usuario_por_nombre($con, $usuario) {
 
 // obtener proyectos
 function obtener_todos_proyectos($con){
-    $sql = "SELECT * FROM proyectos";
+    $sql = "SELECT id_proyecto, nombre, descripcion, fecha_inicio, fecha_fin, estado FROM proyectos";
     return $con->query($sql);
 }
 

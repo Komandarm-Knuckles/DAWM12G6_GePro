@@ -21,9 +21,15 @@ function obtener_todos_los_jefes($con)
 // Función para crear un proyecto
 function crear_proyecto($con, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado)
 {
-    $sql = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("sssss", $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado);
+    if (empty($fecha_fin)) {
+        $sql = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, NULL, ?)";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("ssss", $nombre, $descripcion, $fecha_inicio, $estado);
+    } else {
+        $sql = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("sssss", $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado);
+    }
     return $stmt->execute();
     if ($stmt->execute()) {
         echo "
@@ -151,8 +157,7 @@ $result_proyectos = obtener_todos_proyectos($con);
                 <div class="flex flex-col w-full">
                     Estado:
                     <select name="estado" class="rounded-lg border-2 text-center w-full p-1" required>
-                        <option value="">Selecciona un estado</option>
-                        <option value="pendiente">Pendiente</option>
+                        <option value="pendiente" selected>Pendiente</option>
                         <option value="en proceso">En proceso</option>
                         <option value="completado">Completado</option>
                     </select>
