@@ -97,7 +97,7 @@
     }
 
 
-    // TODO - EXPLICAR ESTO, LA TAREA SE ASIGNA A UN PROYECTO Y A UN USUARIO, CON LO CUAL, SI LA TAREA LA ASOCIAMOS A EL USUARIO 1, AL USUARIO 1 LE APARECERÁ EL PROYECTO EL CUAL ESTA ASIGNADO A ESA TAREA
+
     // Obtener tareas asignadas al usuario actual
     $sql_tareas = "SELECT * FROM tareas WHERE usuario = ?";
     $stmt_tareas = $con->prepare($sql_tareas);
@@ -105,19 +105,22 @@
     $stmt_tareas->execute();
     $tareas = $stmt_tareas->get_result();
 
-    // Obtener proyectos del usuario actual (a través de sus tareas)
-    $sql_proyectos = "SELECT DISTINCT p.* FROM proyectos p 
-                  INNER JOIN tareas t ON p.id_proyecto = t.id_proyecto 
-                  WHERE t.usuario = ?";
-    $stmt_proyectos = $con->prepare($sql_proyectos);
-    $stmt_proyectos->bind_param("s", $usuario);
-    $stmt_proyectos->execute();
-    $proyectos = $stmt_proyectos->get_result();
+    $sql = "SELECT p.* FROM proyectos p
+        INNER JOIN proyectos_usuarios pu ON p.id_proyecto = pu.id_proyecto
+        WHERE pu.usuario = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("s", $usuario);
+    $stmt->execute();
+    $proyectos = $stmt->get_result();
 
+    while ($proyecto = $result->fetch_assoc()) {
+        // Muestra los datos del proyecto
+        echo "<div>" . htmlspecialchars($proyecto['nombre']) . "</div>";
+    }
     // Obtener reuniones relacionadas con los proyectos del usuario
-    $sql_reuniones = "SELECT r.* FROM reuniones r 
-                  INNER JOIN tareas t ON r.id_proyecto = t.id_proyecto 
-                  WHERE t.usuario = ?";
+    $sql_reuniones = "SELECT r.* FROM reuniones r
+                  INNER JOIN proyectos_usuarios pu ON r.id_proyecto = pu.id_proyecto
+                  WHERE pu.usuario = ?";
     $stmt_reuniones = $con->prepare($sql_reuniones);
     $stmt_reuniones->bind_param("s", $usuario);
     $stmt_reuniones->execute();
@@ -157,7 +160,7 @@
       <section class="flex flex-col p-10 gap-10">
           <h1 class="text-4xl text-center text-orange-400 underline font-bold">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h1>
           <div class="flex flex-col w-full p-6">
-              <div class="flex flex-col md:flex-row w-full bg-gray-300 items-center justify-center shadow-md rounded-lg gap-10 p-6">
+              <div class="flex flex-col  w-full bg-gray-300 items-center justify-center shadow-md rounded-lg gap-10 p-6">
                   <div class=" flex flex-col items-center justify-center relative ">
                       <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>"
                           alt="Imagen Usuario"
@@ -180,7 +183,7 @@
 
 
 
-      <div class="flex flex-col p-10 bg-gray-300 bg-opacity-90 gap-10 rounded w-full max-w-[90%]">
+      <div class="flex flex-col p-10 bg-gray-300 bg-opacity-90 gap-10 rounded-xl w-full max-w-[90%]">
           <h2 class="font-bold text-center text-orange-500 text-3xl underline rounded p-4">Información de Proyectos</h2>
           <ul class="flex flex-wrap gap-2 justify-center items-center w-full">
               <?php if ($proyectos->num_rows == 0) { ?>
@@ -192,12 +195,12 @@
                         echo
                         "<div class='flex w-full bg-gray-200 gap-2 rounded-lg shadow-lg p-5'>" .
                             "<div class='flex flex-col w-full gap-2 p-5'>" .
-                            "<p class='font-bold text-orange-500'>-ID: <span class='text-black'>" . htmlspecialchars($proyecto['id_proyecto']) . "</p>" .
-                            "<p class='font-bold text-orange-500'>Nombre: <span class='text-black'>" . htmlspecialchars($proyecto['nombre']) . "</p>" .
-                            "<p class='font-bold text-orange-500'>Descripción: <span class='text-black'>" . htmlspecialchars($proyecto['descripcion']) . "</p>" .
-                            "<p class='font-bold text-orange-500'>Fecha de Inicio: <span class='text-black'>" . htmlspecialchars($proyecto['fecha_inicio']) . "</p>" .
-                            "<p class='font-bold text-orange-500'>Fecha de Fin: <span class='text-black'>" . htmlspecialchars($proyecto['fecha_fin']) . "</p>" .
-                            "<p class='font-bold text-orange-500'>Estado: <span class='text-black'>" . htmlspecialchars($proyecto['estado']) . "</p>"
+                            "<p class='font-bold text-orange-400'>-ID del Proyecto: <span class='text-black'>" . htmlspecialchars($proyecto['id_proyecto']) . "</p>" .
+                            "<p class='font-bold text-orange-400'>Nombre: <span class='text-black'>" . htmlspecialchars($proyecto['nombre']) . "</p>" .
+                            "<p class='font-bold text-orange-400'>Descripción: <span class='text-black'>" . htmlspecialchars($proyecto['descripcion']) . "</p>" .
+                            "<p class='font-bold text-orange-400'>Fecha de Inicio: <span class='text-black'>" . htmlspecialchars($proyecto['fecha_inicio']) . "</p>" .
+                            "<p class='font-bold text-orange-400'>Fecha de Fin: <span class='text-black'>" . htmlspecialchars($proyecto['fecha_fin']) . "</p>" .
+                            "<p class='font-bold text-orange-400'>Estado: <span class='text-black'>" . htmlspecialchars($proyecto['estado']) . "</p>"
 
                         ?>
                       <?php echo "</div></div>"; ?>
@@ -238,7 +241,7 @@
                         echo
                         "<div class='flex bg-gray-200 gap-2 rounded-lg shadow-lg p-5'>" .
                             "<div class='flex flex-col gap-2 p-5'>" .
-                            " <p class='font-bold text-orange-400'>-ID: <span class='text-black'>" . htmlspecialchars($tarea['id_tarea']) . "</span></p> " .
+                            " <p class='font-bold text-orange-400'>-ID de la Tarea: <span class='text-black'>" . htmlspecialchars($tarea['id_tarea']) . "</span></p> " .
                             " <p class='font-bold text-orange-400'>-Nombre: <span class='text-black'>" . htmlspecialchars($tarea['nombre']) . "</p> " .
                             " <p class='font-bold text-orange-400'>-Usuario Asignado: <span class='text-black'>" . htmlspecialchars($tarea['usuario']) . "</p>" .
                             " <p class='font-bold text-orange-400'>-Descripció: <span class='text-black'>" . htmlspecialchars($tarea['descripcion']) . "</p>" .

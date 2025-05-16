@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea']))
     if ($stmt->execute()) 
     {
         echo "<script>alert('Tarea creada con éxito.');
-              window.location.href='jefes-equipo.php'; </script>";
+              window.location.href='jefeTareas.php'; </script>";
         exit();
     } 
     else 
@@ -95,9 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea']))
             <div class="flex flex-col w-full">
             <label for="fecha_vencimiento">Fecha de vencimiento:</label>
             <input type="date" name="fecha_vencimiento" required class="p-2 border rounded-xl text-center w-full" />
-            </div>        
+            </div>     
+            <div class="flex justify-center items-center">
+            <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Tarea</button>
+            </div>
         </form>
-        <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Tarea</button>
+
         <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
     </div>
 </body>

@@ -79,7 +79,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             <input type="time" name="hora" class="text-center border-2 rounded-lg p-2 w-full" value="<?php echo htmlspecialchars($reunion['hora']); ?>" required>
             </div>
             <div class="flex flex-col w-full">
-            Estado:
+            Proyecto Asignado:
             <select name="id_proyecto" class="text-center border-2 rounded-lg p-2 w-full" required>
                 <option value="">Selecciona un proyecto</option>
                 <?php while ($proyecto = $proyectos->fetch_assoc()): ?>

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssssii", $titulo, $descripcion, $fecha, $hora, $id_proyecto, $id_reunion);
     $stmt->execute();
 
-    header("Location: jefes-equipo.php");
+    header("Location: jefeReuniones.php");
     exit();
 }
 #endregion
@@ -83,7 +83,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             <input type="time" name="hora" class="text-center border-2 rounded-lg p-2 w-full" value="<?php echo htmlspecialchars($reunion['hora']); ?>" required>
             </div>
             <div class="flex flex-col w-full">
-            Estado:
+            Proyecto Asignado:
             <select name="id_proyecto" class="text-center border-2 rounded-lg p-2 w-full" required>
                 <option value="">Selecciona un proyecto</option>
                 <?php while ($proyecto = $proyectos->fetch_assoc()): ?>
@@ -96,7 +96,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             <div class="flex w-full justify-center flex-col justify-center items-center gap-10">
                 <button type="submit" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Guardar cambios</button>
                 <span class="block h-0.5 w-full bg-black opacity-40"></span>
-                <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Cancelar</button>
+                <button type="button" onclick="window.location.href='jefeReuniones.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Cancelar</button>
 
             </div>
         </form>

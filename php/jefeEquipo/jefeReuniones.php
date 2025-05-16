@@ -1,13 +1,52 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
+if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 1) {
     $_SESSION['error'] = "Debes iniciar sesión antes de acceder.";
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 
 require_once("../database.php");
 $con = crearConexion();
+
+// Obtenemos el usuario de la sesión
+$usuario = $_SESSION['usuario'];
+
+// Intentemos obtener los proyectos relacionados al jefe de equipo a través de las tareas
+// Esta consulta asume que existe una relación entre tareas y proyectos,
+// y que el jefe de equipo está registrado como usuario en las tareas
+$sql_proyectos = "SELECT DISTINCT id_proyecto 
+                  FROM proyectos_usuarios 
+                  WHERE usuario = ?";
+
+$stmt_proyectos = $con->prepare($sql_proyectos);
+$stmt_proyectos->bind_param("s", $usuario);
+$stmt_proyectos->execute();
+$resultado_proyectos = $stmt_proyectos->get_result();
+
+if ($resultado_proyectos->num_rows > 0) {
+    // Recopilamos todos los IDs de proyecto asociados con este jefe de equipo
+    $ids_proyectos = [];
+    while ($fila = $resultado_proyectos->fetch_assoc()) {
+        $ids_proyectos[] = $fila['id_proyecto'];
+    }
+    
+    // Construimos una consulta IN para obtener reuniones de todos los proyectos asociados
+    $placeholders = str_repeat('?,', count($ids_proyectos) - 1) . '?';
+    $sql_reuniones = "SELECT * FROM reuniones WHERE id_proyecto IN ($placeholders)";
+    
+    $stmt_reuniones = $con->prepare($sql_reuniones);
+    
+    // Preparamos el binding de parámetros dinámicamente
+    $tipos = str_repeat('i', count($ids_proyectos));
+    $stmt_reuniones->bind_param($tipos, ...$ids_proyectos);
+    
+    $stmt_reuniones->execute();
+    $result_reuniones = $stmt_reuniones->get_result();
+} else {
+    // Si el jefe no tiene proyectos asignados, mostramos una tabla vacía
+    $result_reuniones = $con->query("SELECT * FROM reuniones WHERE 1=0");
+}
 
 // Eliminar reunión
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['eliminar_reunion'])) {
@@ -24,42 +63,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['eliminar_reunion'])) {
 // Editar reunión
 if (isset($_POST['editar_reunion'])) {
     $id_reunion = $_POST['id_reunion'];
-    header("Location: editarReunion.php?id=" . $id_reunion);
+    header("Location: editarReunionesJefeEquipo.php?id=" . $id_reunion);
     exit;
 }
 
-$result_reuniones = $con->query("SELECT * FROM reuniones");
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Reuniones</title>
+    <title>Reuniones Jefe Equipo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex w-full min-h-screen justify-center items-center">
+<div class="flex w-full min-h-screen justify-center items-center">
         <div class="flex w-full md:flex-row flex-col justify-center items-stretch max-w-[90%]">
-            <!-- Menú lateral -->
-            <section class="flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5">
+<section class="flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5">
                 <img class="md:w-13 w-[10em]" src="../../img/LogoEmpresa.png" alt="logo Empresa"/>
                 <div class="flex gap-2">
-                    <img src="../../img/users.svg" alt="imagenProyectos"/>
-                    <a href="adminUsuarios.php" class="font-bold text-white text-lg">Usuarios</a>
-                </div>
-                <div class="flex gap-2">
                     <img src="../../img/folder-git-2.svg" alt="imagenProyectos"/>
-                    <a href="adminProyectos.php" class="font-bold text-white text-lg">Proyectos</a>
+                    <a href="jefeProyectos.php" class="font-bold text-white text-lg">Proyectos</a>
                 </div>
 
                 <div class="flex gap-2">
                     <img src="../../img/clipboard-list.svg" alt="imagentareas"/>
-                    <a href="adminTareas.php" class="font-bold text-white text-lg">Tareas</a>
+                    <a href="jefeTareas.php" class="font-bold text-white text-lg">Tareas</a>
                 </div>
-            </section>
-
+        </section>
+ 
             <!-- Contenido principal -->
             <div class="flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
                 <h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE REUNIONES</h1>
@@ -112,12 +145,11 @@ $result_reuniones = $con->query("SELECT * FROM reuniones");
                 <?php endif; ?>
 
                 <!-- Botón crear reunión -->
-                <button type="button" onclick="window.location.href='adminCrearReunion.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR REUNIÓN</button>
-
-                <!-- Botones de navegación -->
+                <button type="button" onclick="window.location.href='jefeCrearReunion.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">CREAR REUNIÓN</button>
+ <!-- Botones de navegación -->
                 <div class="flex justify-center items-center gap-10">
                     <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-                        <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
+                        <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Jefe de Equipo</button>
                     </form>
                 </div>
             </div>

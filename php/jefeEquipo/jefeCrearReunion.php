@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     if ($stmt->execute()) 
     {
         echo "<script>alert('Reunión creada con éxito.');
-              window.location.href='jefes-equipo.php'; </script>";
+              window.location.href='jefeReuniones.php'; </script>";
         exit();
     } 
     else 
@@ -79,10 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     </option>
                 <?php endwhile; ?>
             </select>
-            </div>    
+            </div> 
+            <div class="flex justify-center items-center">
+                
+            <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Reunión</button>
+            </div> 
         </form>
-        <button type="submit" name="crear_tarea" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Crear Reunión</button>
-        <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+        <button type="button" onclick="window.location.href='jefeReuniones.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
 
     </div>
 </body>

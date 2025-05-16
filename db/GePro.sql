@@ -14,21 +14,6 @@ CREATE TABLE usuarios (
     imagen_perfil VARCHAR(255)
 );
 
--- TABLA DE GRUPOS
-CREATE TABLE grupos (
-    id_grupo INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL UNIQUE
-);
-
--- RELACIÓN USUARIOS - GRUPOS
-CREATE TABLE usuarios_grupos (
-    usuario VARCHAR(50) NOT NULL,
-    id_grupo INT NOT NULL,
-    FOREIGN KEY (usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE,
-    FOREIGN KEY (id_grupo) REFERENCES grupos(id_grupo) ON DELETE CASCADE,
-    PRIMARY KEY (usuario, id_grupo)
-);
-
 -- TABLA DE PROYECTOS
 CREATE TABLE proyectos (
     id_proyecto INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,6 +22,16 @@ CREATE TABLE proyectos (
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE CHECK (fecha_fin IS NULL OR fecha_fin > fecha_inicio), 
     estado ENUM('pendiente', 'en progreso', 'completado') NOT NULL
+);
+
+-- TABLA INTERMEDIA PARA ASIGNACIÓN DE USUARIOS A PROYECTOS
+CREATE TABLE proyectos_usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_proyecto INT NOT NULL,
+    usuario VARCHAR(50) NOT NULL,
+    FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto) ON DELETE CASCADE,
+    FOREIGN KEY (usuario) REFERENCES usuarios(usuario) ON DELETE CASCADE,
+    UNIQUE (id_proyecto, usuario)
 );
 
 -- TABLA DE TAREAS

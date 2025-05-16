@@ -11,39 +11,83 @@ if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
 require_once("../database.php");
 $con = crearConexion();
 
+// Función para obtener todos los jefes de equipo
+function obtener_todos_los_jefes($con)
+{
+    $sql = "SELECT usuario, nombre FROM usuarios WHERE tipo = 1"; // Ajusta el campo y tabla según tu estructura
+    return $con->query($sql);
+}
+
+// Función para crear un proyecto
+function crear_proyecto($con, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado)
+{
+    $sql = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("sssss", $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado);
+    return $stmt->execute();
+    if ($stmt->execute()) {
+        echo "
+        <script>
+            alert('Proyecto creado correctamente.');
+            window.location.href = 'adminProyectos.php';
+        </script>";
+        exit;
+    } else {
+        echo "<script>
+            alert('Error al crear Proyecto.');
+            window.location.href = 'adminProyectos.php';
+        </script>";
+        exit;
+    }
+}
+
 // Envio del formulario proyecto
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['crear_proyecto'])) {
     $nombre = trim($_POST['nombre']);
     $descripcion = trim($_POST['descripcion']);
     $fecha_inicio = $_POST['fecha_inicio'];
-    $fecha_fin = !empty($_POST['fecha_fin']) ? $_POST['fecha_fin'] : null; 
+    $fecha_fin = !empty($_POST['fecha_fin']) ? $_POST['fecha_fin'] : null;
     $estado = $_POST['estado'];
+    $jefe_equipo = $_POST['jefe_equipo'];
+    $empleados_asignados = isset($_POST['empleados_asignados']) ? $_POST['empleados_asignados'] : [];
 
-    // Validar fecha fin (controlando el error de poner fecha actual)
-    if (strtotime($fecha_fin) <= strtotime($fecha_inicio)) {
-        echo "<script>alert('La fecha de fin no puede ser la de hoy.');
-             window.location.href = window.location.href; </script>";
-        exit();
-    }
-
-    if (!empty($nombre) && !empty($descripcion) && !empty($fecha_inicio) && !empty($estado)) {
+    if (!empty($nombre) && !empty($descripcion) && !empty($fecha_inicio) && !empty($estado) && !empty($jefe_equipo)) {
+        // Validar fecha fin
+        if (!empty($fecha_fin) && strtotime($fecha_fin) <= strtotime($fecha_inicio)) {
+            echo "<script>alert('La fecha de fin no puede ser la de hoy.');
+                 window.location.href = window.location.href; </script>";
+            exit();
+        }
+        // Crear proyecto
         if (crear_proyecto($con, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado)) {
-            header("Location: " . $_SERVER['PHP_SELF']); 
+            // Obtener el id del proyecto recién creado
+            $id_proyecto = $con->insert_id;
+            // Insertar en la tabla intermedia los Jefes de Equipo
+            $stmt = $con->prepare("INSERT INTO proyectos_usuarios (id_proyecto, usuario) VALUES (?, ?)");
+            $stmt->bind_param("is", $id_proyecto, $jefe_equipo);
+            $stmt->execute();
+
+             // Asignar empleados seleccionados
+        foreach ($empleados_asignados as $empleado) {
+            $stmt = $con->prepare("INSERT INTO proyectos_usuarios (id_proyecto, usuario) VALUES (?, ?)");
+            $stmt->bind_param("is", $id_proyecto, $empleado);
+            $stmt->execute();
+        }
+
+            echo "<script>
+        alert('Proyecto creado correctamente.');
+        window.location.href = 'adminProyectos.php';
+    </script>";
             exit();
         } else {
-            $error = "Error al crear el proyecto.";
+            echo "<script>
+        alert('Error al crear Proyecto.');
+        window.location.href = 'adminProyectos.php';
+    </script>";
+            exit();
         }
-    } else {
-        $error = "Todos los campos son obligatorios excepto la fecha de fin.";
     }
 }
-
- // Validar fecha fin (controlando el error de poner fecha actual)
-    if (strtotime($fecha_fin) <= strtotime($fecha_inicio)) {
-        echo "<script>alert('La fecha de fin no puede ser la de hoy.');
-             window.location.href = window.location.href; </script>";
-        exit();
-    }
 
 $result_proyectos = obtener_todos_proyectos($con);
 ?>
@@ -54,56 +98,84 @@ $result_proyectos = obtener_todos_proyectos($con);
 </head>
 
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-        <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
-            <h1 class="text-4xl font-bold text-center underline text-orange-400"> CREAR NUEVO PROYECTO</h1>
-            <div class="flex justify-center items-center">
+    <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
+        <h1 class="text-4xl font-bold text-center underline text-orange-400"> CREAR NUEVO PROYECTO</h1>
+        <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
-            </div>
-            <div class="flex flex-col justify-center items-center">
-            <?php if (isset($error)) { echo "<p class='text-red-600'>$error</p>"; } ?>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+            <?php if (isset($error)) {
+                echo "<p class='text-red-600'>$error</p>";
+            } ?>
             <form method="POST" action="" class="flex flex-col w-full md:max-w-[85%] justify-center items-center  gap-6">
                 <div class="flex flex-col w-full">
-                Nombre:
-                <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded" />
+                    Nombre:
+                    <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded" />
                 </div>
                 <div class="flex flex-col w-full">
-                Descripción:
-                <textarea name="descripcion" placeholder="Descripción" required class="p-2 border w-full rounded"></textarea>
+                    Descripción:
+                    <textarea name="descripcion" placeholder="Descripción" required class="p-2 border w-full rounded"></textarea>
                 </div>
                 <div class="flex flex-col w-full">
-                Fecha Inicio:
-                <input type="date" name="fecha_inicio" required class="p-2 border text-center w-full rounded" />
+                    Fecha Inicio:
+                    <input type="date" name="fecha_inicio" required class="p-2 border text-center w-full rounded" />
                 </div>
                 <div class="flex flex-col w-full">
-                Fecha Fin:
-                <input type="date" name="fecha_fin" class="p-2 border text-center w-full rounded" />
+                    Fecha Fin:
+                    <input type="date" name="fecha_fin" class="p-2 border text-center w-full rounded" />
                 </div>
-                <div class="flex flex-col w-full">                
-                Estado:
-                <select name="estado" class="rounded-lg border-2 text-center w-full p-1">
-                    <option value="pendiente">Pendiente</option>
-                    <option value="en proceso">En proceso</option>
-                    <option value="completado">Completado</option>
+                <div class="flex flex-col w-full">
+                    Asignar Jefe de Equipo:
+                    <select name="jefe_equipo" class="rounded-lg border-2 text-center w-full p-1" required>
+                        <option value="">Selecciona un jefe de equipo</option>
+                        <?php
+                        $result_jefes = obtener_todos_los_jefes($con);
+                        while ($jefe = $result_jefes->fetch_assoc()) {
+                            echo "<option value='" . $jefe['usuario'] . "'>" . htmlspecialchars($jefe['nombre']) . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="flex flex-col  w-full">
+                Asignar Empleados:
+                <select name="empleados_asignados[]" multiple class="rounded-lg border-2 text-center w-full p-1" required>
+                    <?php
+                    $result_empleados = $con->query("SELECT usuario, nombre FROM usuarios WHERE tipo = 2");
+                    while ($empleado = $result_empleados->fetch_assoc()) {
+                        echo "<option value='" . $empleado['usuario'] . "'>" . htmlspecialchars($empleado['nombre']) . "</option>";
+                    }
+                    ?>
                 </select>
+                <small class="text-green-800 text-center">Pulsa Ctrl (o Cmd en Mac) para seleccionar varios</small>
                 </div>
-                <button type="submit" name="crear_proyecto" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded-xl">Crear Nuevo Proyecto</button>
+                <div class="flex flex-col w-full">
+                    Estado:
+                    <select name="estado" class="rounded-lg border-2 text-center w-full p-1" required>
+                        <option value="">Selecciona un estado</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en proceso">En proceso</option>
+                        <option value="completado">Completado</option>
+                    </select>
+                </div>
+                <input type="hidden" name="crear_proyecto" value="1">
+                <button type="submit" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded-xl">Crear Nuevo Proyecto</button>
                 <!-- Boton de volver -->
-            <div class="flex justify-center items-center ">
-                <button type="button" onclick="window.location.href='adminProyectos.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
-            </div>    
+                <div class="flex justify-center items-center ">
+                    <button type="button" onclick="window.location.href='adminProyectos.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
+                </div>
             </form>
-        
+
             <span class="block h-0.5 w-full bg-black opacity-40"></span>
-            
+
             <!-- Botones de volver a panel administrados-->
             <div class="flex justify-center items-center gap-10">
                 <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col">
-                <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
+                    <button type="button" onclick="window.location.href='administradores.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Administrador</button>
                 </form>
             </div>
-            </div>
         </div>
-   
+    </div>
+
 
     <?php
     $con->close();

@@ -70,7 +70,7 @@ $usuarios = obtener_todos_los_usuarios($con);
 if ($usuarios->num_rows === 0) {
     echo "<p>No se encuentran usuarios</p>";
 } else {
-    echo "<div class='max-h-[800px] overflow-y-auto shadow-2xl w-full'>"; // Aseguramos que el div tenga ancho total
+    echo "<div class='max-h-[700px] overflow-y-auto shadow-2xl w-full'>"; // Aseguramos que el div tenga ancho total
     echo "<table class='styled-table w-full'>"; // Aseguramos que la tabla tenga ancho total
     echo "<thead>
             <tr class='sticky bg-orange-400 text-white top-0 bg-gray-300'>

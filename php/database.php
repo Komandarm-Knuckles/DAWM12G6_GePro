@@ -149,32 +149,7 @@ function obtener_todos_proyectos($con){
     return $con->query($sql);
 }
 
-// crear nuevo proyecto (fecha fin opcional)
-function crear_proyecto($con, $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado) {
-    if (empty($fecha_fin)) {
-        $query = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, NULL, ?)";
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("ssss", $nombre, $descripcion, $fecha_inicio, $estado);
-    } else {
-        $query = "INSERT INTO proyectos (nombre, descripcion, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("sssss", $nombre, $descripcion, $fecha_inicio, $fecha_fin, $estado);
-    }
-    if ($stmt->execute()) {
-        echo "
-        <script>
-            alert('Proyecto creado correctamente.');
-            window.location.href = 'adminProyectos.php';
-        </script>";
-        exit;
-    } else {
-        echo "<script>
-            alert('Error al crear Proyecto.');
-            window.location.href = 'adminProyectos.php';
-        </script>";
-        exit;
-    }
-}
+
 
 
 
