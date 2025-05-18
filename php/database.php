@@ -101,7 +101,7 @@ function borrar_usuario($con, $usuario) {
     $stmt->execute();
     
     // Eliminamos al usuario de los grupos
-    $stmt = $con->prepare("DELETE FROM usuarios_grupos WHERE usuario=?");
+    $stmt = $con->prepare("DELETE FROM proyectos_usuarios WHERE usuario=?");
     $stmt->bind_param("s", $usuario);
     $stmt->execute();
 
