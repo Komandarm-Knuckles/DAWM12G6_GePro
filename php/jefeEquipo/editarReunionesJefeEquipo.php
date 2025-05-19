@@ -6,7 +6,7 @@ $con = crearConexion();
 session_start();
 if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 1) {
     $_SESSION['error'] = "Debes iniciar sesión antes de acceder.";
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 #endregion

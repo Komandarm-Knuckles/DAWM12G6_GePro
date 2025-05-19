@@ -5,7 +5,7 @@ $con = crearConexion();
 
 #region Control de sesión
 if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] !== 0) {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 #endregion

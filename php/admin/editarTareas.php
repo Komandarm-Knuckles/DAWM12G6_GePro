@@ -3,6 +3,15 @@ include '../database.php';
 
 $con = crearConexion();
 
+#region Control de sesión
+session_start();
+if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
+    $_SESSION['error'] = "Debes iniciar sesión antes de acceder.";
+    header("Location: ../index.php");
+    exit();
+}
+#endregion
+
 if (isset($_GET['id'])) {
     $id_tarea = $_GET['id'];
     // Obtener la tarea de la base de datos
