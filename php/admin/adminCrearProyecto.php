@@ -99,7 +99,7 @@ $result_proyectos = obtener_todos_proyectos($con);
 ?>
 
 <head>
-    <title>Panel de Proyectos Admin</title>
+    <title>Crear Proyectos Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

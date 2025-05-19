@@ -46,10 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_image'])) {
         $new_file_name = 'user_' . $usuario . '_' . time() . '.' . $file_extension;
         
         // Ruta completa donde se guardará la imagen en el sistema de archivos
-$upload_path = $upload_dir . $new_file_name;
+        $upload_path = $upload_dir . $new_file_name;
 
-// Ruta relativa para la base de datos (URL que usará el navegador)
-$image_path = '../../uploads/profile_images/' . $new_file_name;
+        // Ruta relativa para la base de datos (URL que usará el navegador)
+        $image_path = '../../uploads/profile_images/' . $new_file_name;
 
 // Mover el archivo subido al directorio destino
 if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $upload_path)) {
@@ -103,7 +103,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Página de Administradores</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <script>
@@ -126,7 +126,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
     <div class="flex flex-col gap-10 rounded-xl p-10 w-200 max-w-[90%] bg-gray-300 justify-center items-center">
         <div class="flex flex-col items-center gap-6">   
-            <h1 class="font-bold md:text-5xl text-xl underline text-center">Bienvenid@, <?php echo htmlspecialchars($usuario); ?></h1>
+            <h1 class="font-bold md:text-5xl text-xl underline text-center">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h1>
              <section class="flex flex-col md:flex-row justify-center items-center bg-gray-300 p-10 gap-3">
             
                 <div class=" flex flex-col items-center justify-center relative p-2 ">
@@ -136,7 +136,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
      id="profileImage"
      
 />
-                <form id="imageUploadForm" method="post" enctype="multipart/form-data" style="display:none;">
+    <form id="imageUploadForm" method="post" enctype="multipart/form-data" style="display:none;">
         <input type="file" name="profileImage" id="imageInput" accept="image/*">
         <input type="hidden" name="upload_image" value="1">
     </form>

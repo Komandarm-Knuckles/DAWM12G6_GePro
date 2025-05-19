@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_usuario'])) 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Usuarios</title>
+    <title>Página de Usuarios Admin</title>
     <!-- <link rel="stylesheet" type="text/css" href="../css/admin-styles.css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>

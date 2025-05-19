@@ -97,7 +97,7 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
 <html>
 
 <head>
-    <title>Panel de Jefe de Equipo</title>
+    <title>Página de Jefe de Equipo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <script>

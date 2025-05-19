@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuario</title>
+    <title>Editar Usuario Admin</title>
     <!-- <link rel="stylesheet" type="text/css" href="../css/styles.css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
 

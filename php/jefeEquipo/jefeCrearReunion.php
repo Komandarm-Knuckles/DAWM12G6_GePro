@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Crear Reunión</title>
+    <title>Crear Reunión Jefe Equipo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">

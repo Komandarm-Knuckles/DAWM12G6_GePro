@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Administrar Tareas</title>
+    <title>Página de Tareas Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">

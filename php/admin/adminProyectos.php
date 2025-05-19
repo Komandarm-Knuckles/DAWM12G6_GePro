@@ -37,7 +37,7 @@ $usuarios = obtener_todos_los_usuarios($con);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Proyectos</title>
+    <title>Página de Proyectos Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">

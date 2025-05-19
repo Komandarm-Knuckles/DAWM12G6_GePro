@@ -53,7 +53,7 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 
 <head>
     <meta charset="UTF-8">
-    <title>Editar Reunión</title>
+    <title>Editar Reunión Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

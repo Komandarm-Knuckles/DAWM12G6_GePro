@@ -132,7 +132,7 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Pagina de Empleado</title>
+      <title>Página de Empleado</title>
       <script src="https://cdn.tailwindcss.com"></script>
       <!-- Script para la subida de la imagen de perfil de los usuarios -->
       <script>

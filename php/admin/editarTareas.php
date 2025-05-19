@@ -53,7 +53,7 @@ if (isset($_POST['guardar_cambios'])) {
 <html>
 
 <head>
-    <title>Editar Tarea Admin</title>
+    <title>Editar Tareas Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

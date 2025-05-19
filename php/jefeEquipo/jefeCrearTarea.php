@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea']))
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Crear Tarea</title>
+    <title>Crear Tarea Jefe Equipo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

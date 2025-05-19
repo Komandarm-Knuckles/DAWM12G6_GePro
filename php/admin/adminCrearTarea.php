@@ -55,7 +55,7 @@ $result_proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 <html>
 
 <head>
-    <title>Panel de Tareas Admin</title>
+    <title>Crear Tareas Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
