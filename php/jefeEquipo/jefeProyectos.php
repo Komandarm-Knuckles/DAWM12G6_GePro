@@ -112,13 +112,14 @@ if ($resultado_proyectos->num_rows > 0) {
                         </table>
                         
                     </div>
-                <!-- Botones de navegación -->
-    <div class="flex justify-center items-center gap-10">
-        <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
-            <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Jefe de Equipo</button>
-        </form>
-                </div>
                 <?php endif; ?>
+                
+                <!-- Botones de navegación -->
+                <div class="flex justify-center items-center gap-10">
+                    <form action="../logout.php" method="POST" class="p-5 flex md:flex-row flex-col gap-10">
+                        <button type="button" onclick="window.location.href='jefes-equipo.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-fit p-3 shadow-lg">Panel de Jefe de Equipo</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
