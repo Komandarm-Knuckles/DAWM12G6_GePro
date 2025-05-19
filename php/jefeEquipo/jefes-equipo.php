@@ -162,22 +162,22 @@ $result = $stmt->get_result();
         <section class="flex flex-col items-center gap-6 bg-gray-300 bg-opacity-90 p-10 rounded-xl w-full max-w-[18%] shadow-lg">
             <h2 class="font-bold text-lg bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Elige una de las opciones:</h2>
             
-            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+            <span class="block h-0.5 w-full bg-black opacity-40"></span>
             <div class="flex flex-col w-full gap-5 items-center">
                 <a href="jefeProyectos.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
                     Proyectos Asignados
                 </a>
-                <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+                <span class="block h-0.5 w-full bg-black opacity-40"></span>
 
                 <a href="jefeReuniones.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
                     Reuniones Asignadas
                 </a>
-                <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+                <span class="block h-0.5 w-full bg-black opacity-40"></span>
 
                 <a href="jefeTareas.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
                     Tareas Asignadas
                 </a>
-                <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+                <span class="block h-0.5 w-full bg-black opacity-40"></span>
 
             </div>
 
