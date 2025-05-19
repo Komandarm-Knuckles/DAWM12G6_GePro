@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
     #region Expresiones regulares - Comprobación en servidor
     $dniRegex = "/^\d{8}[A-Z]$/";
     $emailRegex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-    $passwordRegex = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&.\-_])[A-Za-z\d@$!%*?&.\-_]{8,}$/";
+    $passwordRegex = '/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)_\-\+=\{\}\[\]:;"\'<>,\.?\/\\\\|~`€])[A-Za-z\dñÑ!@#\$%\^&\*\(\)_\-\+=\{\}\[\]:;"\'<>,\.?\/\\\\|~`€]{8,}$/u';
 
     if (!preg_match($dniRegex, $nuevo_dni)) {
         echo "<p style='color: red;'>Error: El DNI debe tener 8 números seguidos de una letra mayúscula.</p>";
