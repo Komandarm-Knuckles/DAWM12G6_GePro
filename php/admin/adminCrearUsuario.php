@@ -4,12 +4,13 @@ session_start();
 $con = crearConexion();
 
 #region Control de sesión
-if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] !== 0) {
+session_start();
+if (!isset($_SESSION['usuario']) || $_SESSION['tipo'] != 0) {
+    $_SESSION['error'] = "Debes iniciar sesión antes de acceder.";
     header("Location: ../index.php");
     exit();
 }
 #endregion
-
 #region Recogida de datos e inserción
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pass'], $_POST['nombre'], $_POST['apellido'], $_POST['dni'], $_POST['email'], $_POST['telefono'], $_POST['tipo'])) {
     $usuario = $_POST['usuario'];
