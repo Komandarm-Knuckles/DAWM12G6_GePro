@@ -61,22 +61,22 @@ if (isset($_POST['guardar_cambios'])) {
     class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
         <div class="flex flex-col gap-10 p-5 w-full md:w-[50em] max-w-[90%] mt-10 rounded-xl bg-gray-300 justify-center items-center">
 
-        <h2 class="font-bold text-orange-400 text-4xl underline">Editar Tarea</h2>
+            <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">EDITAR TAREA</h1>
         <form method="POST" action=""
             class="flex flex-col w-full p-4 gap-6 rounded-lg justify-center items-center">
             <div class="flex flex-col w-full">
             <input type="hidden" name="id_tarea" value="<?php echo $tarea['id_tarea']; ?>">
-            <label for="nombre" class="text-xl text-black">Nombre:</label>
+            <label for="nombre" class="font-bold">Nombre*</label>
             <input type="text" name="nombre" class="flex text-center  rounded-lg p-1"
                 value="<?php echo htmlspecialchars($tarea['nombre']); ?>" required>
             </div>
             <div class="flex flex-col w-full">
-            <label for="descripcion" class="text-xl text-black">Descripción:</label>
+            <label for="descripcion" class="font-bold">Descripción*</label>
             <textarea name="descripcion" class="text-black rounded-lg p-1" rows="5" cols="45"
                 required><?php echo htmlspecialchars($tarea['descripcion']); ?></textarea>
             </div>
             <div class="flex flex-col w-full">
-            <label for="estado" class="text-xl text-black">Estado:</label>
+            <label for="estado" class="font-bold">Estado*</label>
             <select name="estado" class="rounded-xl text-center p-1">
                 <option value="pendiente" <?php if ($tarea['estado'] == "pendiente")
                     echo "selected"; ?>>Pendiente
@@ -89,11 +89,11 @@ if (isset($_POST['guardar_cambios'])) {
                 </option>
             </select>
             </div>
-            <button type="submit" class="rounded-lg bg-orange-400 hover:bg-orange-700 p-3 text-white" name="guardar_cambios">Guardar
-                Cambios</button>
+            <label for="campos">Los campos asignados con un <strong>(*)</strong> son <strong>Obligatorios</strong></label>
+            <button type="submit" class="rounded-lg bg-orange-400 hover:bg-orange-700 p-3 text-white font-bold" name="guardar_cambios">Guardar Cambios</button>
             <form action="../logout.php" method="POST" class="p-5 flex gap-10">
                 <button type="button" onclick="window.location.href='adminTareas.php'"
-                    class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Volver</button>
+                    class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Cancelar</button>
             </form>
         </form>
 

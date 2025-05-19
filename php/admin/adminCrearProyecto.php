@@ -105,7 +105,7 @@ $result_proyectos = obtener_todos_proyectos($con);
 
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
     <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
-        <h1 class="text-4xl font-bold text-center underline text-orange-400"> CREAR NUEVO PROYECTO</h1>
+            <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">CREAR NUEVO PROYECTO</h1>
         <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
@@ -115,23 +115,23 @@ $result_proyectos = obtener_todos_proyectos($con);
             } ?>
             <form method="POST" action="" class="flex flex-col w-full md:max-w-[85%] justify-center items-center  gap-6">
                 <div class="flex flex-col w-full">
-                    Nombre:
+                    <label for ="nombre" class="font-bold">Nombre *</label>
                     <input type="text" name="nombre" placeholder="Nombre del Proyecto" required class="p-2 w-full border rounded" />
                 </div>
                 <div class="flex flex-col w-full">
-                    Descripción:
-                    <textarea name="descripcion" placeholder="Descripción" required class="p-2 border w-full rounded"></textarea>
+                    <label for ="descripcion" class="font-bold">Descripción *</label>
+                    <textarea name="descripcion" placeholder="Descripción del proyecto" required class="p-2 border w-full rounded"></textarea>
                 </div>
                 <div class="flex flex-col w-full">
-                    Fecha Inicio:
+                    <label for ="fecha_inicio" class="font-bold">Fecha de Inicio del Proyecto *</label>
                     <input type="date" name="fecha_inicio" required class="p-2 border text-center w-full rounded" />
                 </div>
                 <div class="flex flex-col w-full">
-                    Fecha Fin:
+                    <label for ="fecha_fin" class="font-bold">Fecha Final del Proyecto (Opcional)</label>
                     <input type="date" name="fecha_fin" class="p-2 border text-center w-full rounded" />
                 </div>
                 <div class="flex flex-col w-full">
-                    Asignar Jefe de Equipo:
+                    <label for ="jefe_equipo" class="font-bold">Jefe de Equipo *</label>
                     <select name="jefe_equipo" class="rounded-lg border-2 text-center w-full p-1" required>
                         <option value="">Selecciona un jefe de equipo</option>
                         <?php
@@ -143,7 +143,7 @@ $result_proyectos = obtener_todos_proyectos($con);
                     </select>
                 </div>
                 <div class="flex flex-col  w-full">
-                Asignar Empleados:
+                <label for ="empleados_asignados" class="font-bold">Asigna uno o varios Empleado *</label>
                 <select name="empleados_asignados[]" multiple class="rounded-lg border-2 text-center w-full p-1" required>
                     <?php
                     $result_empleados = $con->query("SELECT usuario, nombre FROM usuarios WHERE tipo = 2");
@@ -155,18 +155,19 @@ $result_proyectos = obtener_todos_proyectos($con);
                 <small class="text-green-800 text-center">Pulsa Ctrl (o Cmd en Mac) para seleccionar varios</small>
                 </div>
                 <div class="flex flex-col w-full">
-                    Estado:
+                    <label for ="estado" class="font-bold">Estado del Proyecto *</label>
                     <select name="estado" class="rounded-lg border-2 text-center w-full p-1" required>
                         <option value="pendiente" selected>Pendiente</option>
                         <option value="en proceso">En proceso</option>
                         <option value="completado">Completado</option>
                     </select>
                 </div>
+                <label for="campos">Los campos asignados con un <strong>(*)</strong> son <strong>Obligatorios</strong></label>
                 <input type="hidden" name="crear_proyecto" value="1">
-                <button type="submit" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer text-white rounded-xl">Crear Nuevo Proyecto</button>
+                <button type="submit" class="p-2 w-[15em] bg-orange-400 hover:bg-orange-700 cursor-pointer font-bold text-white rounded-xl">Crear Proyecto</button>
                 <!-- Boton de volver -->
                 <div class="flex justify-center items-center ">
-                    <button type="button" onclick="window.location.href='adminProyectos.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
+                    <button type="button" onclick="window.location.href='adminProyectos.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Cancelar</button>
                 </div>
             </form>
 

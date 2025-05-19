@@ -95,8 +95,8 @@ if (isset($_POST['editar_reunion'])) {
  
             <!-- Contenido principal -->
             <div class="flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
-                <h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE REUNIONES</h1>
-                <h3 class='text-xl font-bold text-orange-400'>Reuniones registradas:</h3>
+            <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">GESTIÓN DE REUNIONES</h1>
+                <h3 class="text-xl font-bold text-lg bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Reuniones registradas:</h3>
         
                 <?php if ($result_reuniones->num_rows === 0): ?>
                     <p>No hay reuniones registradas.</p>

@@ -66,22 +66,22 @@ if (isset($_POST['guardar_cambios'])) {
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
         <div class="flex flex-col gap-10 p-5 w-full md:w-[50em] max-w-[90%] mt-10 rounded-xl bg-gray-300 justify-center items-center">
 
-        <h2 class="text-orange-500 text-4xl underline">EDITAR TAREA</h2>
+            <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">EDITAR TAREA</h1>
         <form method="POST" action=""
             class="flex flex-col w-full p-4 gap-6 rounded-lg items-center">
             <div class="flex flex-col w-full">
-                <label for="nombre" class="text-xl">Nombre:</label>
+                <label for="nombre" class="font-bold">Nombre*</label>
                 <input type="text" name="nombre" class="text-center  rounded-lg p-1"
                        value="<?php echo htmlspecialchars($tarea['nombre']); ?>" required>
             </div>
 
             <div class="flex flex-col w-full">
-                <label for="fecha" class="text-xl">Fecha:</label>
+                <label for="fecha" class="font-bold">Fecha*</label>
                 <input type="date" name="fecha" class="text-center rounded-lg  p-1"
                        value="<?php echo htmlspecialchars($tarea['fecha_vencimiento']); ?>" required>
             </div>
             <div class="flex flex-col w-full">
-                <label for="id_proyecto" class="text-xl">Proyecto Asignado:</label>
+                <label for="id_proyecto" class="font-bold">Proyecto Asignado*</label>
                 <select name="id_proyecto" class="text-center rounded-lg p-1" required>
                     <?php foreach ($proyectos as $proyecto): ?>
                         <option value="<?php echo htmlspecialchars($proyecto['id_proyecto']); ?>"
@@ -92,7 +92,7 @@ if (isset($_POST['guardar_cambios'])) {
                 </select>
             </div>
             <div class="flex flex-col w-full">
-                <label for="usuario" class="text-xl">Usuario Asignado:</label>
+                <label for="usuario" class="font-bold">Usuario Asignado*</label>
                 <select name="usuario" class="text-center  rounded-lg p-1" required>
                     <?php
                     $users_query = $con->query("SELECT usuario FROM usuarios WHERE tipo = 2");
@@ -104,12 +104,12 @@ if (isset($_POST['guardar_cambios'])) {
                 </select>
             </div>
             <div class="flex flex-col w-full">
-                <label for="descripcion" class="text-xl">Descripción:</label>
+                <label for="descripcion" class="font-bold">Descripción*</label>
                 <textarea name="descripcion" class="text-black text-center rounded-lg p-1 " rows="5" cols="45"
                           required><?php echo htmlspecialchars($tarea['descripcion']); ?></textarea>
             </div>
             <div class="flex flex-col w-full">
-                <label for="estado" class="text-xl">Estado:</label>
+                <label for="estado" class="font-bold">Estado*</label>
                 <select name="estado" class=" text-center rounded-lg p-1">
                     <option value="pendiente" <?php if ($tarea['estado'] == "pendiente")
                                                         echo "selected"; ?>>Pendiente
@@ -122,13 +122,14 @@ if (isset($_POST['guardar_cambios'])) {
                     </option>
                 </select>
             </div>
+            <label for="campos">Los campos asignados con un <strong>(*)</strong> son <strong>Obligatorios</strong></label>
             <button type="submit" class="rounded-lg bg-orange-500 hover:bg-orange-700 p-3 w-[10em] text-white" name="guardar_cambios">Guardar
                 Cambios</button>
             <span class="block h-0.5 w-full bg-black opacity-40"></span>
 
             <form action="../logout.php" method="POST" class="p-5 flex gap-10">
-                <button type="button" onclick="window.location.href='jefes-equipo.php'"
-                        class="bg-orange-500 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em]  p-3 shadow-lg">Volver</button>
+        <button type="button" onclick="window.location.href='jefeTareas.php'" class="bg-orange-400 hover:bg-orange-700 text-white font-bold rounded-xl w-[10em] p-3 shadow-lg">Cancelar</button>
+
             </form>
         </form>
     </div>

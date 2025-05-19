@@ -1,6 +1,5 @@
 <?php
 require_once("../database.php");
-session_start();
 $con = crearConexion();
 
 #region Control de sesión
@@ -75,45 +74,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
 </head>
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
         <div class="flex flex-col gap-10 p-5 md:max-w-[65%] max-w-[95%] rounded-xl bg-gray-300 justify-center items-center">
-        <h1 class="font-bold text-4xl text-orange-500 underline">EDITAR USUARIO</h1>
+            <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">EDITAR USUARIO</h1>
         <form method="POST" action="" id="formEditarUsuarios" class="flex flex-col gap-6  items-center w-[40em]">
             <input type="hidden" name="editar_usuario" value="<?php echo $usuario; ?>">
             <div class="w-full">
-            <p class="text-lg">Contraseña: - (Opcional):</p>
-            <input type="password" id="pass" name="pass" placeholder="Nueva contraseña - opcional" class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
+            <p class="font-bold">Contraseña</p>
+            <input type="password" id="pass" name="pass" placeholder="Nueva contraseña Opcional" class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
             </div>
             <div class="w-full">
-            <p class="text-lg">Nombre:</p>
+            <p class="font-bold">Nombre*</p>
             <input type="text" name="nombre" value="<?php echo htmlspecialchars($datos_usuario['nombre']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
             </div>
             <div class="w-full">
-            <p class="text-lg">Apellido:</p>
+            <p class="font-bold">Apellido*</p>
             <input type="text" name="apellido" value="<?php echo htmlspecialchars($datos_usuario['apellido']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
             </div>
             <div class="w-full">
-            <p class="text-lg">Dni:</p>
+            <p class="font-bold">DNI*</p>
             <input type="text" id="dni" name="dni" value="<?php echo htmlspecialchars($datos_usuario['dni']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
             </div>
             <div class="w-full">
-            <p class="text-lg">Email:</p>
+            <p class="font-bold">Email*</p>
             <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($datos_usuario['email']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
             </div>
             <div class="w-full">
-            <p class="text-lg">Teléfono:</p>
+            <p class="font-bold">Teléfono*</p>
             <input type="text" name="telefono" value="<?php echo htmlspecialchars($datos_usuario['telefono']); ?>" required class="border-1 rounded-md text-center p-2 focus:outline-none w-full">
             </div>
             <div class="w-full">
-            <p class="text-lg">Tipo:</p>
+            <p class="font-bold">Tipo de Usuario*</p>
             <select name="tipo" class="border-1 rounded-md text-center p-2 focus:outline-none w-full" required>
                 <option value="0" <?php echo ($datos_usuario['tipo'] == 0) ? 'selected' : ''; ?>>Administrador</option>
                 <option value="1" <?php echo ($datos_usuario['tipo'] == 1) ? 'selected' : ''; ?>>Jefe de Equipo</option>
                 <option value="2" <?php echo ($datos_usuario['tipo'] == 2) ? 'selected' : ''; ?>>Empleado</option>
             </select>
             </div>
-            
+            <label for="campos">Los campos asignados con un <strong>(*)</strong> son <strong>Obligatorios</strong></label>
             <div class="flex gap-5 justify-center items-center">
-                <button type="submit" name="update_user" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Actualizar</button>
-                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Volver</button>
+                <button type="submit" name="update_user" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Guardar Cambios</button>
+                <button type="button" onclick="history.back()" class="bg-orange-400 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md w-[10em]">Cancelar</button>
             </div>
         </form>
     </div>

@@ -49,29 +49,29 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
 <body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
 <div class="flex flex-col max-w-[90%] w-[40em] bg-gray-300 p-8 rounded shadow-xl gap-6">
     
-<h1 class="text-4xl font-bold text-center underline text-orange-400">Crear Nueva Reunión</h1>
+<h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">CREAR NUEVA REUNIÓN</h1>
 <div class="flex justify-center items-center">
             <span class="block h-0.5 w-130 bg-black opacity-40"></span>
         </div>
     <form method="POST" class="flex flex-col w-full justify-center items-center gap-4">
         <div class="flex flex-col w-full">
-        Título:
-        <input type="text" name="titulo" required class=" p-2 border rounded-xl w-full">
+        <label for ="titulo" class="font-bold">Título*</label>
+        <input type="text" name="titulo" required class=" p-2 border rounded-xl w-full" placeholder="Título de la Reunión">
         </div>
         <div class="flex flex-col w-full">
-        Descripción:
-        <textarea name="descripcion" required class=" p-2 border rounded-xl w-full" ></textarea>
+         <label for ="descripcion" class="font-bold">Descripción*</label>
+        <textarea name="descripcion" required class=" p-2 border rounded-xl w-full" placeholder="Descripción de la reunión"></textarea>
         </div>
         <div class="flex flex-col w-full">
-        Fecha:
+        <label for ="fecha" class="font-bold">Fecha de la Reunión*</label>
         <input type="date" name="fecha" required class=" p-2 border rounded-xl text-center w-full">
         </div>
         <div class="flex flex-col w-full">
-        Hora:
+        <label for ="hora" class="font-bold">Hora de la Reunión*</label>
         <input type="time" name="hora" required class=" p-2 border rounded-xl text-center w-full">
         </div>
         <div class="flex flex-col w-full">
-        Proyecto:
+        <label for ="id_proyecto" class="font-bold">Proyecto*</label>
         <select name="id_proyecto" required class=" p-2 border rounded-xl text-center w-full">
             <option value="">Selecciona un proyecto</option>
             <?php while ($proyecto = $proyectos->fetch_assoc()): ?>
@@ -81,12 +81,13 @@ $proyectos = $con->query("SELECT id_proyecto, nombre FROM proyectos");
             <?php endwhile; ?>
         </select>
         </div>
+        <label for="campos">Los campos asignados con un <strong>(*)</strong> son <strong>Obligatorios</strong></label>
         <div class="flex justify-center items-center">
                 <input type="submit" value="Crear Reunion" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold" />
         </div>
         <!-- Boton de volver -->
         <div class="flex justify-center items-center  ">
-            <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Volver</button>
+            <button type="button" onclick="window.location.href='adminReuniones.php'" class="bg-orange-400 text-white p-2 rounded-xl w-[10em] items-center cursor-pointer hover:bg-orange-700 font-bold">Cancelar</button>
         </div>    
     </form>
         

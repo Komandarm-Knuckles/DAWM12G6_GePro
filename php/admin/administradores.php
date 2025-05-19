@@ -123,56 +123,69 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
     });
 });
 </script>
-<body class="w-full min-h-screen flex justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
-    <div class="flex flex-col gap-10 rounded-xl p-10 w-200 max-w-[90%] bg-gray-300 justify-center items-center">
-        <div class="flex flex-col items-center gap-6">   
-            <h1 class="font-bold md:text-5xl text-xl underline text-center">Bienvenido/a, <?php echo htmlspecialchars($usuario); ?></h1>
-             <section class="flex flex-col md:flex-row justify-center items-center bg-gray-300 p-10 gap-3">
+<body class="w-full min-h-screen flex flex-col justify-center items-center bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
+
+    <!-- saludo e imagen de perfil -->
+
+<section class="flex flex-col items-center gap-6 p-10">
+    <div class="flex flex-col items-center justify-center bg-gray-300 p-4 rounded-lg shadow-lg">
+
+        <h1 class="font-bold bg-orange-400 md:text-5xl text-xl underline text-center p-4 rounded-lg mb-4">
+            Bienvenido/a, <?php echo htmlspecialchars($usuario); ?>
+        </h1>
+
+        <!-- Imagen de usuario -->
+        <div class="relative">
+            <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>" 
+                 alt="Imagen Usuario" 
+                 class="w-[15em] h-[15em] rounded-lg" 
+                 id="profileImage" />
             
-                <div class=" flex flex-col items-center justify-center relative p-2 ">
-                <img src="<?php echo htmlspecialchars($imagen_a_mostrar); ?>" 
-     alt="Imagen Usuario" 
-     class="w-[15em] h-[15em] rounded-lg" 
-     id="profileImage"
-     
-/>
-    <form id="imageUploadForm" method="post" enctype="multipart/form-data" style="display:none;">
-        <input type="file" name="profileImage" id="imageInput" accept="image/*">
-        <input type="hidden" name="upload_image" value="1">
-    </form>
-    <button class="absolute right-1 top-1" id="uploadButton">
-        <img src="../../img/pencil-line.svg" alt="Editar imagen" class="bg-orange-400 rounded-lg p-1"/>
-    </button>
-                </div>
-                      
-    </section>
-            <h2 class="font-bold text-lg md:text-3xl underline text-center">Elige una de las opciones:</h2>
+            <button class="absolute right-1 top-1" id="uploadButton">
+                <img src="../../img/pencil-line.svg" alt="Editar imagen" class="bg-orange-400 rounded-lg p-1"/>
+            </button>
         </div>
-        <div class="flex flex-col w-full gap-5 items-center">
-            <a href="adminUsuarios.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
-                Usuarios
-            </a>
-            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
-            <a href="adminCrearUsuario.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
-                Crear Usuarios
-            </a>
-            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
-            <a href="adminProyectos.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
-                Proyectos
-            </a>
-            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
-            <a href="adminReuniones.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
-                Reuniones
-            </a>
-            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
-            <a href="adminTareas.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">
-                Tareas
-            </a>
-            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
-        </div>
-        <form action="../logout.php" method="POST">
-            <button type="submit" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-40 shadow-lg cursor-pointer font-bold text-white">Cerrar Sesión</button>
+
+        <form id="imageUploadForm" method="post" enctype="multipart/form-data" style="display:none;">
+            <input type="file" name="profileImage" id="imageInput" accept="image/*">
+            <input type="hidden" name="upload_image" value="1">
         </form>
+
     </div>
+</section>
+
+
+    <!-- opciones administrador -->
+
+    <section class="flex flex-col items-center gap-6 bg-gray-300 bg-opacity-90 p-10 rounded-xl w-full max-w-[22%] shadow-lg">
+        <h2 class="font-bold text-lg bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Elige una de las opciones:</h2>
+            
+        <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+        <div class="flex flex-col w-full gap-5 items-center">
+            <a href="adminUsuarios.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Usuarios</a>
+            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+
+            <a href="adminCrearUsuario.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Crear Usuarios</a>
+            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+
+            <a href="adminProyectos.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Proyectos</a>
+            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+
+            <a href="adminReuniones.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Reuniones</a>
+            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+
+            <a href="adminTareas.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Tareas</a>
+            <span class="block h-0.5 w-full md:w-[20em] bg-black opacity-40"></span>
+        </div>
+
+
+    </section><br>
+
+        <form action="../logout.php" method="POST">
+            <button type="submit" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-40 shadow-lg cursor-pointer font-bold text-white">
+                Cerrar Sesión
+            </button>
+        </form><br>
 </body>
+
 </html>

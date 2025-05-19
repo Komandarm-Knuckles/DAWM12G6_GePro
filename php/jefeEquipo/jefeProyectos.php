@@ -63,7 +63,8 @@ if ($resultado_proyectos->num_rows > 0) {
 <body class="w-full bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
     <div class="flex w-full min-h-screen justify-center items-center">
         <div class="flex w-full md:flex-row flex-col justify-center items-stretch max-w-[90%]">
-            <!-- Menú lateral -->
+            
+        <!-- Menú lateral -->
             <section class="flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5">
                 <img class="md:w-13 w-[10em]" src="../../img/LogoEmpresa.png" alt="logo Empresa"/>
                 <div class="flex gap-2">
@@ -78,9 +79,8 @@ if ($resultado_proyectos->num_rows > 0) {
 
             <!-- Contenido principal -->
             <div class="flex flex-col min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
-
-                <h1 class='font-bold text-4xl text-orange-400'>GESTIÓN DE PROYECTOS</h1>
-                <h3 class='text-xl font-bold text-orange-400'>Proyectos registrados:</h3>
+            <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">GESTIÓN DE PROYECTOS</h1>
+                <h3 class="text-xl font-bold text-lg bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Proyectos Registrados:</h3>
                 <?php if ($result_proyectos->num_rows === 0): ?>
                     <p>No hay proyectos registrados.</p>
                 <?php else: ?>
