@@ -162,11 +162,9 @@ if (empty($imagen_perfil) || !file_exists($imagen_perfil)) {
             
         <span class="block h-0.5 w-full  bg-black opacity-40"></span>
         <div class="flex flex-col w-full gap-5 items-center">
+            
             <a href="adminUsuarios.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Usuarios</a>
             <span class="block h-0.5 w-full bg-black opacity-40"></span>
-
-            <a href="adminCrearUsuario.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Crear Usuarios</a>
-            <span class="block h-0.5 w-full  bg-black opacity-40"></span>
 
             <a href="adminProyectos.php" class="p-3 bg-orange-400 hover:bg-orange-700 rounded-xl w-60 shadow-lg cursor-pointer font-bold text-white text-center">Proyectos</a>
             <span class="block h-0.5 w-full  bg-black opacity-40"></span>
