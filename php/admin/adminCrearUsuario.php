@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
                 </div>
                 <div>
                     <label for ="pass" class="font-bold">Contraseña*</label>
-                    <input type="text" name="pass" id="pass" placeholder="Contraseña" required class=" p-2 border rounded-xl w-full" />
+                    <input type="password" name="pass" id="pass" placeholder="Contraseña" required class=" p-2 border rounded-xl w-full" />
                 </div>
         </div>
         <label for="campos">Los campos asignados con un <strong>(*)</strong> son <strong>Obligatorios</strong></label>
