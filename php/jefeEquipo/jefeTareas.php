@@ -110,7 +110,7 @@ if (isset($_POST['editar_tarea'])) {
                                     <th class="p-3">Fecha Fin</th>
                                     <th class="p-3">Estado</th>
                                     <th class="p-3">ID Proyecto</th>
-                                    <th class="p-3">Usuario</th>
+                                    <th class="p-3">Usuario Asignado</th>
                                     <th class="p-3">Acciones</th>
                                 </tr>
                             </thead>

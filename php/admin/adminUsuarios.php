@@ -62,8 +62,8 @@ echo "<div class='flex flex-col min-h-screen gap-6 justify-center items-center b
 
 // ---------------------------GESTIÓN DE USUARIOS-----------------------------
 
-echo '<h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">GESTIÓN DE PROYECTOS</h1>';
-echo '<h3 class="text-xl font-bold bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Proyectos Registrados:</h3>';
+echo '<h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">GESTIÓN DE USUARIOS</h1>';
+echo '<h3 class="text-xl font-bold bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Usuarios Registrados:</h3>';
 
 $usuarios = obtener_todos_los_usuarios($con);
 

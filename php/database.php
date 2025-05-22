@@ -35,7 +35,17 @@ function crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, 
     $resultado = $check->get_result();
 
     if ($resultado->num_rows > 0) {
-        echo "<script>alert('El usuario ya existe, cambia el nombre de usuario, Por Favor!')</script>";
+        echo "<script>alert('El Usuario ya existe, cambia el nombre de usuario, Por Favor!')</script>";
+        return false; 
+    }
+
+    $check = $con->prepare("SELECT dni FROM usuarios WHERE dni = ?");
+    $check->bind_param("s", $dni);
+    $check->execute();
+    $resultado = $check->get_result();
+
+    if ($resultado->num_rows > 0) {
+        echo "<script>alert('El DNI ya existe, cambia el DNI, Por Favor!')</script>";
         return false; 
     }
 

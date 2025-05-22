@@ -39,13 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_user'])) {
     $dniRegex = "/^\d{8}[A-Z]$/";
     $emailRegex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     $passwordRegex = '/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)_\-\+=\{\}\[\]:;"\'<>,\.?\/\\\\|~`€])[A-Za-z\dñÑ!@#\$%\^&\*\(\)_\-\+=\{\}\[\]:;"\'<>,\.?\/\\\\|~`€]{8,}$/u';
-
+    $telefonoRegex = "/^\d{9}$/";
     if (!preg_match($dniRegex, $nuevo_dni)) {
         echo "<p style='color: red;'>Error: El DNI debe tener 8 números seguidos de una letra mayúscula.</p>";
     } elseif (!preg_match($emailRegex, $nuevo_email)) {
         echo "<p style='color: red;'>Error: Introduce un correo electrónico válido.</p>";
     } elseif (!empty($nuevo_pass) && !preg_match($passwordRegex, $nuevo_pass)) {
         echo "<p style='color: red;'>Error: La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.</p>";
+    } elseif (!preg_match($telefonoRegex, $nuevo_telefono)) {
+            echo "<script>alert('El teléfono debe tener 9 dígitos.');</script>";
     } else {
         if (modificar_usuarios($con, $usuario, $nuevo_pass, $nuevo_nombre, $nuevo_apellido, $nuevo_dni, $nuevo_email, $nuevo_telefono, $nuevo_tipo)) {
             header("Location: adminUsuarios.php");

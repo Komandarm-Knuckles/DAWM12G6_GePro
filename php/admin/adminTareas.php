@@ -55,29 +55,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Página de Tareas Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="w-full bg-cover bg-center bg-fixed z-10 bg-[url('../../img/pixels14.jpg')]">
     <div class="flex w-full min-h-screen justify-center items-center">
         <div class="flex w-full md:flex-row flex-col justify-center items-stretch max-w-[90%]">
 
             <!-- Menú lateral -->
             <section class="flex md:flex-col md:w-80 w-full flex-wrap md:justify-start justify-center items-center bg-orange-400 md:gap-10 gap-5 pt-5">
-                <img class="md:w-13 w-[10em]" src="../../img/LogoEmpresa.png" alt="logo Empresa"/>
+                <img class="md:w-13 w-[10em]" src="../../img/LogoEmpresa.png" alt="logo Empresa" />
                 <div class="flex gap-2">
-                    <img src="../../img/users.svg" alt="imagenProyectos"/>
+                    <img src="../../img/users.svg" alt="imagenProyectos" />
                     <a href="adminUsuarios.php" class="font-bold text-white text-lg">Usuarios</a>
                 </div>
                 <div class="flex gap-2">
-                    
-                    <img src="../../img/folder-git-2.svg" alt="imagenReuniones"/>
+
+                    <img src="../../img/folder-git-2.svg" alt="imagenReuniones" />
                     <a href="adminProyectos.php" class="font-bold text-white text-lg">Proyectos</a>
                 </div>
                 <div class="flex gap-2">
-                    <img src="../../img/projector.svg" alt="imagentareas"/>
+                    <img src="../../img/projector.svg" alt="imagentareas" />
                     <a href="adminReuniones.php" class="font-bold text-white text-lg">Reuniones</a>
                 </div>
             </section>
@@ -85,9 +87,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
             <!-- Contenido principal -->
             <div class="flex flex-col py-5 min-h-screen gap-6 justify-center items-center bg-gray-300 w-full">
 
-            <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">GESTIÓN DE TAREAS</h1>
-            <h3 class="text-xl font-bold text-lg bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Tareas Registradas:</h3>
-               
+                <h1 class="font-bold text-lg bg-orange-400 md:text-5xl underline text-center p-2 rounded-lg">GESTIÓN DE TAREAS</h1>
+                <h3 class="text-xl font-bold text-lg bg-orange-400 md:text-2xl underline text-center p-2 rounded-lg">Tareas Registradas:</h3>
+
                 <?php if ($result_tareas->num_rows === 0): ?>
                     <p>No hay tareas registradas.</p>
                 <?php else: ?>
@@ -98,6 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
                                     <th class="p-3">ID</th>
                                     <th class="p-3">Nombre</th>
                                     <th class="p-3">Descripción</th>
+                                    <th class="p-3">Fecha Inicio</th>
+                                    <th class="p-3">Fecha Fin</th>
+                                    <th class="p-3">ID Proyecto</th>
+                                    <th class="p-3">Usuario Asignado</th>
                                     <th class="p-3">Estado</th>
                                     <th class="p-3">Acciones</th>
                                 </tr>
@@ -108,6 +114,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
                                         <td class="text-center p-4 font-semibold"><?= $tarea['id_tarea'] ?></td>
                                         <td class="text-center p-4 font-semibold"><?= htmlspecialchars($tarea['nombre']) ?></td>
                                         <td class="text-center p-4 font-semibold"><?= htmlspecialchars($tarea['descripcion']) ?></td>
+                                        <td class="text-center p-4 font-semibold"><?= $tarea['fecha_asignacion'] ?></td>
+                                        <td class="text-center p-4 font-semibold"><?= $tarea['fecha_vencimiento'] ?></td>
+                                        <td class="text-center p-4 font-semibold"><?= $tarea['id_proyecto'] ?></td>
+                                        <td class="text-center p-4 font-semibold"><?= htmlspecialchars($tarea['usuario']) ?></td>
                                         <td class="text-center p-4 font-semibold"><?= htmlspecialchars($tarea['estado']) ?></td>
                                         <td class="flex justify-center items-center gap-3 pt-4">
                                             <form method="POST" action="">
@@ -144,4 +154,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['crear_tarea'])) {
     </div>
     <?php $con->close(); ?>
 </body>
+
 </html>

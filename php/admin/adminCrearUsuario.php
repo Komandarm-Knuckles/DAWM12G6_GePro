@@ -28,19 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['usuario'], $_POST['pa
         $dniRegex = "/^\d{8}[A-Z]$/";
         $emailRegex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
         $passwordRegex = '/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)_\-\+=\{\}\[\]:;"\'<>,\.?\/\\\\|~`€])[A-Za-z\dñÑ!@#\$%\^&\*\(\)_\-\+=\{\}\[\]:;"\'<>,\.?\/\\\\|~`€]{8,}$/u';
-
+        $telefonoRegex = "/^\d{9}$/";
         if (!preg_match($dniRegex, $dni)) {
             echo "<p style='color: red;'>Error: El DNI debe tener 8 números seguidos de una letra mayúscula.</p>";
         } elseif (!preg_match($emailRegex, $email)) {
             echo "<p style='color: red;'>Error: Introduce un correo electrónico válido.</p>";
         } elseif (!preg_match($passwordRegex, $pass)) {
             echo "<p style='color: red;'>Error: La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.</p>";
+        } elseif (!preg_match($telefonoRegex, $telefono)) {
+            echo "<script>alert('El teléfono debe tener 9 dígitos.');</script>";
         } else {
             if (crear_usuario($con, $usuario, $pass, $nombre, $apellido, $dni, $email, $telefono, $tipo)) {
                 header("Location: adminUsuarios.php");
                 exit();
-            } else {
-                echo "<p style='color: red;'>Error al crear usuario.</p>";
             }
         }
         #endregion 
