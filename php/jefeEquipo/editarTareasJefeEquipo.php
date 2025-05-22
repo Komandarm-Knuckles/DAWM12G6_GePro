@@ -95,7 +95,7 @@ if (isset($_POST['guardar_cambios'])) {
                 <label for="usuario" class="font-bold">Usuario Asignado*</label>
                 <select name="usuario" class="text-center  rounded-lg p-1" required>
                     <?php
-                    $users_query = $con->query("SELECT usuario FROM usuarios WHERE tipo = 2");
+                    $users_query = $con->query("SELECT usuario FROM usuarios WHERE tipo = 2 OR tipo = 1");
                     while ($user = $users_query->fetch_assoc()) {
                         $selected = ($user['usuario'] == $tarea['usuario']) ? 'selected' : '';
                         echo "<option value='" . htmlspecialchars($user['usuario']) . "' $selected>" . htmlspecialchars($user['usuario']) . "</option>";
